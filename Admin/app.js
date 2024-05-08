@@ -6,7 +6,7 @@ const domain = "http://localhost:3004" || "https://awaitero.com";
 const BaseURLWithoutPort = "http://localhost:3004/api" || "https://awaitero.com";
 
 const lodash = ``;
-const copyRight = `Copyright &copy; Awaitero 2021`;
+const copyRight = `Copyright &copy; Awaitero 2024`;
 //SuperAdmin
 
 const RestaurantMapping = {
