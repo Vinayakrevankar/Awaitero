@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <title>Awaitero</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" async>
+
+    <link href="css/res.css" rel="stylesheet" type="text/css" async>
+
+    <link href="font/stylesheet.css" rel="stylesheet" async>
+
+    <link href="vendor/mdi-icons/css/materialdesignicons.min.css" rel="stylesheet" async>
+
+    <link href="css/custom.css" rel="stylesheet" async>
+
+    <link href="css/kot.css" rel="stylesheet">
+    
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <!-- <script src="js/jquery.PrintArea.js"></script>
+     -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/PrintArea/2.4.1/jquery.PrintArea.min.js" integrity="sha512-mPA/BA22QPGx1iuaMpZdSsXVsHUTr9OisxHDtdsYj73eDGWG2bTSTLTUOb4TG40JvUyjoTcLF+2srfRchwbodg==" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+
+    <!-- <script src="js/jquery.validate.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js" integrity="sha512-37T7leoNS06R80c8Ulq7cdCDU5MNQBwlYoy1TX/WUsLFC2eYNqtKlV0QjH7r8JpG/S0GUMZwebnVFLPd6SU5yg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- <script src="js/additional-methods.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/additional-methods.min.js" integrity="sha512-XZEy8UQ9rngkxQVugAdOuBRDmJ5N4vCuNXCh8KlniZgDKTvf7zl75QBtaVG1lEhMFe2a2DuA22nZYY+qsI2/xA==" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+    <!-- <script src="js/printThis.js"></script> -->
+    <script src="js/socket.io.min.js" crossorigin="anonymous" async></script>
+
+    <style>
+ 
+        table {
+            border-collapse: collapse;
+        }
+        @media print {
+  body * {
+    visibility: hidden;
+  }
+  #section-to-print, #section-to-print * {
+    visibility: visible;
+  }
+  #section-to-print {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+    </style>
+    
+</head>
+<body id="page-top"  >
+<div id="loader" class="center"></div>
+   
+    <div id="wrapper" style="display:none; flex-direction: column; min-height: 100vh;">
+
+        <div id="content-wrapper" class="d-flex flex-column" style="padding-top:100px">
+
+            <div id="content">
+
+                <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5" style=" background-color: #343a40!important">
+                    <a class="navbar-brand" href="javascript:void(0)">
+                      <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top"  alt="">
+                      Awaitero |
+                    </a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                     
+                  <li class="nav-item text-white mr-1">
+                      <a class="nav-link" id="HomeMenu" href="">
+                          <i class="mdi mdi-home-variant-outline"></i>
+                          <span>Home</span></a>
+                  </li>
+      
+                  <li class="nav-item active text-white mr-1">
+                      <a class="nav-link" id="restaurantTable">
+                          <i class="mdi mdi-silverware"></i>
+                          <span>Table</span></a>
+                  </li>
+      
+                  <li class="nav-item text-white mr-1">
+                      <a class="nav-link" id="restaurantMenu">
+                          <i class="mdi mdi-window-maximize"></i>
+                          <span>Menu</span></a>
+                  </li>
+      
+      
+                  <li class="nav-item text-white mr-1">
+                      <a class="nav-link" id="restaurantQRCode">
+                          <i class="mdi mdi-qrcode"></i>
+                          <span>QR Code</span></a>
+                  </li>
+                  <li class="nav-item text-white mr-1">
+                      <a class="nav-link" id="reports">
+                          <i class="mdi  mdi-file-document"></i>
+                          <span>Reports</span></a>
+                  </li>
+                    </ul>
+                    <div class="form-inline my-2 my-lg-0" >
+                      <i class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"></i>
+                      <span class="mb-0 text-white mr-4"  id="UserName"></span>
+                      <span class="mb-0 text-white"  onclick="Logout()">LOGOUT</span>
+                    </div>
+                  </div>
+                </nav>
+
+                <div class="container-fluid">
+
+                    <div>
+                        <h5 style="text-align: center;color:red" id="ErrorMessage"></h5>
+                        <hr>
+                    </div>
+
+
+                    <div class="mt-n5 bg-white p-2 rounded shadow position-relative">
+                        <div class="vin-single-top-info">
+                            <ul class="nav nav-tabs border-0" role="tablist">
+                                <li class="nav-item mr-2" role="presentation">
+                                    <a class="nav-link active border-0 btn btn-light" id="restaurantName"></a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <br>
+                        <div class="container" style="max-width:100%">
+                            <div class="row">
+                                        <div class="col col-3">
+                                            <div class="card list-group shadow-sm" id="appendCatLeftView" style="overflow-x: hidden;
+                                            overflow-y: auto;
+                                            text-align:justify;height:520px">
+                                               
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <div class="row" id="appendGRIDHERE">
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="bg-white shadow-sm p-3 rounded mb-4">
+            
+                                            
+                                                <a class="btn btn-success text-white btn-sm mt-1" id="updateStatus" disabled></a>
+            
+                                                <a type="button" class="btn btn-danger text-white mr-1 btn-sm mt-1" onclick="closeOrder()" id="closeOrder">Close Order</a>
+                                                <!-- <a type="button" class="btn btn-danger text-white mr-1 btn-sm mt-1" data-toggle="modal" data-target="#addItemToTable" id="addItemBtn">Add Item</a> -->
+                                                <span id="appendBadge"></span>
+                                                <a type="button" class="btn btn-warning text-white mr-1 btn-sm mt-1" data-toggle="modal" data-target="#createManualUser" id="orderManual">Order</a>
+                                           
+                                        </div>
+                                    <div class="bg-white shadow-sm p-3 rounded mb-4" id="showIfOrderIsNotConfirmed">
+                                        <table style="color:black" class="table table-bordered table-striped  table-sm mb-0" style="text-align: center;height:50px;
+                    overflow:auto;">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Item</th>
+                                                    <th scope="col">Quantity</th>
+            
+                                                </tr>
+                                            </thead>
+                                            <form id="confirmOrderList">
+                                            <tbody id="confirmOrder">
+            
+                                            </tbody>
+                                            </form>
+                                        </table>
+                                        <a type="button" onclick="confirmOrderBtn()" class="btn btn-warning text-white mr-1 btn-sm mt-1">Confirm Order</a>
+                                        <a type="button" onclick="cancelAllOrderBtn()" class="btn btn-warning text-white mr-1 btn-sm mt-1">Cancel</a>
+            
+                                    </div>
+                                    <div class="col-md-12" id="ItemTable">
+                                        <div class="bg-white shadow-sm p-3 rounded mb-4">
+            
+                                            <div class="d-flex align-items-center mb-3">
+            
+                                                <h3><b><p class="mb-0 ml-auto" id="tableName"> </p></b></h3><br>
+                                            </div>
+                                            <div>
+                                                <div id="generateBill" style="float: right;"><button type="button" onclick="generateBillNo()"  class="btn btn-info text-white btn-sm">Generate Bill</button></div>
+                                                <div id="printBill" style="float: right;">
+                                                <i class="mdi mdi-printer" style="font-size: 30px;"></i> </div>
+                                            
+                                            </div>
+            
+                                            <p class="font-weight-bold text-black mb-0" id="customerName">Name: </p>
+            
+                                            <p class="font-weight-bold text-black mb-0" id="customerMobile">Mobile: </p>
+                                            <p class="font-weight-bold text-black mb-0" id="customerMail">Mail: </p>
+                                            <br>
+                                            <h6>  <p class="font-weight-bold text-black mt-2">
+                                                   <b id="totalAmount">Total Amount: Rs 0</b>
+            
+                                            </p> </h6> 
+                                            <p class="font-weight-bold text-black mb-0">Ordered Items: </p>
+            
+                                            <div class="table-wrapper-scroll-y" style="
+                        height: 200px;
+                        overflow: auto;
+                        ">
+                                                <table style="color:black" class="table table-bordered table-striped  table-sm mb-0" style="text-align: center;height:50px;
+                    overflow:auto;">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">#</th>
+                                                            <th scope="col">Item</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Amount</th>
+                                                            <th scope="col">Cancel Order</th>
+            
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="listOfItemOrdered">
+            
+                                                    </tbody>
+                                                </table>
+            
+                                            </div>
+            
+            
+                                     
+                                   
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                    
+                           
+                           
+                        </div>
+                        
+                        <hr>
+                    <div class="row" id="appendKot">
+                
+                    </div>
+                </div>
+                </div>
+                
+                </div>
+
+        </div>
+        </div>
+
+                <div class="modal fade" id="myitemsAddItem" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content vin-item-detail-pop">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">Add Table</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                            </div>
+                            <div class="modal-body px-3 py-0">
+                                <div class="mb-3">
+                                    <div class="alert alert-success fade" id="ModelAddTableAlert" role="alert">
+
+                                    </div>
+                                </div>
+                                <form id="addTable">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="w-100">
+
+                                            <p class="mb-0 small font-weight-bold text-dark">Enter Table Name</p>
+                                            <input type="text" autocomplete="off" name="name" id="name" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Table Name">
+                                            <label for="name" class="mb-0 small font-weight-bold error" style="color:red"></label>
+
+                                        </div>
+                                    </div>
+                        </form>
+                        <div class="modal-footer justify-content-start">
+
+                            <input type="submit" class="btn btn-primary btn-block mb-3" value="ADD TABLE">
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="modal fade" id="createManualUser" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content vin-item-detail-pop">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title" id="createManualUserLabel">Create User</h5>
+                        <button type="button" class="close" id="closeModel" onclick="closeModel()" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                    </div>
+                    <div class="modal-body px-3 py-0">
+                        <form id="createManualUserForm">
+                        <div class="mb-3">
+                            <div class="alert alert-success fade" id="ModelManualAlert" role="alert">
+                            </div>
+                        </div>
+                      
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="w-100">
+                                    <input type="number" id="idRestaurantR" name="idRestaurant" value="" hidden>
+                                    <input type="number" id="idTableT" name="idTable" value="" hidden>
+                                    <p class="mb-0 small font-weight-bold text-dark">Enter Name</p>
+                                    <input type="text" autocomplete="off" name="name" id="nameR" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Name">
+                                    <label for="nameR" class="mb-0 small font-weight-bold error" style="color:red"></label>
+
+
+                                    <p class="mb-0 small font-weight-bold text-dark" style="margin-top: 10px;">Enter Email</p>
+                                    <input type="text" autocomplete="off" name="email" id="email" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Email">
+                                    <label for="email" class="mb-0 small font-weight-bold error" style="color:red"></label>
+
+
+                                    <p class="mb-0 small font-weight-bold text-dark">Enter Mobile</p>
+                                    <input type="text" autocomplete="off" name="mobile" id="mobile" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Mobile">
+
+                                    <label for="mobile" class="mb-0 small font-weight-bold error" style="color:red"></label>
+
+                                </div>
+                            </div>
+
+
+                    </div>
+
+                    <div class="modal-footer justify-content-start">
+
+                        <input type="submit" class="btn btn-primary btn-block mb-3" id="createManualUserFormSubmit" value="Add User"></a>
+                    </div>
+                </div>
+               
+            </div>
+        </form>
+
+        </div>
+
+                <div class="modal fade" id="addItemToTable" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content vin-item-detail-pop">
+                            <div class="modal-header border-0">
+                                <h5 class="modal-title" id="exampleModalLabel">List Items</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                            </div>
+                            <div class="modal-body px-3 py-0">
+                                <div class="mb-3">
+                                    <div class="alert alert-success" id="AddItemModelAlert" role="alert">
+                                    </div>
+                                </div>
+                                <form id="addItemToTable">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <div class="w-100">
+
+                                            <p class="mb-0 small font-weight-bold text-dark">Search Item</p>
+                                            <div class="input-group mt-2 mb-2">
+                                                <input type="text" class="form-control" pattern="^[a-zA-Z0-9@]+$" id="searchItem" placeholder="Search...">
+                                              
+                                                <button type="button" class="btn bg-transparent" onclick="clearField('searchItem')" style="margin-left: -40px; z-index: 100;color: black;">
+    <span style="color:black">X</span>
+  </button>
+                                            </div>
+                                            <p class="mb-0 small font-weight-bold text-dark">Select Category</p>
+                                            <!-- <select class="form-control mt-2" id="selectCategory" aria-label="Select Category"> -->
+                                                
+                                                <input class="form-control" list="datalistOptions" id="selectCategory">
+                                                <datalist id="datalistOptions">
+                                                    
+                                                </datalist>
+                                            <!-- </select> -->
+                                        </div>
+                                    </div>
+
+                                    <div id="AppendItems">
+
+
+                                    </div>
+
+
+
+                            <div class="modal-footer justify-content-start mb-4">
+
+                                <!-- <input type="submit"  class="btn btn-primary btn-block mb-3" value="Add Item"></a> -->
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+             
+               
+
+            </div>
+         
+                </div>
+               
+  </div>
+  <footer class="sticky-footer bg-white">
+    <div class="container text-center">
+      <span id="copyRight"></span>
+    </div>
+  </footer>
+<div id="PRINTTHIS" hidden>
+    <div style="width:384px; display: flex;  
+flex-wrap: wrap;" class="body1">
+        <div style="height: 740px;">
+
+
+        <!-- <div class="dclr"></div> -->
+        <p class="p0 ft0" style="font-weight: 900;margin-left: 8px;padding-top:10px" id="setKOTNo">KOT</p>
+        <p class="p0 ft0" style="font-weight: 900;margin-left: 8px;" id="setKOTTable"></p>   
+        
+        <p class="p0 ft0"><p class="p0 ft0" style="float: left;font-weight: 900;font-size:small;margin-left: 12px" id="setKOTDate"></p>
+        <p class="p0 ft0" style="float: right;font-weight: 900;font-size: small;margin-right: 12px;" id="setKOTTime"> </p>
+        
+        <table style="width:384px; display: flex;  
+        flex-wrap: wrap;margin-left: 10px;margin-right: 10px;">
+           
+        
+            <tbody id="KOTITEMS">
+
+            
+            </tbody>
+        </table>
+
+    </div>
+    </div>
+</div>
+
+<div id="PRINTTHISBILL" hidden>
+<div class="body1" style="width: 384px; display: flex; flex-wrap: wrap">
+    <div style="height: 740px">
+      <!-- <div class="dclr"></div> -->
+        <img src="img/logoWithName.svg" style="width: 200px;height:60px"/>
+      <p class="p0 ft0" style="font-weight: 900; margin-left: 8px" id="setRestaurantName">
+      </p>
+      <p class="p0 ft0" style="font-weight: 900; margin-left: 8px" id="setRestaurantAddress">
+      </p>
+      <p class="p0 ft0" style="font-weight: 900; margin-left: 8px" id="setRestaurantMobile">
+      </p>
+      <p class="p0 ft0" style="font-weight: 900; margin-left: 8px" id="setGST">
+    </p>
+      <p class="p0 ft0" style="font-weight: 900">
+        <nobr>----------------INVOICE---------------</nobr>
+      </p>
+      <p class="p0 ft0" style="font-weight: 900;" id="setBillTable">
+        
+      </p>
+      <p class="p0 ft0" style="font-weight: 900;margin-top: 5px;float: left;margin-left: 20px;" id="setBillOrderId">
+       
+      </p>
+      <p class="p0 ft0" style="font-weight: 900;margin-top: 5px; margin-right: 10px;float: right;" id="setBillNo">
+      </p>
+        <p class="p0 ft0" style="font-weight: 900; float: left; margin-left: 20px" id="setBillDate">
+          </p>
+          
+        <p class="p0 ft0" style="font-weight: 900; float: right;margin-right: 30px" id="setBillTime">
+          </p>
+      
+      <p class="p0 ft0" style="font-weight: 900">
+        <nobr>----------------------------------------</nobr>
+      </p>
+
+      <table  style="
+      text-align: end;
+      margin-left: 10px;
+      margin-right: 10px;
+    
+    ">
+        <tbody id="AppendBillBody">
+          
+        </tbody>
+      </table>
+   
+      <p class="p0 ft0" style="font-weight: 900" id="setTotalItems"></p>
+      <br />
+      <p class="p0 ft0" id="dash2" style="font-weight: 900; margin-top: -10px;display: none;">
+        <nobr>----------------------------------------</nobr>
+      </p>
+      <!-- <p class="p0 ft0 marginL" style="font-weight: 900;text-align:right;margin-right: 10px;">
+             
+        </p><br>
+        <p class="p0 ft0 marginL" style="font-weight: 900;text-align:right;margin-right: 10px;">
+            CGST:2.5% @ 150  3.75
+        </p><br>
+        <p class="p0 ft0 marginL" style="font-weight: 900;text-align:right;margin-right: 10px;">
+            SGST:2.5% @ 150  3.75
+        </p><br>
+        <p class="p0 ft0 marginL" style="font-weight: 900;text-align:right;margin-right: 10px;">
+             150.00       
+        </p><br> -->
+      <table id="GSTSCREEN"
+        style="
+          float: right; text-align: end; margin-left: 10px; margin-right: 10px;
+          display: none;
+        "
+      >
+        <tbody>
+          <tr>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="font-weight: 900; text-align: end">
+                Sub Total:
+              </p>
+            </td>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="text-align: end" id="setSubTotal"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="font-weight: 900; text-align: end;white-space: nowrap;" id="setCGST">
+                
+              </p>
+            </td>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="text-align: end" id="setCGSTAmount"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tr0 td0" style="margin-right:10px">
+              <p class="p0 ft0" style="font-weight: 900; text-align: end;" id="setSGST">
+                
+              </p>
+            </td>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="text-align: end" id="setSGSTAmount"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tr0 td0" style="margin-right:10px">
+              <p class="p0 ft0" style="font-weight: 900; text-align: end;">
+                Round off
+              </p>
+            </td>
+            <td class="tr0 td0">
+              <p class="p0 ft0" style="text-align: end" id="setRoundAmount"></p>
+            </td>
+          </tr>
+          <tr>
+            <td class="tr0 td0">
+              <p
+                class="p0 ft0"
+                style="font-weight: 900; text-align: end; word-wrap: break-word"
+              >
+                Total Bill:
+              </p>
+            </td>
+            <td class="p0 ft0">
+              <p style="text-align: end" class="p0 ft0" id="setTotalBill"></p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="p0 ft0 marginL" style="font-weight: 900; margin-bottom: -10px">
+        <nobr>----------------------------------------</nobr>
+      </p>
+      <br />
+      <p class="p0 ft0" style="font-weight: 900" id="setGrandTotal"></p>
+      <br />
+      <p class="p0 ft0" style="font-weight: 900; margin-top: -10px">
+        <nobr>----------------------------------------</nobr>
+      </p>
+      <p class="p0 ft0" style="font-weight: 900">Thank you Visit Again</p>
+
+    </div>
+    </div>
+</div>
+
+    
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="733a478407262b07af967949-text/javascript"></script>
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js" type="733a478407262b07af967949-text/javascript"></script>
+
+    <script src="js/res.min.js" type="733a478407262b07af967949-text/javascript"></script>
+    <script src="js/rocket-loader.min.js" data-cf-settings="733a478407262b07af967949-|49" defer=""></script>
+    <script>
+        //  jQuery(window).load(function() {
+        //      // document.querySelector("body").style.visibility = "visible";
+        //             // document.querySelector("#loader").style.visibility = "visible";
+               
+        // });
+        
+    </script>
+    <script>
+        var kotData = {}
+        var confirmOrderItems = null;
+        let AdminItemModal = (val) => `<div style="color:black">
+                  <p class="mb-0">
+                    <span>Item Name: </span>
+                    <span id="itemName">${val.name}</span>
+
+                  </p>
+                 <p class="mb-0" >
+                    <b><span> Price: </span>
+                    <span>	&#8377;${val.price}</span></b>
+                  </p>
+                  <p class="float-right">
+    <label>Qty</label>
+                  <input type="number" style="width:40px;height:25px;width:40px;text-align: right; " name="Quantity${val.idItem}" id="Quantity${val.idItem}" value="1">
+</p>
+                  <input type="button" onclick="AddItemFromAdmin(${val.idItem})" value="Add Item"> 
+                </div>
+                  <hr>`
+        async function confirmOrderBtn() {
+            var confirmOrder = confirm("Are you sure you want to Confirm Order ?");
+      if (confirmOrder == true) {
+            console.log("confirmOrderItems",confirmOrderItems)
+            let idOrder = confirmOrderItems.map(v => v.idOrder);
+            let FinalConfirmList = []
+                $("input[id^=confirmIndex-]").each(function(){
+                    let idItem = $(this).attr('id').split("-")[1];
+                    let max = $(this).attr('max');
+                    let quantity = $(this).val();
+                    FinalConfirmList.push([idItem,+quantity])
+                })
+                let cancelList = []
+                confirmOrderItems = confirmOrderItems.sort(function compare( a, b ) {
+                    if ( a.idOrder < b.idOrder ){
+                        return -1;
+                    }
+                    if ( a.idOrder > b.idOrder ){
+                        return 1;
+                    }
+                    return 0;
+                    })
+                let resultArr = FinalConfirmList.map(([idItem,quantity])=>{
+
+                   let confirmOrderItemsList = confirmOrderItems.filter(v => v.idItem == idItem );
+                    if(confirmOrderItemsList.slice(quantity, confirmOrderItemsList.length).length)
+                        cancelList.push(...confirmOrderItemsList.slice(quantity, confirmOrderItemsList.length))
+                    var newArr = confirmOrderItemsList.slice(0, quantity);
+                    return newArr;
+                }).flat(2).map(v => v.idOrder);
+                
+                cancelList = cancelList.map(v => v.idOrder);
+            let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+            let idCustomer = JSON.parse(sessionStorage.getItem("idCustomer"));
+
+            let result = await Axios(BaseURLSuperUser, "/confirmOrder", "POST", { idOrder, cancelList, idRestaurant,idCustomer });
+            let res = result.data;
+            if (res.status != 200) {
+                $('#ErrorMessage').show();
+
+                $('#ErrorMessage').text(res.errorMessage)
+
+                return false;
+            } else if(res.status == 200) {
+                $('#ErrorMessage').text("")
+                location.reload()
+                return true
+
+            }
+        }
+    }
+    
+
+        async function cancelAllOrderBtn() {
+
+    var confirmCancelOrder = confirm("Are you sure you want to Cancel Order ?");
+      if (confirmCancelOrder == true) {
+
+
+        let idOrder = confirmOrderItems.map(v => v.idOrder)
+            let result = await Axios(BaseURLSuperUser, "/confirmOrder", "PUT", idOrder);
+            let res = result.data;
+            if (res.status != 200) {
+                $('#ErrorMessage').show();
+
+                $('#ErrorMessage').text(res.errorMessage)
+
+                return false;
+            } else if(res.status == 200){
+                $('#ErrorMessage').text("")
+                location.reload()
+                return true
+
+            }
+        }
+    }
+       async function generateBillNo(){
+        let da = JSON.parse(sessionStorage.getItem("AdminTable"));
+
+        let [{
+                idTable
+            }] = da.filter(val => val.idTable == getUrlVars().idTable.replace('#',''));
+            let data = {
+                idCustomer: JSON.parse(sessionStorage.getItem("idCustomer")),
+                idRestaurant: JSON.parse(sessionStorage.getItem("idRestaurant")),
+                idTable:idTable
+
+            }
+            let result = await Axios(BaseURLSuperUser, "/generateBill", "POST", data);
+                    let res = result.data;
+                    if (res.status != 200) {
+                        $('#ErrorMessage').show();
+
+                        $('#ErrorMessage').text(res.errorMessage)
+
+                        return false;
+                    } else if(res.status == 200){
+                        $('#ErrorMessage').text("")
+                        getTableDetails(getUrlVars().idTable)
+                        return true
+                    }
+        }
+        function AddUserManually() {
+            $('#createManualUserForm').validate({ // initialize the plugi
+
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 1
+                    }
+                },
+                messages: {
+                    name: "Enter Name"
+                },
+
+                submitHandler: async function(form) {
+
+
+                    let data = convertPayload("createManualUserForm")
+                    let result = await Axios(BaseURLUser, "/login", "POST", data);
+                    let res = result.data;
+                    if (res.status != 200) {
+                        $('#ErrorMessage').show();
+
+                        $('#ErrorMessage').text(res.errorMessage)
+
+                        return false;
+                    } else if(res.status == 200){
+                        $('#ErrorMessage').text("")
+                        window.location = `tableDetails.html?idRestaurant=${data.idRestaurant}&idTable=${data.idTable}`
+                        return true
+                    }
+
+                }
+            });
+
+        }
+        
+        function OrderManual() {
+
+            $('#createManualUser').addClass('show')
+
+        }
+
+        function closeModel() {
+            $('#createManualUser').removeClass('show')
+
+        }
+
+        function generateBill(clubItems,billNo){
+            $('#AppendBillBody').empty()
+
+           let start = `<tr>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">Item</p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">Rate</p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">Qty</p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">Amount</p>
+            </td>
+          </tr>
+          <tr>`
+                $('#AppendBillBody').append(start)
+                totalBillAmount = 0
+                Object.keys(clubItems).forEach((v,idx)=>{
+             let items = clubItems[v][0];
+             itemCount = clubItems[v].length 
+
+             let totalAmount = 0;
+             totalAmount +=   +items.price*itemCount
+             totalBillAmount += totalAmount
+
+            let modal = `<tr><td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">${items.name}</p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900;">
+                ${items.price}
+              </p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">${itemCount}</p>
+            </td>
+            <td class="tr0 td0" style="font-weight: 900">
+              <p class="p0 ft0" style="font-weight: 900">${totalAmount}</p>
+            </td>
+          </tr>`
+                        $('#AppendBillBody').append(modal);       
+
+         })
+        
+         let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+                let restaurantData = JSON.parse(sessionStorage.getItem("RestaurantsList"));
+                restaurantData = restaurantData.filter(val=>val.idRestaurant == idRestaurant)
+                $('#setRestaurantName').text(restaurantData[0].name)
+                $('#setRestaurantAddress').text(restaurantData[0].address)
+                $('#setRestaurantMobile').text(`Contact No. : ${restaurantData[0].restaurantNumber}`)
+                
+            let idCustomer = JSON.parse(sessionStorage.getItem("idCustomer"))
+                $('#setBillOrderId').text(`Order Id: ${idCustomer}`)
+                $('#setBillNo').text(`Bill No. : ${billNo}`)
+
+        if(restaurantData[0].gst.length>0){
+            $('#setGST').text(`GST NO.: ${restaurantData[0].gst}`)
+         let Amount = totalBillAmount;
+            var percent =  (Amount * 5 /105).toFixed(3) //((9 / 109) * +Amount).toFixed(2);
+            totalAmount = (Amount-percent).toFixed(3);
+            var GST = (percent/2).toFixed(3);
+            let totalGST = +GST + +GST;
+            let subTotal = totalBillAmount.toFixed(3)-totalGST
+            var roundoff= (+subTotal + totalGST - Amount).toFixed(3)
+
+            $('#setSubTotal').empty()
+            $('#setCGST').empty()
+            $('#setCGSTAmount').empty()
+            $('#setSGST').empty()
+            $('#setSGSTAmount').empty()
+            $('#setRoundAmount').empty()
+            $('#setTotalBill').empty()
+
+            $('#dash1').show()
+            $('#dash2').show()
+            $('#setGST').show()
+
+            $('#setCGST').append(`CGST:2.5% @ ${totalAmount}`)
+            $('#setCGSTAmount').append('&#8377;'+GST)
+
+            $('#setSGST').append(`SGST:2.5% @ ${totalAmount}`)
+            $('#setSGSTAmount').append('&#8377;'+`${GST}`)
+
+            $('#roundoff').append('&#8377;'+ Math.abs(roundoff))
+            $('#setTotalBill').append('&#8377;'+ ((+totalAmount+ +totalGST)+ +roundoff).toFixed(2)+'0')
+
+            $('#setGrandTotal').text(`Grand Total: Rs ${totalBillAmount}`)
+            $('#setSubTotal').text(totalBillAmount.toFixed(2)-totalGST)
+            $('#setRoundAmount').text(roundoff)
+            $('#GSTSCREEN').show();
+        }else{
+            $('#setGST').hide()
+            $('#dash1').hide()
+            $('#dash2').hide()
+            $('#GSTSCREEN').hide();
+            $('#setGrandTotal').text(`Grand Total: Rs ${totalBillAmount}`)
+            
+
+        }
+                
+
+        }
+
+        function clearField(id) {
+            let idd = '#' + id;
+            $(idd).val("")
+            SearchItem()
+        }
+        async function closeOrder() {
+
+            var confirmCloseOrder = confirm("Are you sure you want to Close Order ?");
+      if (confirmCloseOrder == true) {
+
+
+            let idTable = getUrlVars().idTable
+            let idRestaurant = getUrlVars().idRestaurant
+
+            let result = await Axios(BaseURLSuperUser, `/closeOrder/${idTable}`, "PUT", null);
+            let res = result.data;
+
+            if (res.status != 200) {
+                alert('Something Went Wrong. Unable to Close Order')
+            } else if(res.status == 200){
+                window.location = `table.html?idRestaurant=${idRestaurant}`
+
+            }
+        }
+        }
+
+        async function addItemFromGrid(id){
+            let AdminItems = JSON.parse(sessionStorage.getItem("AdminItems"));
+            let restaurant = JSON.parse(sessionStorage.getItem("RestaurantsList")).filter(va => va.idRestaurant == params.idRestaurant);
+            cartValue = AdminItems.filter(val => val.idItem == id).map(val => {
+                return {
+                    idItem: val.idItem,
+                    price: val.price,
+                    idCategory: val.idCategory,
+                    price: val.price
+                }
+            });
+            let da = JSON.parse(sessionStorage.getItem("AdminTable"));
+            let tableID = getUrlVars().idTable.replace('#','');
+
+            let  [{idReference}] =  da.filter(val => val.idTable == tableID);
+            cartValue = Array(Math.abs(1)).fill(cartValue[0])
+            let result = await Axios(BaseURLSuperUser, `/orderItems`, "POST", {
+                cartValue: cartValue,
+                restaurant,
+                idRestaurant: params.idRestaurant,
+                idReference: idReference
+            });
+
+            let res = result.data;
+            if (res.status != 200) {
+                $('#AddItemModelAlertGrid').text('Something Went Wrong')
+                $('#AddItemModelAlertGrid').show()
+                return false;
+            } else if(res.status == 200){
+                
+                $('#AddItemModelAlertGrid').text('Added Successfully')
+                $('#AddItemModelAlertGrid').show()
+                getTableDetails(getUrlVars().idTable)
+
+            }
+            setTimeout(function(){
+                $('#AddItemModelAlertGrid').hide()
+            }, 3000);
+        }
+        function showKOT(id){
+            if(!$(`#${id}`).is(":hidden"))
+                $(`#${id}`).hide();
+            else    
+                 $(`#${id}`).show();
+
+        }
+        async function AddItemFromAdmin(id) {
+            let AdminItems = JSON.parse(sessionStorage.getItem("AdminItems"));
+            let restaurant = JSON.parse(sessionStorage.getItem("RestaurantsList")).filter(va => va.idRestaurant == params.idRestaurant);
+            cartValue = AdminItems.filter(val => val.idItem == id).map(val => {
+                return {
+                    idItem: val.idItem,
+                    price: val.price,
+                    idCategory: val.idCategory,
+                    price: val.price
+                }
+            });
+            let NoOfQuatity = $(`input[name=Quantity${id}]`).val() || 1
+            cartValue = Array(Math.abs(NoOfQuatity)).fill(cartValue[0])
+            let da = JSON.parse(sessionStorage.getItem("AdminTable"));
+            let [{
+                idReference
+            }] = da.filter(val => val.idTable == getUrlVars().idTable.replace('#',''));
+            let result = await Axios(BaseURLSuperUser, `/orderItems`, "POST", {
+                cartValue: cartValue,
+                restaurant,
+                idRestaurant: params.idRestaurant,
+                idReference: idReference
+            });
+            let res = result.data;
+            if (res.status != 200) {
+                $('#AddItemModelAlert').text('Something Went Wrong')
+                $('#AddItemModelAlert').show()
+                return false;
+            } else if(res.status == 200) {
+                
+                $('#AddItemModelAlert').text('Added Successfully')
+                $('#AddItemModelAlert').show()
+                getTableDetails(getUrlVars().idTable.replace("#",''))
+                
+
+            }
+            setTimeout(function(){
+                $('#AddItemModelAlert').hide()
+            }, 3000);
+        }
+        let kotModel = (idx,items,count,idKot) => {
+            let rows ="";
+                              Object.keys(items).forEach((Va,icdd)=> {
+                                let arr = items[Va];
+                                    arr.forEach((Val1,idx1)=>{
+                                         if(idx1==0){
+                                        let modal = `<tr>
+                                            <td>${icdd+1}</td>
+                                            <td>${Val1.name}</td>
+                                            <td>
+                                            <p>${arr.length}</p>
+                                            </td>
+                                            </tr>`
+                                            rows += modal
+                                        }
+
+
+                                    })
+                                    
+                                
+
+                              })
+                            //   display:none
+        let htmlContent = `<div class="col mt-2">
+            <span class="float-right"> <i class="mdi mdi-printer" onclick="setKOTData(${idKot},'${count}')" style="font-size: 20px;color:black"></i></span>
+                                              <h6 onclick="showKOT('KOTTable${idKot}')">KOT ${count} <i class="mdi mdi-eye"></i></h6>
+                                            <table style="color:black" class="table table-bordered table-striped  table-sm" style="text-align: center;height:50px;overflow:auto;" id="KOTTable${idKot}" >
+                                                                            <thead>
+                                                                                <tr>
+                                                                                    <th scope="col">#</th>
+                                                                                    <th scope="col">Item</th>
+                                                                                    <th scope="col">Quantity</th>
+                                                                                </tr>
+                                                                            </thead>
+                                                                            <tbody id="kot">`+rows+`</tbody></table></div>`  
+                                
+
+                                                                               
+                                            return htmlContent;
+                                        }
+
+                                        async function enableOrDisabletable(idTable, isActive) {
+            let message = "";
+            if (isActive == 0) {
+                isActive = 1
+                message = "Enabled Successfully"
+            } else {
+                isActive = 0
+                message = "Disabled Successfully"
+
+            }
+            let result = await Axios(BaseURLSuperUser, `/updateTable/${idTable}`, "PUT", {
+                isActive
+            });
+            let res = result.data;
+
+            if (res.status != 200) {
+                alert('Something Went Wrong')
+            } else if(res.status == 200) {
+                getTableDetails(getUrlVars().idTable.replace('#',''))
+                alert(message)
+
+            }
+
+        }
+                                        let contentHH = []    
+
+        async function getTableDetails(idTable,from='') {
+            
+            let result = await Axios(BaseURLSuperUser, `/getTable/${idTable}`, "GET", null);
+            let res = result.data;
+
+            if (res.status != 200) {
+
+            } else if(res.status == 200) {
+
+                let idRestaurant = "";
+
+                res.payload.table.length == 0 ? $('#noTable').show() : $('#noTable').hide()
+                res.payload.table.forEach((element, idx) => {
+                    $('#appendBadge').empty()
+
+                    $('#appendBadge').append(`<a class="btn btn-${element.isActive==0 ? 'success' : 'danger'} btn-sm mt-1 mr-1" style="color:white" onclick="enableOrDisabletable(${idTable},${element.isActive})">${element.isActive==0 ? 'Enable' : 'Disable'}</a>`)
+
+                    idRestaurant = element.idRestaurant;
+                    sessionStorage.setItem("tableName",JSON.stringify(element.name));
+                    $('#tableName').text(element.name)
+                    $('#updateStatus').text(element.occupied == 0 ? 'Vacant' : 'Occupied')
+
+                    $('#idTableT').attr("value", idTable);
+                    $('#idRestaurantR').attr("value", idRestaurant);
+                    $('#nameR').val(JSON.parse(sessionStorage.getItem("restaurantName")))
+                    $('#createManualUserFormSubmit').attr("value", `Add User To ${element.name}`)
+
+                    let sum = 0;
+                    let confirmedOrder = element.items.filter(v => v.isConfirmed == 1)
+                    confirmedOrder = confirmedOrder.sort((a,b)=> new Date(a.createdOn) - new Date(b.createdOn))
+                
+                    kotData = {};
+                    confirmedOrder.forEach((element, idx) => {
+                       
+                    //     sum += +element.price;
+                    //     let modal = `<tr>
+                    //           <th scope="row">${idx+1}</th>
+                    //           <td>${element.name}</td>
+                    //           <td>1</td>
+                            
+                    //           <td><h6>${element.price}</h6></td>
+                    //           <td>
+                    //             <i class="mdi mdi-delete" data-name="mdi-delete" onclick="deleteItemFromTable(${element.idOrder},${idRestaurant})"></i></td>
+                    //         </tr>`
+                    if((`${element.idKot}` in kotData)){
+                        kotData[element.idKot].push(element)
+                    }
+                    else {
+                                kotData[element.idKot] =[]
+                                kotData[element.idKot].push(element)
+                    }
+                    //     $('#listOfItemOrdered').append(modal);
+                        
+                       
+                      
+
+
+                    //     $('#totalAmount').text(`Total Amount: Rs ${sum}`)
+                    //     $('#totalAmountCount').text(`Total Amount: Rs ${sum}`)
+
+                    //     $('#customerName').text('')
+                    //     $('#customerMobile').text('')
+                    //     $('#customerMail').text('')
+                    });
+
+                    $('#updateStatus').show();
+                    if (element.occupied == 0) {
+                        $('#orderManual').show()
+                    }  else{
+                        $('#orderManual').hide()
+                    }
+                    
+                    if( element.occupied == 1 && confirmedOrder.length <=0) {
+                        $('#closeOrder').show()
+                    }
+                    let kotDataKeys = Object.keys(kotData)
+                    var i,j;
+                    let finalKOtData = []
+                        for (i = 0, j = kotDataKeys.length; i < j; i += 3) {
+                            let objKey = kotDataKeys.slice(i, i + 3);
+                            finalKOtData.push(objKey);
+                            objKey.forEach(val=>{
+                                    kotData[val] = kotData[val].reduce(function(r, a) {
+                                        r[a.idItem] = r[a.idItem] || [];
+                                        r[a.idItem].push(a);
+                                        return r;
+                                    }, Object.create(null));
+                                       
+                               
+                            })
+                            
+                        }
+
+                        
+                        let count = 1
+                        $('#appendKot').empty()
+                        contentHH = [];
+                        finalKOtData.forEach((idKot,idx)=>{
+                            
+                            let start = '';//`<div>`;
+                            //   let f = kotData[+idKot];
+                            idKot.map(va=>{
+                                    start +=  kotModel(idx,kotData[va],count,va)
+                                    count += 1
+                              })
+                                // start += '</div>'
+                                contentHH.push(start)
+                        })
+                        
+                         $('#appendKot').append(contentHH.join("\n").toString());
+
+                    let name = JSON.parse(sessionStorage.getItem("tableName"));
+               
+                        $('#setBillOrderId').text('OrderId:9856320')
+
+                        $('#setBillTable').text('Table:'+name)
+
+                    let clubItems =  confirmedOrder.reduce(function(r, a) {
+                                        r[a.idItem] = r[a.idItem] || [];
+                                        r[a.idItem].push(a);
+                                        return r;
+                                    }, Object.create(null));
+                                    $('#listOfItemOrderedCount').empty()
+                                    
+                   $('#listOfItemOrdered').empty()
+
+                                    Object.keys(clubItems).forEach((v,idx)=>{
+             let items = clubItems[v].sort(function compare( a, b ) {
+                    if ( a.idOrder < b.idOrder ){
+                        return -1;
+                    }
+                    if ( a.idOrder > b.idOrder ){
+                        return 1;
+                    }
+                    return 0;
+                    })
+                    let lastItemAdded = items[items.length-1]
+                    items = items[0];
+                   let  totalAmount = 0
+             itemCount = clubItems[v].length 
+             totalAmount +=   +items.price* +itemCount
+             sum += +totalAmount;
+            // let modal = `<tr>
+            //                   <th scope="row">${idx+1}</th>
+            //                   <td>${items.name}</td>
+            //                   <td>${itemCount}</td>
+                            
+            //                   <td><h6>${totalAmount}</h6></td>
+            //                   <td>
+            //                 </tr>`
+                         let   modal = `<tr>
+                              <th scope="row">${idx+1}</th>
+                              <td>${items.name}</td>
+                              <td>${itemCount} x ${items.price}</td>
+                            
+                              <td><h6>${totalAmount}</h6></td>
+                              <td>
+                                <i class="mdi mdi-delete" data-name="mdi-delete" onclick="deleteItemFromTable(${lastItemAdded.idOrder},${idRestaurant})"></i></td>
+                            </tr>`
+                            $('#listOfItemOrdered').append(modal);
+                        // $('#listOfItemOrderedCount').append(modal);
+                        
+                      
+         })
+
+
+                        $('#totalAmount').text(`Total Amount: Rs ${sum}`)
+                        $('#totalAmountCount').text(`Total Amount: Rs ${sum}`)
+
+                        $('#customerName').text('')
+                        $('#customerMobile').text('')
+                        $('#customerMail').text('')
+         res.payload.customer.forEach((element, idx) => {
+         $(`#appendCatLeftView`).show()
+sessionStorage.setItem('idCustomer',JSON.stringify(element.idCustomer))
+$('#customerName').text('Name: ' + element.name)
+$('#customerMobile').text('Mobile: ' + element.mobile)
+$('#customerMail').text('Email: ' + element.email)
+if(element.billNo !== null){
+ $('#printBill').show()
+ $('#generateBill').hide() 
+ $('#closeOrder').show()
+}
+else {
+    
+    $('#printBill').hide()
+ $('#generateBill').show()
+
+}
+
+});
+let billNo = '';
+if (res.payload.customer.length === 0){
+$('#addItemBtn').hide()
+}else{
+$('#addItemBtn').show()
+
+billNo = res.payload.customer[0].billNo 
+}
+
+            
+         generateBill(clubItems,billNo)
+
+
+                    let NonConfirmedOrder = element.items.filter(v => v.isConfirmed == 0)
+                    confirmOrderItems = NonConfirmedOrder
+
+                     if (!NonConfirmedOrder.length) 
+                            $('#showIfOrderIsNotConfirmed').hide()
+                    
+                    // else 
+// $('#showIfOrderIsNotConfirmed').show()
+                    NonConfirmedOrder = NonConfirmedOrder.reduce(function(r, a) {
+                        r[a.idItem] = r[a.idItem] || [];
+                        r[a.idItem].push(a);
+                        return r;
+                    }, Object.create(null));
+                    totalCountOfItem = 0
+                    $('#confirmOrder').empty()
+                    // $('#KOTITEMS').empty();
+                    // <p><input type="number" id="confirmIndex${idx}" min="0" max="${items.length}" value="${items.length}" </p>
+
+                    Object.keys(NonConfirmedOrder).forEach((v, idx) => {
+                        
+                        // <div>
+                        //             <span class="input-group-btn">
+                        //                 <button type="button" id="confirmRemovebtn${idx}" class="btn-danger btn-number">
+                        //                     <span>-</span>
+                        //                 </button>
+                        //             </span>
+                        //             <input type="number" style="width:30px" id="confirmIndex${idx}" min="0" max="${items.length}" value="${items.length}">
+                        //             <span class="input-group-btn">
+                        //                 <button type="button" id="confirmAddbtn${idx}" class="btn-success btn-number">
+                        //                     <span>+</span>
+                        //                 </button>
+                        //             </span>
+                        //         </div>
+                        let items = NonConfirmedOrder[v];
+                        let singleItem = items[0]
+                        let modal = `<tr>
+                              <td>${idx+1}</td>
+                              <td>${singleItem.name}</td>
+                              <td> <div id="confirmOrderListDiv">
+                                    <span class="input-group-btn">
+                                        <button type="button" id="confirmRemovebtn-${singleItem.idItem}" class="btn-danger btn-number">
+                                            <span>-</span>
+                                        </button>
+                                    </span>
+                                    <input type="number" style="width:40px;text-align: right;" id="confirmIndex-${singleItem.idItem}" min="0" max="${items.length}" value="${items.length}">
+                                    <span class="input-group-btn">
+                                        <button type="button" id="confirmAddbtn-${singleItem.idItem}" class="btn-success btn-number">
+                                            <span>+</span>
+                                        </button>
+                                    </span>
+                                </div></td>
+                              </tr>`
+                              totalCountOfItem += items.length;
+
+
+                        $('#confirmOrder').append(modal);
+                        $('#showIfOrderIsNotConfirmed').show();
+
+                    
+                        $(`#confirmIndex-${singleItem.idItem}`).on('change', function() {
+                           let max = $(`#confirmIndex-${singleItem.idItem}`).attr("max");
+                        //    if(this.value == max){
+                        //         $(`#confirmAddbtn${idx}`).hide()
+                        //     }
+                        console.log("max",max)
+                        console.log("this.value",this.value)
+
+                            if(this.value < 0){
+                                $(`#confirmIndex-${singleItem.idItem}`).val(0)
+                                return
+                           } 
+                           if(+max <= +this.value){
+                                $(`#confirmIndex-${singleItem.idItem}`).val(max)
+                           } 
+                        });
+                        // $(`#confirmAddbtn${idx}`).hide()
+                        $(`#confirmAddbtn-${singleItem.idItem}`).on('click', function() {
+                            let id = this.id
+                            let idBtn  = id.replace('confirmAddbtn-','');
+                            let confirmIndex = `#confirmIndex-${idBtn}`;
+                            let val  = $(confirmIndex).val();
+                            let max = $(confirmIndex).attr("max");
+                           
+                            let finalVal = +val+1 ;
+                            if(finalVal>=max){
+                                $(confirmIndex).val(max)
+                                // $(`#confirmAddbtn${idBtn}`).hide()
+                                return 
+
+                            } 
+                            if(finalVal<max){
+                                $(confirmIndex).val(finalVal)
+                            }
+                            if(finalVal==max){
+                                $(confirmIndex).val(max)
+                                // $(`#confirmAddbtn${idBtn}`).hide()
+                                return 
+
+                            }
+                        
+                            
+
+                        });
+
+                        $(`#confirmRemovebtn-${singleItem.idItem}`).on('click', function() {
+                            let id = this.id
+                            let idBtn  = id.replace('confirmRemovebtn-','');
+                            let confirmIndex = `#confirmIndex-${idBtn}`;
+                            let val  = $(confirmIndex).val();
+                            let max = $(confirmIndex).attr("max");
+                            let finalVal = +val-1 ;
+                            if(finalVal <= 0){
+                                $(confirmIndex).val(0)
+                                return
+                            } 
+                            if(finalVal < max){
+                                $(confirmIndex).val(finalVal)
+                                $(`#confirmAddbtn-${idBtn}`).show()
+                            }
+
+                        });
+                 
+                    });
+
+                });
+
+               
+
+
+
+                sessionStorage.setItem("AdminTable", JSON.stringify(res.payload.table));
+
+
+
+            }
+        }
+    </script>
+    
+    <script>
+        let params = {
+            idRestaurant: sessionStorage.getItem('idRestaurant')
+        }
+        $('#restaurantTable').attr('href', `table.html?idRestaurant=${params.idRestaurant}`)
+
+        async function deleteItemFromTable(idOrder, idRestaurant) {
+            var confirmDelete = confirm("Are you sure you want to Cancel Item ?");
+      if (confirmDelete == true) {
+
+            let data = {
+                idOrder
+            }
+            let result = await Axios(BaseURLSuperUser, `/cancelItem`, "PUT", data);
+            let res = result.data;
+            if (res.status != 200) {
+                alert('Unable to Delete Item from the table')
+                return false;
+            } else if(res.status == 200) {
+                alert("Deleted Successfully")
+                location.reload();
+            }
+        }
+        }
+
+        function SearchItem() {
+
+            var str = $("#searchItem").val();
+            let  CategoryName = $('#selectCategory').val();
+            CategoryName = CategoryName.split("-")[0].trim();
+            let items = JSON.parse(sessionStorage.getItem('AdminItems'))
+            let category = JSON.parse(sessionStorage.getItem('Category'))
+            if (str && str.length) {
+                var y = new RegExp(str, 'gmi')
+                items = items.filter(val => val.name.match(y));
+            }
+            
+            if(CategoryName!=='All' && CategoryName!=''){
+                let [{ idCategory }] = category.filter(val => val.name == CategoryName)
+            if(idCategory != "All")
+            {
+             
+                items = items.filter(va=> va.idCategory == idCategory)
+
+            }
+
+        }
+            $('#AppendItems').empty()
+            items.forEach((val, idx) => {
+
+                $('#AppendItems').append(AdminItemModal(val));
+            });
+
+        }
+
+        function setKOTData(idKot,kotNo){
+
+          let  items = kotData[idKot];
+            let totalItems =  0
+        $('#KOTITEMS').empty()
+        $('#KOTITEMS').append(`<tr>
+                <td class="tr0 td0"  style="font-weight: 900;">
+                    <p class="p0 ft0"  style="font-weight: 900;">SL.</p>
+                </td>
+                <td class="tr0 td0"  style="font-weight: 900;">
+                    <p class="p0 ft0"  style="font-weight: 900;">PARTICULAR</p>
+                </td>
+                <td class="tr0 td0"  style="font-weight: 900;">
+                    <p class="p0 ft0"  style="font-weight: 900;">QTY</p>
+                </td>
+          
+            </tr>`)
+          Object.keys(items).forEach((Va,icdd)=> {
+                                let arr = items[Va];
+                                    arr.forEach((Val1,idx1)=>{
+                                        if(idx1==0){
+                                    let AddItemInKOT = `<tr>
+                                                <td class="tr0 td0"  style="font-weight: 900;">
+                                                    <p class="p0 ft0"  style="font-weight: 900;">${icdd+1}</p>
+                                                </td>
+                                                <td class="tr0 td0"  style="font-weight: 900;">
+                                                    <p class="p0 ft0"  style="font-weight: 900;font-size:medium;">${Val1.name}</p>
+                                                </td>
+                                                <td class="tr0 td0"  style="font-weight: 900;">
+                                                    <p class="p0 ft0"  style="font-weight: 900;">${arr.length}</p>
+                                                </td>
+                                                </tr>`
+                                                totalItems += arr.length
+                                     $('#KOTITEMS').append(AddItemInKOT);
+                                            }
+                                            })
+                                          
+                                       
+                                        });
+                                        let lastAppend= `<tr>
+                                        <td  colspan="3" class="tr0 td0"  style="font-weight: 900;">
+                                        </td>
+                                        </tr>
+                                        <tr>
+                                        
+                                            <td colspan="2" class="tr0 td0"  style="font-weight: 900;">
+                                                <p class="p0 ft0"  style="font-weight: 900;"> Total Items</p>
+                                            </td>
+                                            <td class="tr0 td0"  style="font-weight: 900;">
+                                                <p class="p0 ft0"  style="font-weight: 900;">${totalItems}</p>
+                                            </td>
+                                        
+                                        </tr>`
+                                        $('#KOTITEMS').append(lastAppend);
+            var d = new Date();
+                let day = d.getDate();
+            let month =d.getMonth()+1;
+            let year = d.getFullYear();
+            var mode = "iframe" 
+            var close = true;
+            let name = JSON.parse(sessionStorage.getItem("tableName"));
+            
+            $('#setKOTNo').empty()
+            $('#setKOTTable').empty()
+            $('#setKOTDate').empty()
+            $('#setKOTTime').empty()
+            $('#setKOTNo').append(`KOT - ${kotNo}`)
+            $('#setKOTTable').append('Table:'+name)
+            $('#setKOTDate').append(`Date:${day}-${month}-${year}`)
+            $('#setKOTTime').append(`Time:${d.toLocaleTimeString()}`)
+
+            // var print = "";
+            // print += (print.length > 0 ? "," : "") + "div.PrintArea" + $('#area1').val();
+
+            var keepAttr = ["id"];
+            var options = { mode : mode, popClose : close, retainAttr : keepAttr };
+
+            $('#PRINTTHIS').printArea( options );
+
+        }
+
+        function getItemForGrid(idCategory){
+            //Reference
+            // $('#AppendItemsGridCategory button[id]').map(function(){ return this.id; }).get()
+            $('#appendCatLeftView').find("a").each(function(){
+                if(this.id == `Cat${idCategory}`)
+                    { 
+                     $(`#Cat${idCategory}`).css('background-color',"#36b9cc")
+                        $(`#${this.id}`).css('color',"white")
+
+
+            }
+                else 
+                    $(`#${this.id}`).css('background-color',"white")
+                    $(`#${this.id}`).css('color',"black")
+
+
+            })
+            
+            $('#appendGRIDHERE').empty()
+            let items = JSON.parse(sessionStorage.getItem('AdminItems'))
+                items =  items.filter(val=> val.idCategory===idCategory);
+                items.forEach(val=>{
+                    $('#appendGRIDHERE').append(`<button class="card shadow-sm m-1 btn-ripple"><div class="d-flex m-2"  style="border:1px solid #000;width:80px;height:100%" id="gridItem${val.idItem}" onclick="addItemFromGrid(${val.idItem})">  <div class="m-2" style="width:80px;"><h3 class="font-weight-bold" style="font-size:12px"> ${val.name} </h3><h5 class="font-weight-bold" style="font-size:12px">Rs ${val.price}</h5></div></div></button>`)
+                        // <button class="badge badge-secondary" id="gridItem${val.idItem}" onClick="addItemFromGrid(${val.idItem})" style="font-size: 0.4em;background-color:white;color:black">${val.name}</button></h3>`)
+                })
+        }
+            $('#printBill').hide()
+            $('#generateBill').hide()
+            $('#addItemBtn').hide()
+            $('#showIfOrderIsNotConfirmed').hide()
+            
+        $(document).ready(function() {
+            // document.querySelector("body").style.visibility = "hidden";
+            document.querySelector("#loader").style.visibility = "visible";
+            $(`#appendCatLeftView`).hide()
+            $('#AddItemModelAlert').hide()
+            $('#AddItemModelAlertGrid').hide()
+            $('#closeOrder').hide();
+            $('#updateStatus').hide();
+            $('#QRCodeDiv').hide();
+
+            
+            (async() => {
+                let result = await Axios(BaseURLSuperUser, "/getRestaurants", "GET");
+                let res = result.data;
+                if (res.status != 200) {
+                    $('#ErrorMessage').text(res.errorMessage)
+                    return false;
+                } else if(res.status == 200) {
+                    sessionStorage.setItem("RestaurantsList", JSON.stringify(res.payload.restaurants));
+
+                }
+
+                let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+                $('#UserName').text(userInfo.name);
+                $('#copyRight').empty()
+                $('#copyRight').append(copyRight);
+
+                let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+
+                let [RestaurantsList] = res.payload.restaurants.filter(val => val.idRestaurant == idRestaurant);
+                // JSON.parse(sessionStorage.getItem("RestaurantsList"))
+                sessionStorage.setItem("restaurantName", JSON.stringify(RestaurantsList.name));
+                $('#restaurantQRCode').attr('href', `qrcode.html?idRestaurant=${idRestaurant}`)
+                $('#restaurantMenu').attr('href', `menu.html?idRestaurant=${params.idRestaurant}`)
+                $('#reports').attr('href', `reports.html?idRestaurant=${params.idRestaurant}`)
+
+                getTableDetails(getUrlVars().idTable)
+
+
+                $('#restaurantName').text(RestaurantsList.name);
+                if (sessionStorage.getItem('Permission') == "73")
+
+                {
+                    $('#HomeMenu').attr('href', `main.html?idRestaurant=${idRestaurant}`)
+
+
+                } else {
+                    $('#HomeMenu').attr('href', `detail.html?idRestaurant=${idRestaurant}`)
+
+                }
+
+
+                let resultItem = await Axios(BaseURLSuperUser, `/getRestaurants/${params.idRestaurant}`, "GET");
+
+                let resItem = resultItem.data;
+                if (res.status != 200) {
+                    $('#ErrorMessage').text(resItem.errorMessage)
+                    return false;
+                } else if(res.status == 200) {
+
+                    jQuery("#wrapper").fadeIn("slow");
+                    sessionStorage.setItem("AdminItems", JSON.stringify(resItem.payload.items));
+
+                    resItem.payload.items.forEach(val => {
+                        $('#AppendItems').append(AdminItemModal(val));
+
+                    });
+                    resItem.payload.category =  resItem.payload.category.sort(function compare( a, b ) {
+                    if ( a.type < b.type ){
+                        return -1;
+                    }
+                    if ( a.type > b.type ){
+                        return 1;
+                    }
+                    return 0;
+                    })
+                    resItem.payload.category.forEach((val,idx,arr) => {
+                        idx == 0 ? $('#datalistOptions').append(`<option value="All">All</option>`) : null
+                        let value= `${val.name}-${val.type==0 ? 'Non Veg': 'Veg'}`
+                        $('#datalistOptions').append(`<option value="${value}"></option>`);
+                                           
+                        // $('#AppendItemsGridCategory').append(`<h3><button class="badge badge-secondary" id="Cat${val.idCategory}" onClick="getItemForGrid(${val.idCategory})" style="font-size: 0.4em;background-color:white;color:black">${value}</button></h3>`);
+                      
+
+                        $('#appendCatLeftView').append(`<a href="javascript:void(0)" id="Cat${val.idCategory}" onClick="getItemForGrid(${val.idCategory})"  style="color:black" class="list-group-item list-group-item-action font-weight-bold">${value}</a>`);
+
+                        // document.querySelector("#loader").style.display = "none";
+                        // document.querySelector("body").style.visibility = "visible";
+                       
+
+                    });
+                   
+
+
+                    sessionStorage.setItem("AdminRestaurantDetails", JSON.stringify(res.payload.restaurant));
+
+                }
+
+
+            })()
+            
+        
+            // $("#PRINTTHIS").printThis({
+                
+            // loadCSS: "./css/kot.css"});
+            $("#searchItem").on('input', function() {
+                SearchItem();
+            });
+            $("#selectCategory").on('change', function() {
+                SearchItem();
+            });
+            
+           
+
+            
+
+            $("div#printKOT").click(function(){
+                var d = new Date();
+                let day = d.getDate();
+let month =d.getMonth()+1;
+let year = d.getFullYear();
+var mode = "popup" 
+var close = true;
+let name = JSON.parse(sessionStorage.getItem("tableName"));
+$('#setKOTTable').empty()
+$('#setKOTDate').empty()
+$('#setKOTTime').empty()
+
+$('#setKOTTable').append('Table:'+name)
+$('#setKOTDate').append(`Date:${day}-${month}-${year}`)
+$('#setKOTTime').append(`Time:${d.toLocaleTimeString()}`)
+
+// var print = "";
+// print += (print.length > 0 ? "," : "") + "div.PrintArea" + $('#area1').val();
+
+var keepAttr = ["id"];
+var options = { mode : mode, popClose : close, retainAttr : keepAttr };
+
+$('#PRINTTHIS').printArea( options );
+});
+        
+
+
+            $("div#printBill").click(function(){
+
+                var d = new Date();
+                let day = d.getDate();
+                let month =d.getMonth()+1;
+                let year = d.getFullYear();
+                var mode = "popup" 
+                var close = true;
+               
+                $('#setBillDate').text(`Date:${day}-${month}-${year}`)
+                $('#setBillTime').text(`Time:${d.toLocaleTimeString()}`)
+            var mode = "popup" 
+            var close = false;
+
+            var keepAttr = ["id"];
+            var options = { mode : mode, popClose : close, retainAttr : keepAttr };
+
+            $('#PRINTTHISBILL').printArea( options );
+
+            });
+
+            $("#selectCategory").focus(function(){
+                $("#selectCategory").val('')
+            }); 
+
+
+            const socket = io(BaseURL);
+            socket.on("connect", () => {});
+            let tableId = `table${getUrlVars().idTable}`
+            socket.on(tableId, function(data) {
+                getTableDetails(getUrlVars().idTable)
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+            AddUserManually()
+            
+});
+
+        
+
+        
+    </script>
+</body>
+
+</html>

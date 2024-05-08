@@ -1,0 +1,30 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <p id="p"></p>
+        <script>
+// function getPosSuccess(pos){
+//     console.log("pos",pos.coords);
+//     var paragraph = document.getElementById("p");
+// var text = document.createTextNode(`latitude: ${pos.coords.latitude} --- longitude: ${pos.coords.longitude}`);
+
+// paragraph.appendChild(text);
+// }
+
+// window.navigator.geolocation
+//   .getCurrentPosition(getPosSuccess, console.log);
+      
+function get_location() {
+  if (Modernizr.geolocation) {
+    navigator.geolocation.getCurrentPosition(console.log);
+  } else {
+    // no native support; maybe try Gears?
+  }
+}
+
+        </script>
+            
+    </body>
+</html>

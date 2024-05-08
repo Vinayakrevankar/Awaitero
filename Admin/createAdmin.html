@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <a
+          class="sidebar-brand d-flex align-items-center"
+          id="companyLogo"
+          href="javascript:void(0)"
+          style="background-color: white"
+        >
+          <div class="sidebar-brand-icon">
+            <img src="img/logoWithName.svg" />
+          </div>
+        </a>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="main.html">
+            <i class="mdi mdi-home-variant-outline"></i>
+            <span>Home</span></a
+          >
+        </li>
+        <li class="nav-item" id="listDealerMenu">
+          <a class="nav-link" href="listDealer.html">
+            <i class="mdi mdi-human-child"></i>
+            <span>Dealer List</span></a
+          >
+        </li>
+        <li class="nav-item" id="dealerMenu">
+          <a class="nav-link" target="_blank" href="dealer.html">
+            <i class="mdi mdi-human"></i>
+            <span>Register Dealer</span></a
+          >
+        </li>
+
+        <li class="nav-item" id="registerRestaurantMenu">
+          <a class="nav-link" target="_blank" href="restaurant.html">
+            <i class="mdi mdi-human"></i>
+            <span>Restaurant Reg</span></a
+          >
+        </li>
+        <li class="nav-item" id="createAdminMenu">
+          <a class="nav-link" href="createAdmin.html">
+            <i class="mdi mdi-human"></i>
+            <span>Create Admin</span></a
+          >
+        </li>
+
+        <div class="d-none d-md-block">
+          <div class="user d-flex align-items-center p-3">
+            <div class="pr-3">
+              <i class="mdi mdi-account-circle-outline text-white h3 mb-0"></i>
+            </div>
+            <div>
+              <p class="mb-0 text-white" id="UserName"></p>
+              <p class="mb-0 text-white" onclick="Logout()">LOGOUT</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <nav
+            class="
+              navbar navbar-expand navbar-light
+              bg-white
+              topbar
+              mb-4
+              static-top
+              shadow-sm
+              vin-nav-top
+            "
+          >
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </nav>
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+            <div class="banner-image p-0 mt-n4 mx-n4 position-relative">
+              <div class="position-absolute heart-icon">
+                <!-- <a href="#" class="bg-white text-decoration-none rounded p-2 text-dark font-weight-bold"><i class="far fa-heart"></i></a> -->
+              </div>
+            </div>
+            <div
+              class="mt-n5 bg-white p-3 mb-4 rounded shadow position-relative"
+            >
+              <div class="vin-single-top-info">
+                <div class="ml-3">
+                  <div class="restaurant-detail mt-2 mb-3"></div>
+
+                  <div class="col-12">
+                    <a class="nav-link active border-0 btn btn-dark mt-2"
+                      >Create System User</a
+                    >
+                  </div>
+                  <hr />
+
+                  <form id="createUser">
+                    <div class="row">
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mb-1">
+                          Select Restaurant<span style="color: red">*</span>
+                        </p>
+                        <select
+                          id="idRestaurant"
+                          name="idRestaurant"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          aria-label=""
+                          required
+                        ></select>
+                        <label
+                          for="idRestaurant"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mb-1">
+                          Select Role<span style="color: red">*</span>
+                        </p>
+                        <select
+                          id="idSystemAttribute"
+                          name="idSystemAttribute"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          aria-label=""
+                          required
+                        >
+                          <option value="74" selected>Admin</option>
+                          <option value="73">Super Admin</option>
+                        </select>
+                        <label
+                          for="idSystemAttribute"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mt-1">
+                          Enter Name<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          autocomplete="off"
+                          name="name"
+                          id="name"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          placeholder="Enter Name"
+                        />
+                        <label
+                          for="name"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mt-1">
+                          Enter Mobile<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          autocomplete="off"
+                          name="mobile"
+                          id="mobile"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          placeholder="Enter Name"
+                        />
+                        <label
+                          for="mobile"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mt-1">
+                          Email<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          autocomplete="off"
+                          name="email"
+                          id="email"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          placeholder="Enter Email"
+                        />
+                        <label
+                          for="email"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div class="col">
+                        <p class="mb-0 small font-weight-bold text-dark mt-1">
+                          Password<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          autocomplete="off"
+                          name="password"
+                          id="password"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          placeholder="Enter Password"
+                        />
+                        <label
+                          for="password"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+                    <div style="padding-left: 0" class="mt-2">
+                      <input
+                        type="submit"
+                        class="btn btn-primary"
+                        value="Create"
+                      />
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="table-wrapper-scroll-y"
+              style="height: 200px; overflow: auto"
+            >
+              <table
+                class="table table-bordered table-striped table-sm mb-0"
+                style="text-align: center; height: 50px; overflow: auto"
+              >
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Restaurant Name</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Mobile</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Active</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody id="appendUser"></tbody>
+              </table>
+            </div>
+
+            <ul
+              class="nav nav-tabs border-0 mb-4"
+              id="myTabCategory"
+              role="tablist"
+            ></ul>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+  </body>
+
+  <script>
+    function generateNav() {
+      let nav = ``;
+    }
+
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function createUser() {
+      $("#createUser").validate({
+        // initialize the plugin
+
+        rules: {
+          idRestaurant: {
+            required: true,
+            minlength: 1,
+          },
+          idSystemAttribute: {
+            required: true,
+            minlength: 1,
+          },
+          name: {
+            required: true,
+            minlength: 1,
+          },
+
+          email: {
+            required: true,
+            email: true,
+          },
+          mobile: {
+            required: true,
+          },
+          password: {
+            required: true,
+          },
+        },
+        messages: {
+          idRestaurant: "Select Restaurant",
+          idSystemAttribute: "Select Role",
+          name: "Enter Name",
+          mobile: "Enter Mobile",
+          email: "Enter Email",
+          password: "Enter Password",
+        },
+        submitHandler: async function (form) {
+          // for demo
+          let data = convertPayload("createUser");
+          if (data.idRestaurant == "null") {
+            alert("Select restaurant");
+            return false;
+          } else {
+            let result = await Axios(BaseURLSuperUser, "/users", "POST", data);
+            let res = result.data;
+            if (res.status != 200) {
+              alert(res.errorMessage);
+              return false;
+            } else if(res.status == 200) {
+              alert("Created Successfully");
+              refreshPage();
+              return true;
+            }
+          }
+        },
+      });
+    }
+
+    let userModal = (
+      { idUser, name, mobile, email, password, isActive },
+      idx,
+      restaurant
+    ) => `<tr>
+                <th scope="row">${idx}</th>
+                <td>${restaurant}</td>
+                <td>${name}</td>
+                <td>${mobile}</td>
+                <td>${email}</td>
+                <td>${password}</td>
+                <td>${isActive == 1 ? "Yes" : "No"}</td>
+
+   <td> <i class="mdi mdi-delete" data-name="mdi-delete" onclick="deleteUser(${idUser},'${name}')"></i>
+    </td>
+              </tr>`;
+
+    async function deleteUser(idUser, name) {
+      if (confirm(`Do you want to delete user ${name} ?`)) {
+        let result = await Axios(
+          BaseURLSuperUser,
+          `/users/${idUser}`,
+          "DELETE"
+        );
+        let res = result.data;
+        if (res.status != 200) {
+          alert("Something Went Wrong");
+          return false;
+        } else if(res.status == 200) {
+          alert("Deleted Successfully");
+          refreshPage();
+        }
+      }
+    }
+    let params;
+    $(document).ready(function () {
+      sessionStorage.setItem(
+        "idRestaurant",
+        getParameterByName("idRestaurant")
+      );
+      params = {
+        idRestaurant: sessionStorage.getItem("idRestaurant"),
+      };
+
+      if (localStorage.getItem("Permission") == "73") {
+        $("#listDealerMenu").show();
+        $("#dealerMenu").show();
+        $("#registerRestaurantMenu").show();
+        $("#createAdminMenu").show();
+      } else {
+        $("#listDealerMenu").hide();
+        $("#dealerMenu").hide();
+        $("#registerRestaurantMenu").hide();
+        $("#createAdminMenu").hide();
+      }
+
+      // let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+      // $('#UserName').text(userInfo.name);
+      (() => {
+        refreshPage();
+      })();
+
+      createUser();
+    });
+
+    async function refreshPage() {
+      let restaurantData = await getRestaurantDetails();
+      getUsers(restaurantData);
+    }
+
+    async function getRestaurantDetails() {
+      let result = await Axios(BaseURLSuperUser, "/getRestaurants", "GET");
+      let res = result.data;
+      let restaurantData = null;
+      if (res.status != 200) {
+        alert("Something Went Wrong");
+      } else if(res.status == 200) {
+        $("#idRestaurant").empty();
+        $("#idRestaurant").append(`<option value="null">--</option>`);
+        restaurantData = res.payload.restaurants;
+        restaurantData.forEach((val) => {
+          if (val.isActive)
+            $("#idRestaurant").append(
+              `<option value="${val.idRestaurant}">${val.name}</option>`
+            );
+        });
+        return restaurantData;
+      }
+    }
+    async function getUsers(restaurantData) {
+      let result = await Axios(BaseURLSuperUser, "/users", "GET");
+      let res = result.data;
+      if (res.status != 200) {
+        alert("Something Went Wrong");
+        return false;
+      } else if(res.status == 200) {
+        $("#appendUser").empty();
+        res.payload.forEach((val, idx) => {
+          let rest = "";
+          if (val.idRestaurant)
+            rest = restaurantData.filter(
+              (v) => v.idRestaurant == val.idRestaurant
+            )[0]["name"];
+          $("#appendUser").append(userModal(val, idx + 1, rest));
+        });
+      }
+    }
+  </script>
+</html>

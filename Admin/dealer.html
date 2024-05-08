@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="69f84c5007cbf78f96d8cb7e-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="69f84c5007cbf78f96d8cb7e-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="69f84c5007cbf78f96d8cb7e-text/javascript"
+    ></script>
+    <script
+      src="js/res.min.js"
+      type="69f84c5007cbf78f96d8cb7e-text/javascript"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body>
+    <div class="wrapper">
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <!-- <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow-sm vin-nav-top">
+        
+    
+        <ul class="navbar-nav">
+        
+            <a class="sidebar-brand d-flex align-items-center" href="index.html">
+                <div class="sidebar-brand-icon">
+                    AWAITERO
+            </div>
+            </a>
+    
+        </ul>
+        
+     
+        </nav> -->
+          <nav
+            class="
+              navbar navbar-expand
+              topbar
+              mb-4
+              static-top
+              shadow-sm
+              vin-nav-top
+            "
+          >
+            <ul class="navbar-nav" style="color: #c60021">
+              <a
+                class="sidebar-brand d-flex align-items-center"
+                id="companyLogo"
+                href="#"
+                style="background-color: white"
+              >
+                <div class="sidebar-brand-icon">
+                  <img src="img/logoWithName.svg" />
+                </div>
+              </a>
+            </ul>
+          </nav>
+
+          <div class="container-fluid" style="align-content: center">
+            <div
+              class="
+                d-flex
+                align-items-center
+                justify-content-between
+                mb-4
+                mt-2
+              "
+            >
+              <h2 class="mb-1" style="text-align: center">
+                Welcome to Awaitero - Dealer Registration
+              </h2>
+            </div>
+
+            <form
+              id="dealerRegistration"
+              autocomplete="off"
+              enctype="multipart/form-data"
+            >
+              <div class="row">
+                <div class="col-md-6 col-lg-4">
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter First Name<span style="color: red">*</span>
+                  </p>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    autocomplete="off"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter First Name"
+                    required
+                  />
+                  <label
+                    for="firstName"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Last Name<span style="color: red">*</span>
+                  </p>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    autocomplete="off"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Last Name"
+                    required
+                  />
+                  <label
+                    for="lastName"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Mobile Number<span style="color: red">*</span>
+                  </p>
+                  <input
+                    type="number"
+                    id="mobile"
+                    name="mobile"
+                    autocomplete="off"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Mobile Number"
+                    required
+                  />
+                  <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                  <label
+                    for="mobile"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Alternate Mobile Number<span style="color: red"
+                      >*</span
+                    >
+                  </p>
+                  <input
+                    type="number"
+                    id="alternateNumber"
+                    autocomplete="off"
+                    name="alternateNumber"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Alternate Mobile Number"
+                    required
+                  />
+                  <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                  <label
+                    for="alternateNumber"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Email<span style="color: red">*</span>
+                  </p>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Email"
+                  />
+                  <label
+                    for="email"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <div>
+                    <div class="d-flex align-items-center">
+                      <div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Select State<span style="color: red">*</span>
+                  </p>
+                  <select
+                    id="idState"
+                    name="idState"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label=""
+                    required
+                  >
+                    <option disabled="disabled" selected="">
+                      Select State
+                    </option>
+                    <option value="1">Andhra Pradesh</option>
+                    <option value="2">Arunachal Pradesh</option>
+                    <option value="3">Assam</option>
+                    <option value="4">Bihar</option>
+                    <option value="5">Chhattisgarh</option>
+                    <option value="6">Goa</option>
+                    <option value="7">Gujarat</option>
+                    <option value="8">Haryana</option>
+                    <option value="9">Himachal Pradesh</option>
+                    <option value="10">Jammu and Kashmir</option>
+                    <option value="11">Jharkhand</option>
+                    <option value="12">Karnataka</option>
+                    <option value="13">Kerala</option>
+                    <option value="14">Madhya Pradesh</option>
+                    <option value="15">Maharashtra</option>
+                    <option value="16">Manipur</option>
+                    <option value="17">Meghalaya</option>
+                    <option value="18">Mizoram</option>
+                    <option value="19">Nagaland</option>
+                    <option value="20">Odisha</option>
+                    <option value="21">Punjab</option>
+                    <option value="22">Rajasthan</option>
+                    <option value="23">Sikkim</option>
+                    <option value="24">Tamil Nadu</option>
+                    <option value="25">Telangana</option>
+                    <option value="26">Tripura</option>
+                    <option value="27">Uttarakhand</option>
+                    <option value="28">Uttar Pradesh</option>
+                    <option value="29">West Bengal</option>
+                    <option value="30">Andaman and Nicobar Islands</option>
+                    <option value="31">Chandigarh</option>
+                    <option value="32">Dadra and Nagar Haveli</option>
+                    <option value="33">Daman and Diu</option>
+                    <option value="34">Delhi</option>
+                    <option value="35">Lakshadweep</option>
+                    <option value="36">Puducherry</option>
+                  </select>
+
+                  <p
+                    class="mb-0 small font-weight-bold text-dark"
+                    style="margin-top: 1.2rem"
+                  >
+                    Enter City<span style="color: red">*</span>
+                  </p>
+                  <input
+                    type="text"
+                    id="city"
+                    name="city"
+                    autocomplete="off"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter City"
+                    required
+                  />
+                  <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                  <label
+                    for="city"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Upload Aadhar Card<span style="color: red">*</span>
+                  </p>
+                  <input
+                    id="aadharIdProofPath"
+                    type="file"
+                    name="aadharIdProofPath"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label=""
+                    required
+                  />
+                  <label
+                    for="aadharIdProofPath"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Upload Pan Card<span style="color: red">*</span>
+                  </p>
+                  <input
+                    id="pancardIdProofPath"
+                    type="file"
+                    name="pancardIdProofPath"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label=""
+                    required
+                  />
+                  <label
+                    for="pancardIdProofPath"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Address<span style="color: red">*</span>
+                  </p>
+                  <textarea
+                    rows="2"
+                    id="address"
+                    name="address"
+                    autocomplete="off"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                    "
+                    placeholder="Enter Address"
+                    required
+                  ></textarea>
+                  <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                  <label
+                    for="address"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                </div>
+              </div>
+              <!-- <div class="col-md-6 col-lg-4">
+    
+       
+    </div> -->
+              <div class="col-md-12 col-lg-8">
+                <input
+                  type="submit"
+                  class="btn btn-primary btn-block"
+                  value="Register"
+                />
+              </div>
+              <div
+                aria-live="polite"
+                aria-atomic="true"
+                class="d-flex justify-content-center align-items-center"
+                style="min-height: 200px"
+              >
+                <!-- Then put toasts within -->
+                <div
+                  class="toast"
+                  role="alert"
+                  aria-live="assertive"
+                  aria-atomic="true"
+                >
+                  <div class="toast-header">
+                    <img src="..." class="rounded mr-2" alt="..." />
+                    <strong class="mr-auto">Bootstrap</strong>
+                    <small>11 mins ago</small>
+                    <button
+                      type="button"
+                      class="ml-2 mb-1 close"
+                      data-dismiss="toast"
+                      aria-label="Close"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="toast-body">
+                    Hello, world! This is a toast message.
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-lg-8"><br /></div>
+        <div class="col-md-12 col-lg-8"><br /></div>
+        <div class="col-md-12 col-lg-8"><br /></div>
+        <div class="col-md-12 col-lg-8"><br /></div>
+        <div class="col-md-12 col-lg-8"><br /></div>
+        <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span id="copyRight"></span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      // onclick="validateUser(event)"
+      // $(".toast").toast('show');
+
+      $(document).ready(function () {
+        if (sessionStorage.getItem("Permission") == "73") {
+          $("#listDealerMenu").show();
+          $("#dealerMenu").show();
+        } else {
+          $("#listDealerMenu").hide();
+          $("#dealerMenu").hide();
+        }
+        // $('#toast').
+        $("#dealerRegistration").validate({
+          // initialize the plugin
+
+          rules: {
+            firstName: {
+              required: true,
+              minlength: 1,
+            },
+            lastName: {
+              required: true,
+              minlength: 1,
+            },
+            mobile: {
+              required: true,
+              minlength: 10,
+            },
+            alternateNumber: {
+              required: true,
+              minlength: 10,
+            },
+            email: {
+              required: true,
+              email: true,
+            },
+            idState: {
+              required: true,
+            },
+            city: {
+              required: true,
+            },
+            aadharIdProofPath: {
+              required: true,
+              extension: "png|jpeg|jpg",
+            },
+            pancardIdProofPath: {
+              required: true,
+              extension: "png|jpeg|jpg",
+            },
+
+            address: {
+              required: true,
+            },
+          },
+          messages: {
+            firstName: "Enter First Name",
+            lastName: "Enter Last Name",
+            mobile: "Enter Mobile Number",
+            alternateNumber: "Enter Alternate Number",
+            idState: "Select State",
+            city: "Enter City",
+            aadharIdProofPath:
+              "Aadhar card photo must be JPG, or PNG, less than 1MB",
+            pancardIdProofPath:
+              "Pan card photo must be JPG, or PNG, less than 1MB",
+            address: "Enter Address",
+          },
+          submitHandler: async function (form) {
+            // for demo
+            var form = $("#dealerRegistration");
+            var formdata = false;
+            if (window.FormData) {
+              formdata = new FormData(form[0]);
+            }
+            let data = formdata
+              ? formdata
+              : convertPayload("dealerRegistration"); //formdata||convertPayload("dealerRegistration");
+            let result = await Axios(
+              BaseURLSuperUser,
+              "/dealer/create",
+              "POST",
+              data
+            );
+            let res = result.data;
+            if (res.status != 200) {
+              alert(res.errorMessage);
+              // $('#ErrorMessage').text(res.errorMessage)
+              return false;
+            } else if(res.status == 200) 
+              alert("Registered Successfully");
+              location.reload();
+            // $('#ErrorMessage').text("")
+            // $('.toast').toast('')
+
+            return true;
+          },
+        });
+      });
+    </script>
+
+    <!-- <script src="../../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="69f84c5007cbf78f96d8cb7e-|49" defer=""></script><script defer src="../../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6a86c250cbb4de4a","version":"2021.10.0","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}'></script> -->
+  </body>
+</html>

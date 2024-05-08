@@ -1,0 +1,52 @@
+.body1 {
+  text-align: center;
+  margin: 0px;
+  margin-top: 0px;
+  margin-left: 0px;
+  font-size: 1vw;
+  color: #000;
+}
+
+.dclr {
+  clear: both;
+  float: none;
+  height: 0px;
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+}
+
+.ft0 {
+  font: 16px "Courier New";
+  line-height: 18px;
+}
+
+.p0 {
+  text-align: center;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.td0 {
+  padding: 0px;
+  margin: 0px;
+  width: 231px;
+  vertical-align: bottom;
+}
+
+.td1 {
+  padding: 0px;
+  margin: 0px;
+  width: 76px;
+  vertical-align: bottom;
+}
+
+.tr0 {
+  height: 20px;
+}
+table,
+th,
+td {
+  border: 1px solid black;
+  text-align: center;
+}

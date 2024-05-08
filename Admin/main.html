@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <div id="loader" class="center"></div>
+    <div id="wrapper" style="display:none">
+
+      
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <a
+          class="sidebar-brand d-flex align-items-center bg-dark"
+          id="companyLogo"
+          href="javascript:void(0)"
+          style="background-color: #343a40"
+        >
+          <div class="sidebar-brand-icon">
+            <img src="img/logo.svg" style="width: 100; height: 38px" alt="logoWithName" />
+            <span class="text-white" style="text-transform: none">Awaitero</span>
+          </div>
+        </a>
+
+        <li class="nav-item active">
+          <a class="nav-link" href="main.html">
+            <i class="mdi mdi-home-variant-outline"></i>
+            <span>Home</span></a
+          >
+        </li>
+        <li class="nav-item" id="listDealerMenu">
+          <a class="nav-link" href="listDealer.html">
+            <i class="mdi mdi-human-child"></i>
+            <span>Dealer List</span></a
+          >
+        </li>
+        <li class="nav-item" id="dealerMenu">
+          <a class="nav-link" target="_blank" href="dealer.html">
+            <i class="mdi mdi-human"></i>
+            <span>Register Dealer</span></a
+          >
+        </li>
+
+        <li class="nav-item" id="registerRestaurantMenu">
+          <a class="nav-link" target="_blank" href="restaurant.html">
+            <i class="mdi mdi-human"></i>
+            <span>Restaurant Reg</span></a
+          >
+        </li>
+        <li class="nav-item" id="createAdminMenu">
+          <a class="nav-link" href="createAdmin.html">
+            <i class="mdi mdi-human"></i>
+            <span>Create Admin</span></a
+          >
+        </li>
+
+        <div class="d-none d-md-block">
+          <div class="user d-flex align-items-center p-3">
+            <div class="pr-3">
+              <i class="mdi mdi-account-circle-outline text-white h3 mb-0"></i>
+            </div>
+            <div>
+              <p class="mb-0 text-white" id="UserName"></p>
+
+              <p class="mb-0 text-white" onclick="Logout()">LOGOUT</p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <nav
+            class="
+              navbar navbar-expand navbar-light
+              bg-dark
+              topbar
+              mb-4
+              static-top
+              shadow-sm
+              vin-nav-top
+            "
+          >
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown no-arrow d-sm-none">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="javascript:void(0)"
+                  id="searchDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  <i class="fas fa-search fa-fw"></i>
+                </a>
+              </li>
+            </ul>
+
+            <div class="ml-auto">
+              <form
+                class="
+                  d-none d-sm-inline-block
+                  form-inline
+                  mx-2
+                  my-2 my-md-0
+                  mw-100
+                  navbar-search
+                "
+              >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control bg-light"
+                    id="searchRestaurant"
+                    name="searchRestaurant"
+                    placeholder="Search for..."
+                    aria-label="Search"
+                    aria-describedby="basic-addon2"
+                  />
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="button">
+                      <i class="mdi mdi-magnify"></i>
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </nav>
+         
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+
+            <div
+              class="
+                d-flex
+                align-items-center
+                justify-content-between
+                mb-3
+                mt-2
+              "
+            >
+              <h5 class="mb-0" id="Restaurants">Restaurants</h5>
+            </div>
+
+            <div class="row" id="RestaurantList"></div>
+
+            <div class="row"></div>
+
+            <h5 class="mb-0" id="Restaurants">Restaurants Not Assigned Contract</h5>
+
+            <div class="row mt-3" id="RestaurantListNotRegistered"></div>
+
+            
+          </div>
+
+         </div>
+         <footer class="sticky-footer bg-white">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span id="copyRight"></span>
+            </div>
+          </div>
+        </footer>
+          </div>
+          
+        </div>
+
+      
+      </div>
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="c84b552052e7ef1e20843335-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="c84b552052e7ef1e20843335-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="c84b552052e7ef1e20843335-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="c84b552052e7ef1e20843335-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="c84b552052e7ef1e20843335-|49"
+      defer=""
+    ></script>
+  </body>
+
+  <script>
+    let restaurantList = ({
+      idRestaurant,
+      name,
+      isActive,
+      restaurantLogo,
+    }) => `<a href="detail.html?idRestaurant=${idRestaurant}"  onclick="setRestaurant(${idRestaurant})"class="text-dark text-decoration-none col-xl-4 col-lg-12 col-md-12">
+<div class="bg-white shadow-sm rounded d-flex align-items-center p-1 mb-4 vin-list">
+<div class="bg-light p-3 rounded">
+<img src="${BaseURL}/${restaurantLogo}" class="img-fluid">
+</div>
+<div class="mx-3 py-2 w-100">
+    <p class="mb-0 d-flex align-items-center mb-2 text-black">${name}
+        <span class="large ml-auto" style="color:${
+          isActive == 1 ? "green" : "red"
+        };font-weight: bold;"> ${isActive == 1 ? "ACTIVE" : "INACTIVE"} </span>
+        </p>
+    <!-- <p class="small mb-2">
+    <i class="mdi mdi-star text-warning mr-1"></i> <span class="font-weight-bold text-dark">0.5</span> (34)
+    <i class="mdi mdi-silverware-fork-knife ml-3 mr-1"></i> Pizza
+    <i class="mdi mdi-currency-inr ml-3"></i> 150/-
+    </p> -->
+    <!-- <p class="mb-0 text-muted d-flex align-items-center"><span class="badge badge-info"><i class="mdi mdi-truck-fast-outline"></i> Free delivery</span>
+    <span class="small ml-auto"><i class="mdi mdi-map-marker"></i> 15 MIN</span> -->
+    </p>
+    </div>
+</div>
+</a>`;
+
+    function setRestaurant(idRestaurant) {
+      sessionStorage.setItem("idRestaurant", idRestaurant);
+    }
+    $(document).ready(function () {
+      
+      document.querySelector("#loader").style.visibility = "visible";
+      
+      if (sessionStorage.getItem("Permission") == "73") {
+        $("#listDealerMenu").show();
+        $("#dealerMenu").show();
+        $("#registerRestaurantMenu").show();
+        $("#createAdminMenu").show();
+      } else {
+        $("#listDealerMenu").hide();
+        $("#dealerMenu").hide();
+        $("#registerRestaurantMenu").hide();
+        $("#createAdminMenu").hide();
+      }
+
+      let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+      $("#UserName").text(userInfo.name);
+
+      (async () => {
+        let result = await Axios(BaseURLSuperUser, "/getRestaurants", "GET");
+        let res = result.data;
+        if (res.status != 200) {
+          $("#ErrorMessage").text(res.errorMessage);
+          return false;
+        } else if(res.status == 200) {
+
+          jQuery("#wrapper").fadeIn("slow");
+          $("#Restaurants").text(
+            `Restaurants (${
+              res.payload.count.activeCount + res.payload.count.inactiveCount
+            })`
+          );
+          $("#ErrorMessage").text("");
+          sessionStorage.setItem(
+            "RestaurantsList",
+            JSON.stringify(res.payload.restaurants)
+          );
+          
+          res.payload.restaurants.map((val) => {
+            if(val.contract.length)
+              $("#RestaurantList").append(restaurantList(val))
+              else 
+              $("#RestaurantListNotRegistered").append(restaurantList(val))
+
+          });
+        }
+      })();
+
+      $("#searchRestaurant").on("input", function (e) {
+        const searchText = $("#searchRestaurant").val();
+        let OrginalRestaurantsList = JSON.parse(
+          sessionStorage.getItem("RestaurantsList")
+        ).filter(val=> val.contract.length>0);
+
+        if (searchText.length > 0) {
+          const regex = new RegExp(searchText, "gmi");
+          let RestaurantsList = OrginalRestaurantsList.filter((val) =>
+            regex.test(val.name) && val.contract.length>0
+          );
+          $("#RestaurantList").empty();
+          $("#RestaurantList").append(
+            RestaurantsList.map((val) => restaurantList(val)).join("\n")
+          );
+          $("#Restaurants").text(`Restaurants (${RestaurantsList.length})`);
+        } else {
+          $("#RestaurantList").empty();
+          $("#RestaurantList").append(
+            OrginalRestaurantsList.map((val) => restaurantList(val)).join("\n")
+          );
+          $("#Restaurants").text(
+            `Restaurants (${OrginalRestaurantsList.length})`
+          );
+        }
+      });
+    });
+  </script>
+</html>

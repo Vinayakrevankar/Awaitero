@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/fav.png">
+    <title>Awaitero</title>
+
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css" />
+
+    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
+
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="vendor/sidebar/demo.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
+</head>
+
+<body class="bg-light fixed-bottom-bar">
+    <div class="vin-checkout">
+        <div class="bg-primary border-bottom px-3 pt-3 pb-5 d-flex align-items-center">
+            <a class="toggle" href="javascript:void(0)"><span></span></a>
+            <h4 class="font-weight-bold m-0 text-white">Ordered List</h4>
+            <a class="text-white font-weight-bold ml-auto" href="javascript:void(0)" id="closeBtn"> Close</a>
+        </div>
+
+        <div class="p-3 vin-cart-item">
+            <div class="d-flex mb-3 vin-cart-item-profile bg-white shadow rounded p-3 mt-n5">
+                <img src="" id="Resturantlogo" class="mr-3 img-fluid" style="width:100px;height:100px">
+
+                <div class="d-flex flex-column">
+                    <h6 class="mb-1 font-weight-bold" id="restaurantName"></h6>
+                    <p class="mb-0 small text-muted" id="restaurantAddress"><i class="feather-map-pin"></i></p>
+                </div>
+            </div>
+            <div class="bg-white rounded shadow mb-3 py-2" id="appendOrderedCart">
+
+
+            </div>
+
+            <div class="shadow bg-white rounded p-3 clearfix" id="ShowIfExists">
+                <p  id="itemAmountView" class="mb-1">Item Total <span class="float-right text-dark" id="totalAmountView"></span></p>
+                <p class="mb-1" id="cgstView">CGST <span class="float-right text-dark" id="CGST"></span></p>
+                <p class="mb-1" id="sgstView">SGST <span class="float-right text-dark" id="SGST"></span></p>
+                <p class="mb-1" id="rounoffView">Round Off <span class="float-right text-dark" id="roundoff"></span></p>
+
+
+                <hr>
+                <h6 class="font-weight-bold mb-0">Total Amount<span class="float-right" id="totalAmount"></span></h6>
+            </div>
+            <button class="btn btn-success btn-block btn-lg fixed-bottom" id="totalBillAmount">Bill Amount<i class="icofont-long-arrow-right"></i></a>
+        </div>
+        </div>
+
+
+<script src="vendor/jquery/jquery.min.js" type="71280aa47ec968b646a40b13-text/javascript"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="71280aa47ec968b646a40b13-text/javascript"></script>
+
+<script type="71280aa47ec968b646a40b13-text/javascript" src="vendor/slick/slick.min.js"></script>
+
+<script type="71280aa47ec968b646a40b13-text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
+
+<script src="js/vin.js" type="71280aa47ec968b646a40b13-text/javascript"></script>
+<script src="../../cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="71280aa47ec968b646a40b13-|49" defer=""></script><script defer src="../../../static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"rayId":"6a87885fbe10de5a","version":"2021.10.0","r":1,"token":"dd471ab1978346bbb991feaa79e6ce5c","si":100}'></script>
+<script>
+      $(document).ready(function () {
+        
+        let restaurantDetails =  JSON.parse(sessionStorage.getItem("RestaurantDetails"));
+        $('#restaurantName').text(restaurantDetails.name) 
+        $('#restaurantAddress').text(restaurantDetails.address)
+        $('#Resturantlogo').attr('src',`${BaseURL}/${restaurantDetails.restaurantLogo}`)
+
+        $('#restaurantName').text(restaurantDetails.name) 
+        $('#restaurantAddress').text(restaurantDetails.address)
+        // const unique = [...new Set(cartValue.map(cartValue => cartValue.idItem))];
+        getDetails();
+    });
+
+    async function getDetails(){
+        let restaurantDetails = JSON.parse(sessionStorage.getItem("RestaurantDetails"));
+
+        let idReference = JSON.parse(sessionStorage.getItem('idReference'))
+
+          let CustIdRestaurant = JSON.parse(sessionStorage.getItem('CustIdRestaurant'))
+
+        let result = await Axios(BaseURLUser,`/items/${idReference}`,"GET");
+         let  res = result.data;
+         if (res.status!=200)
+         {       
+                alert('Something Went Wrong') 
+                 return false;
+         }else if(res.status == 200)
+         {
+          let items = res.payload.items;
+
+          items.forEach(element => {
+            let amount = items.reduce((previousValue, currentValue)=> previousValue + +currentValue.price,0)
+            $('#appendOrderedCart').append(`<div class="gold-members d-flex align-items-center justify-content-between px-3 py-1 border-bottom">
+                <div class="media align-items-center">
+                <div class="media-body">
+                <p class="m-0 font-weight-bold"><b>${element.name}  X 1   </b></p>
+                <p class="m-0"><b>&#8377;${element.price}</b></p> 
+                <span style="font-size: 8px;color:${element.isConfirmed==1 ? 'green': 'red'}">${element.isConfirmed==1 ? 'Confirmed': 'Not Confirmed'}</span>
+                
+                </div>
+                </div>
+                <div class="d-flex align-items-center">
+                <span class="count-number float-right">
+                <p class="text-gray mb-0 float-right text-muted small">&#8377;${element.price}</p>
+                </div>
+                </div>`)
+        
+       
+            });
+
+            if(items.length) {
+                $('#ShowIfExists').show()
+            }
+            else{
+                $('#ShowIfExists').hide()
+                $('#appendOrderedCart').append("<h5 class='mt-1' style='text-align: center;'>No Ordered Items</h5>")
+
+            } 
+        let Amount = items.reduce((previousValue, currentValue)=> previousValue + +currentValue.price,0);
+        if(restaurantDetails.gst.length>0){
+
+        var percent =  (Amount * 5 /118).toFixed(2) //((9 / 109) * +Amount).toFixed(2);
+        var totalAmount = (Amount-percent).toFixed(2);
+        var GST = (percent/2).toFixed(2);
+        let totalGST = +(GST*2);
+        var roundoff= (Amount - (+totalAmount+ +totalGST)).toFixed(2);
+
+        
+        $('#CGST').empty()
+        $('#SGST').empty()
+        
+        $('#totalAmountView').empty()
+        $('#roundoff').empty()
+        $('#totalAmount').empty()
+        
+
+        $('#CGST').append('&#8377;'+GST)
+        $('#SGST').append('&#8377;'+GST)
+        $('#cgstView').show();
+                $('#sgstView').show();
+                $('#rounoffView').show();
+        $('#totalAmountView').append('&#8377;'+`${totalAmount}`)
+        $('#roundoff').append('&#8377;'+ Math.abs(roundoff))
+        $('#totalAmount').append('&#8377;'+ ((+totalAmount+ +totalGST)+ +roundoff).toFixed(2))
+        $('#totalBillAmount').append('&#8377;'+((+totalAmount+ +totalGST)+ +roundoff).toFixed(2))
+        }else{
+            $('#itemAmountView').hide();
+                $('#cgstView').hide();
+                $('#sgstView').hide();
+                $('#rounoffView').hide();
+                $('#totalAmount').append('&#8377;'+Amount)
+        }
+        }
+        $('#closeBtn').attr('href',`home.html?idReference=${idReference}&idRestaurant=${CustIdRestaurant}`)
+        
+    }
+
+</script>
+</body>
+
+<!-- Mirrored from askbootstrap.com/preview/swiggi/checkout.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 03 Nov 2021 18:06:06 GMT -->
+</html>

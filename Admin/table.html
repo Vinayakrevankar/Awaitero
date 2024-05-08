@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <title>Awaitero</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+    <link href="css/res.css" rel="stylesheet">
+
+    <link href="font/stylesheet.css" rel="stylesheet">
+
+    <link href="vendor/mdi-icons/css/materialdesignicons.min.css" rel="stylesheet">
+
+    <link href="css/custom.css" rel="stylesheet">
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js" integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/socket.io.min.js" crossorigin="anonymous"></script>
+    
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+       
+    </style>
+
+</head>
+
+<body id="page-top">
+    <div id="loader" class="center"></div>
+    <div id="wrapper" style="display:none; flex-direction: column; min-height: 100vh;">
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+                
+                
+                <nav class="navbar navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5" style=" background-color: #343a40!important">
+                      <a class="navbar-brand" href="javascript:void()">
+                        <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top"  alt="">
+                        Awaitero |
+                      </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav mr-auto">
+                       
+                    <li class="nav-item text-white mr-1">
+                        <a class="nav-link" id="HomeMenu" href="">
+                            <i class="mdi mdi-home-variant-outline"></i>
+                            <span>Home</span></a>
+                    </li>
+        
+                    <li class="nav-item active text-white mr-1">
+                        <a class="nav-link" id="restaurantTable">
+                            <i class="mdi mdi-silverware"></i>
+                            <span>Table</span></a>
+                    </li>
+        
+                    <li class="nav-item text-white mr-1">
+                        <a class="nav-link" id="restaurantMenu">
+                            <i class="mdi mdi-window-maximize"></i>
+                            <span>Menu</span></a>
+                    </li>
+        
+        
+                    <li class="nav-item text-white mr-1">
+                        <a class="nav-link" id="restaurantQRCode">
+                            <i class="mdi mdi-qrcode"></i>
+                            <span>QR Code</span></a>
+                    </li>
+                    <li class="nav-item text-white mr-1">
+                        <a class="nav-link" id="reports">
+                            <i class="mdi  mdi-file-document"></i>
+                            <span>Reports</span></a>
+                    </li>
+                      </ul>
+                      <div class="form-inline my-2 my-lg-0" >
+                        <i class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"></i>
+                        <span class="mb-0 text-white mr-4"  id="UserName"></span>
+                        <span class="mb-0 text-white"  onclick="Logout()">LOGOUT</span>
+                      </div>
+                    </div>
+                  </nav>
+
+                <div class="container-fluid">
+
+
+                    <div>
+                        <h5 style="text-align: center;color:red" id="ErrorMessage"></h5>
+                        <hr>
+                    </div>
+
+
+                    <div class="mt-n5 bg-white p-2 rounded shadow position-relative">
+                        <div class="vin-single-top-info">
+                            <div class="d-flex">
+                                <ul class="nav nav-tabs border-0" role="tablist">
+                                    <li class="nav-item mr-2" role="presentation">
+                                       
+                                        <a class="nav-link active border-0 btn btn-light" id="restaurantName"></a>
+                                    <a class="nav-link active border-0 btn btn-dark mt-2" data-toggle="modal" data-target="#AddTableItem">ADD TABLE</a>
+                                       
+                                    </li>
+
+                                </ul>
+                                <div hidden> 
+                                    <form id="updateTable">
+                                        <div class="d-flex">
+                                        
+                                           
+                                            <div class="col  ml-1 mt-3">
+                                                
+                                                <select
+                                                id="idTable"
+                                                name="idTable"
+                                                class="
+                                                  form-control form-control-sm
+                                                  p-0
+                                                  border-input border-0
+                                                  rounded-0
+                                                "
+                                              >
+                                                <option disabled="disabled" selected>Select Table</option>
+                                                
+                                              </select>
+                                              <label
+                                                for="idTable"
+                                                class="mb-0 small font-weight-bold error"
+                                                style="color: red"
+                                              ></label>
+                                            </div>
+                                            <div class="col ml-1 mt-3">
+        
+                                            <input type="text" autocomplete="off" name="name" id="name" class="form-control form-control-sm p-0 border-input border-0 rounded-0 mr-4" placeholder="Table Name">
+                                            <label for="name" class="mb-0 small font-weight-bold error mr-4" style="color:red"></label>
+                                            </div>
+                                            <div class="col  ml-1 mt-4">
+                                                <input type="submit" class="btn btn-primary btn-sm mb-3" value="Update">
+        
+                                            </div>
+                                        </div>
+                                    </form>
+                            </div>
+                                <ul class="d-flex" role="tablist" style="margin-left:300px;margin-top: 15px;">
+                                    <!-- <button type="button" style="width:80px;height: fit-content" class="nav-link active border-0 btn btn-secondary btn-sm mb-1 ml-2">
+            Vacant
+         </button> -->
+                                    <button type="button" style="width:80px;height: fit-content;background-color:#C0EC83;color:black" class="nav-link active border-0 btn btn-sm mb-1 ml-2">
+          Running
+         </button>
+                                    <button type="button" style="width:100px;height: fit-content;color:black" class="nav-link active border-0 btn btn-warning btn-sm ml-2">
+          New Order
+         </button>
+                                </ul>
+                            </div>
+                            
+                        </div>
+                        <br>
+                        <div class="m-2" style="margin-left: 0%;">
+                            <a class="nav-link active btn btn-danger" id="noTable" disable>No Table</a>
+
+                            <div class="row col-12" id="addTableName">
+
+                            </div>
+                            <div id="qrcode" hidden>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="AddTableItem" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content vin-item-detail-pop">
+                                <div class="modal-header border-0">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Table</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+                                </div>
+                                <div class="modal-body px-3 py-0">
+                                    <div class="mb-3">
+                                        <div class="alert alert-success fade" id="ModelAddTableAlert" role="alert">
+
+                                        </div>
+                                    </div>
+                                    <form id="addTable">
+                                        <div class="d-flex align-items-center mb-4">
+                                            <div class="w-100">
+
+                                                <p class="mb-0 small font-weight-bold text-dark">Enter Table Name</p>
+                                                <input type="text" autocomplete="off" name="name" id="name" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Table Name">
+                                                <label for="name" class="mb-0 small font-weight-bold error" style="color:red"></label>
+
+                                            </div>
+                                        </div>
+
+
+                                </div>
+
+                                <div class="modal-footer justify-content-start">
+
+                                    <input type="submit" class="btn btn-primary btn-block mb-3" value="ADD TABLE"></a>
+                                </div>
+                            </div>
+                            </form>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <footer class="sticky-footer bg-white">
+        <div class="container text-center">
+          <span id="copyRight"></span>
+        </div>
+      </footer>
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js" type="733a478407262b07af967949-text/javascript"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="733a478407262b07af967949-text/javascript"></script>
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js" type="733a478407262b07af967949-text/javascript"></script>
+
+    <script src="js/res.min.js" type="733a478407262b07af967949-text/javascript"></script>
+    <script src="js/rocket-loader.min.js" data-cf-settings="733a478407262b07af967949-|49" defer=""></script>
+
+    <script>
+        var tablelist = null
+       
+        async function getTableDetails(idTable) {
+            let result = await Axios(BaseURLSuperUser, `/getTable/${idTable}`, "GET", null);
+            let res = result.data;
+
+            if (res.status != 200) {
+                    alert('Something Went Wrong');
+            } else if(res.status == 200) {
+                let idRestaurant = "";
+
+                res.payload.table.length == 0 ? $('#noTable').show() : $('#noTable').hide()
+                res.payload.table.forEach((element, idx) => {
+
+                    idRestaurant = element.idRestaurant;
+                    $('#tableName').text(element.name)
+                    $('#updateStatus').text(element.occupied == 0 ? 'Vacant' : 'Occupied')
+                    $('#closeOrder').show();
+                    $('#updateStatus').show();
+                    $('#QRcodeTableNumber').text(element.name)
+                    if (element.occupied == 0) {
+                        $('#closeOrder').hide()
+                    } else
+                        $('#closeOrder').show()
+                    $('#qrcode').empty()
+                    var qrcode = new QRCode("qrcode", {
+                        text: BaseURLSuperUser + `?idRestaurant=${element.idRestaurant}&idTable=${element.idTable}`,
+                        width: 100,
+                        height: 100,
+                        colorDark: "#000000",
+                        colorLight: "#ffffff",
+                        correctLevel: QRCode.CorrectLevel.H
+                    });
+
+
+
+                });
+                let sum = 0;
+                $('#listOfItemOrdered').empty();
+                res.payload.items.forEach((element, idx) => {
+                    sum += +element.price;
+                    let modal = `<tr>
+                              <th scope="row">${idx+1}</th>
+                              <td>${element.name}</td>
+                              <td>1</td>
+                            
+                              <td><h6>${element.price}</h6></td>
+                              <td><form id="deleteItemFromTable"><input type="text" name="idRestaurant" value="${idRestaurant}" hidden>
+                                <input type="text" name="idOrder" value="${element.idOrder}" hidden>
+                                <i class="mdi mdi-delete" data-name="mdi-delete"></i></form></td>
+                            </tr>`
+
+                    $('#listOfItemOrdered').append(modal);
+                    $('#closeOrder').show()
+                });
+                if (res.payload.items.length == 0)
+                    $('#closeOrder').hide()
+
+
+                $('#totalAmount').text(`Total Amount: Rs ${sum}`)
+
+                $('#customerName').text('')
+                $('#customerMobile').text('')
+                $('#customerMail').text('')
+                res.payload.customer.forEach((element, idx) => {
+
+
+                    $('#customerName').text('Name: ' + element.name)
+                    $('#customerMobile').text('Mobile: ' + element.mobileNumber)
+                    $('#customerMail').text('Email: ' + element.email)
+
+
+                });
+
+
+
+            }
+        }
+    </script>
+    <script>
+        let params = {
+            idRestaurant: sessionStorage.getItem('idRestaurant')
+        }
+
+        function createTable() {
+            $('#addTable').validate({ // initialize the plugin
+
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 4
+                    }
+                },
+                messages: {
+                    name: "Enter Table Name"
+                },
+
+                submitHandler: async function(form) {
+
+
+                    let data = convertPayload("addTable");
+                    let result = await Axios(BaseURLSuperUser, "/createTable", "POST", {
+                        idRestaurant: params.idRestaurant,
+                        ...data
+                    });
+                    let res = result.data;
+
+                    if (res.status != 200) {
+                        $('#ModelAddTableAlert').empty()
+                        $('#ModelAddTableAlert').append(`<strong>${res.errorMessage}</strong>`);
+                        $('#ModelAddTableAlert').attr('class', 'alert alert-warning');
+
+                        setTimeout(function() {
+                            $('#ModelAddTableAlert').attr('class', 'alert alert-warning fade')
+                        }, 3000)
+
+                        return false;
+                    } else if(res.status == 200) {
+                        $('#ModelAddTableAlert').empty()
+                        $('#ModelAddTableAlert').append('<strong>Table Added Successfully</strong>');
+                        $('#ModelAddTableAlert').attr('class', 'alert alert-success')
+                        setTimeout(function() {
+                            document.getElementById("createCoupon").reset();
+                            $('#ModelAddTableAlert').attr('class', 'alert alert-success fade')
+                            $(`#ModelAddTableAlert`).modal('hide')
+                        }, 3000)
+                        getAllTable()
+                        return true
+
+                    }
+
+                }
+
+            });
+        }
+
+
+        async function getAllTable() {
+
+            let result = await Axios(BaseURLSuperUser, `/getAllTable/${params.idRestaurant}`, "GET", null);
+            let res = result.data;
+
+            if (res.status != 200) {
+
+            } else if(res.status == 200) {
+
+                $('#addTableName').empty()
+                let len = Math.max(...res.payload.map(val => val.name.length))
+                res.payload.length == 0 ? $('#noTable').show() : $('#noTable').hide()
+                let tablelist = res.payload;
+                res.payload.forEach((element, idx) => {
+                    element.name = element.name.toUpperCase()
+                    $('#addTableName').append(TableListModel(element, element.idRestaurant, idx))
+                    $('#idTable').append(`<option value="${element.idTable}">${element.name}</option>`);
+
+                    $('#ItemTable').show();
+
+
+                    // if(idx==0){
+                    //   $('#tableName').text(element.name)
+                    //   $('#updateStatus').text(element.occupied==0 ? 'Vacant':'Occupied')
+                    //   $('#QRcodeTableNumber').text(element.name)
+                    //  if(element.occupied==0)
+                    //    $('#closeOrder').hide()
+                    //  else
+                    //    $('#closeOrder').show()
+                    //    $('#qrcode').empty()   
+                    //    var qrcode = new QRCode("qrcode",{
+                    //       text: BaseURLSuperUser+`?idRestaurant=${element.idRestaurant}`,
+                    //       width: 100,
+                    //       height: 100,
+                    //       colorDark : "#000000",
+                    //       colorLight : "#ffffff",
+                    //       correctLevel : QRCode.CorrectLevel.H
+                    //   });
+                    // }
+
+                });
+                $('#idTable').on('change', function() {
+                    let [{name}] = tablelist.filter(val=> val.idTable== +this.value)
+                      $('#updateTable #name').val(name);
+            });
+            }
+        }
+
+        function deleteItemFromTable() {
+
+            $('#deleteItemFromTable').validate({ // initialize the plugin
+
+                rules: {
+                    name: {
+                        required: true,
+                        minlength: 4
+                    }
+                },
+                messages: {
+                    name: "Enter Table Name"
+                },
+
+                submitHandler: async function(form) {
+
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            document.querySelector("#loader").style.visibility = "visible";
+            $('#closeOrder').hide();
+            $('#updateStatus').hide();
+            $('#QRCodeDiv').hide();
+
+            $('#noTable').hide()
+            $('#ItemTable').hide();
+            let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+
+            (async(idRestaurant) => {
+                let result = await Axios(BaseURLSuperUser, "/getRestaurants", "GET");
+                let res = result.data;
+                if (res.status != 200) {
+                    $('#ErrorMessage').text(res.errorMessage)
+                    return false;
+                } else if(res.status == 200) {
+
+                document.querySelector("#loader").style.visibility = "hidden";
+                    
+                    jQuery("#wrapper").fadeIn("slow");
+
+                    // document.querySelector("body").style.visibility = "visible";
+                    // document.querySelector("#loader").style.visibility = "visible";
+                    sessionStorage.setItem("RestaurantsList", JSON.stringify(res.payload.restaurants));
+
+                let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+                $('#UserName').text(userInfo.name);
+                $('#copyRight').empty()
+                $('#copyRight').append(copyRight);
+
+                // let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+
+                let [RestaurantsList] = res.payload.restaurants.filter(val => val.idRestaurant == idRestaurant);
+                // JSON.parse(sessionStorage.getItem("RestaurantsList"))
+
+
+                    $('#restaurantName').text(RestaurantsList.name);
+                    $('#createManualUserForm #nameR').val(RestaurantsList.name)
+
+                    if (sessionStorage.getItem('Permission') == "SuperAdmin")
+
+                    {
+                        $('#HomeMenu').attr('href', `main.html?idRestaurant=${idRestaurant}`)
+
+
+                    } else {
+                        $('#HomeMenu').attr('href', `detail.html?idRestaurant=${idRestaurant}`)
+
+                    }
+                }
+            })(idRestaurant)
+            $('#restaurantMenu').attr('href', `menu.html?idRestaurant=${params.idRestaurant}`)
+            $('#restaurantQRCode').attr('href', `qrcode.html?idRestaurant=${params.idRestaurant}`)
+            $('#restaurantTable').attr('href', `table.html?idRestaurant=${params.idRestaurant}`)
+            $('#reports').attr('href', `reports.html?idRestaurant=${params.idRestaurant}`)
+
+
+            createTable();
+            getAllTable();
+
+        
+            const socket = io(BaseURL);
+            socket.on("connect", () => {
+            });
+            let id = `Rest${idRestaurant}`
+            socket.on(id, function(data) {
+                
+                location.reload();
+
+            });
+            socket.on('error', console.error.bind(console));
+            socket.on('message', console.log.bind(console));
+
+
+        });
+    </script>
+</body>
+
+</html>

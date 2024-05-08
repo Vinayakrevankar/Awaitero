@@ -1,0 +1,60 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var https = require('https');
+var http = require('http');
+
+const fs = require(`fs`);
+const config = require('../config/default.json');
+const ssl = config.ssl;
+var server = null;
+let options = null;
+
+if(ssl){
+ options = {
+  key: fs.readFileSync(`/home/AwaiteroService/bin/awaitero.com.key`),
+  cert: fs.readFileSync(`/home/AwaiteroService/bin/cf685dada1ec3b71.pem`)
+};
+server = https.createServer(options,app);
+}else
+  server = http.createServer(app);
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = process.env.PORT || 3004;
+app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+let io= require("socket.io") (server,{ cors: {    
+  origin: "*",    
+  methods: ["GET", "POST"]  
+}});
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+server.listen(port, function() {
+  const host = server.address().address;
+  const port = server.address().port;
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+
+global.io = io
+io.on("connection", function (socket) {
+  console.log("Made socket connection");
+  global.socket = socket
+});
+// server.on('error', onError);
+// server.on('listening', onListening);
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+

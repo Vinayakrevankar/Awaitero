@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Awaitero</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+    <script src="js/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="app.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+  </head>
+
+  <body
+    style="
+      position: absolute;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    "
+  >
+    <div class="container" style="padding: 140px 0">
+      <div class="d-flex justify-content-center">
+        <div class="alert alert-warning" id="alert" style="text-align: center">
+          Loading...
+        </div>
+        <div class="d-flex justify-content-center" style="text-align: center">
+          <p>To proceed you have to enable the location</p>
+          <button
+            style="width: 100px; margin: auto; display: block"
+            class="btn btn-success btn-block btn-sm"
+            onclick="getLocation()"
+            id="reload"
+          >
+            Reload
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // getCurrentPosition: Successful return
+      
+
+      var successHandler = function(pos) 
+      {
+        $('#reload').hide()
+        // Get the coordinates and accuracy properties from the returned object
+        var [geoLat, geoLng] = [pos.coords.latitude.toFixed(9),pos.coords.longitude.toFixed(9)] // [15.825276, 74.508514];
+        
+        // var geoLng = 74.5092611 || pos.coords.longitude.toFixed(9);
+        var geoAcc = pos.coords.accuracy.toFixed(1);
+        let idReference = getUrlParameter("idReference");
+        let idRestaurant = getUrlParameter("idRestaurant");
+
+        let data = {
+          latitude: geoLat,
+          longitude: geoLng,
+        };
+        verifyUser(data)
+      }
+
+      async function verifyUser(data){
+        let idReference = getUrlParameter('idReference')
+            let idRestaurant = getUrlParameter('idRestaurant')
+            let result = await Axios(BaseURLUser, `/${idReference}`, "POST", data);
+            let res = result.data;
+            if (res.status != 200) {
+            $("#alert").text("");
+            $("#alert").append(
+                `<b><span style="white-space: pre-wrap;">${res.errorMessage}</span></b>`
+            );
+            return false;
+            } else if(res.status == 200) {
+            sessionStorage.setItem("idReference", JSON.stringify(idReference));
+            if (res.payload.occupied == 1)
+                window.location = `home.html?idReference=${idReference}&idRestaurant=${idRestaurant}`;
+            else
+                window.location = `login.html?idReference=${idReference}&idRestaurant=${idRestaurant}&idTable=${res.payload.idTable}`;
+            }
+      } 
+
+      // getCurrentPosition: Error returned
+      var errorHandler = function(err) {
+        switch (err.code) {
+          case err.PERMISSION_DENIED:
+            alert(
+              "User denied the request for Geolocation. Please Enable Location To Proceed"
+            );
+            break;
+          case err.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+          case err.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+          default:
+            alert("An unknown error occurred.");
+            $('#reload').show()
+        }
+      }
+      function getLocation(){
+        location.reload();
+      }
+      navigator.geolocation.getCurrentPosition( 
+        successHandler, errorHandler, 
+        {enableHighAccuracy: true, maximumAge: 10000});
+    </script>
+  </body>
+</html>

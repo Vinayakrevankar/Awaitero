@@ -1,0 +1,26 @@
+{
+    "db.config": {
+        "host": "97.74.84.0",
+        "user": "root",
+        "password":"Root@123.",
+        "database": "hotelmanagement",
+        "multipleStatements": true
+      },
+      "db.configLocalhost": {
+        "host": "localhost",
+        "user": "root",
+        "password":"",
+        "database": "hotelmanagement",
+        "multipleStatements": true
+      },
+      "db.configServer": {
+        "host": "sql6704885@ec2-52-8-112-233.us-west-1.compute.amazonaws.com",
+        "user": "sql6704885",
+        "password":"C6tEY9zYuY",
+        "database": "sql6704885",
+        "multipleStatements": true
+      },
+      "ssl": false,
+      "isLocalHost": true,
+      "isServerHost": false
+}

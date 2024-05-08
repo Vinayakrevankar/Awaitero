@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.svg" />
+    <title>Awaitero</title>
+
+    <link
+      href="./vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+      async
+    />
+
+    <link href="./css/res.css" rel="stylesheet" async/>
+
+    <link href="./font/stylesheet.css" rel="stylesheet" async />
+
+    <link
+      href="./vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+      async
+    />
+
+    <link href="./css/custom.css" rel="stylesheet" async/>
+
+    <script src="./vendor/jquery/jquery.min.js" type="text/javascript"></script>
+
+    <script src="./js/jquery.validate.min.js" async></script>
+    <script src="./js/additional-methods.js" async></script>
+
+    <script src="./js/axios.min.js" async></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      async
+    ></script>
+
+    <script
+      src="./vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="text/javascript"
+      async
+    ></script>
+
+    <script
+      src="./vendor/jquery-easing/jquery.easing.min.js"
+      type="text/javascript"
+      async
+    ></script>
+    <script src="./js/res.min.js" type="text/javascript" async></script>
+    <script src="./app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <div class="row vin-login m-0">
+      <!-- <div class="col-md-6 vin-login-left px-0">
+        </div> -->
+
+      <div
+        class="col-md-6 d-flex justify-content-center flex-column px-0"
+        style="
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          margin: auto;
+        "
+      >
+        <div class="mx-auto">
+          <div
+            class="container"
+            style="width: 150px; height: 100px; position: relative"
+          >
+            <div>
+              <img
+                src="img/final logo-05.svg"
+                alt="Easy to update "
+                class="mb-3 icon-svg"
+              />
+
+              <!-- <img src="Admin/img/logo.svg"  style="width: 240; height: 50px" class="d-inline-block align-top"  alt="">
+              <a href="" class="smoothScroll" style="color: black"><b>Awaitero</b></a> -->
+            </div>
+          </div>
+          <h2 class="mb-1"></h2>
+          <hr />
+
+          <h3 class="mb-1" style="text-align: center">Welcome to Awaitero</h3>
+          <p class="mb-2" style="text-align: center">
+            Sign in to your account to continue
+          </p>
+          <div class="w-100 mb-3" style="text-align: center; color: red" id="ErrorMessage">
+          
+            
+          </div>
+          <form id="signin">
+            <div class="d-flex align-items-center mb-1">
+              <div class="mr-3 bg-light rounded p-2 vin-icon">
+                <i class="mdi mdi-email-outline"></i>
+              </div>
+              <div class="w-100">
+                <labek class="mb-0 small font-weight-bold text-dark">
+                  Email Address / Mobile Number
+                </label>
+                <input
+                  type="email"
+                  name="email"
+                  id="email"
+                  class="
+                    form-control form-control-sm
+                    p-0
+                    border-input border-0
+                    rounded-0
+                  "
+                  placeholder="Enter Your Email "
+                />
+                <!-- <span  class="mb-0 small font-weight-bold text-dark " style="color:red " class="error " id="erroremail "></span>
+ -->
+ <p
+ for="email"
+ class="mt-1 small font-weight-bold error"
+ style="color: red"
+></p>
+          
+              </div>
+
+            </div>
+            <div class="d-flex align-items-center mb-4">
+              <div class="mr-3 bg-light rounded p-2 vin-icon">
+                <i class="mdi mdi-form-textbox-password"></i>
+              </div>
+              <div class="w-100">
+                <label class="mb-0 small font-weight-bold text-dark">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="
+                    form-control form-control-sm
+                    p-0
+                    border-input border-0
+                    rounded-0
+                  "
+                  placeholder="Enter Password"
+                />
+                <!-- <span  class="mb-0 small font-weight-bold text-dark " style="color:red " class="error " id="errorpassword " class="error "></span> -->
+                <p
+                  for="password"
+                  class="mt-1 mb-0 small font-weight-bold error"
+                  style="color: red"
+                ></p>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <input
+                type="submit"
+                class="btn btn-primary btn-block mb-3"
+                value="Sign in "
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      // onclick="validateUser(event) "
+
+      $(document).ready(function () {
+        $("#signin").validate({
+          // initialize the plugin
+          errorElement: 'p',
+          errorPlacement: function(error, element) {
+            console.log(element.parent())
+            error.insertAfter(element.parent());
+        },
+          rules: {
+            email: {
+              required: true,
+              email: true,
+            },
+            password: {
+              required: true,
+              minlength: 5,
+            },
+          },
+          messages: {
+            password: "Enter Password ",
+            email: "Please specify a valid email address ",
+          },
+
+          submitHandler: async function (form) {
+            // for demo
+            // alert('valid form submitted'); // for demo
+            // return false; // for demo
+            let data = convertPayload("signin");
+
+            let result = await Axios(BaseURLSuperUser, "/login", "POST", data);
+            let res = result.data;
+            if (res.status != 200) {
+              $("#ErrorMessage").append(res.errorMessage);
+              $("#ErrorMessage").show()
+              setTimeout(function () {
+              $("#ErrorMessage").fadeOut();
+              $("#ErrorMessage").empty();
+              
+            }, 2000);
+              return false;
+            } else if(res.status == 200) {
+              $("#ErrorMessage").fadeOut();
+              sessionStorage.setItem("isLogin", "1");
+              localStorage.setItem("idRestaurant", res.payload[0].idRestaurant);
+              sessionStorage.setItem(
+                "Permission",
+                res.payload[0].idSystemAttribute
+              );
+              localStorage.setItem(
+                "Permission",
+                res.payload[0].idSystemAttribute
+              );
+
+              sessionStorage.setItem(
+                "UserPayload",
+                JSON.stringify(res.payload)
+              );
+              sessionStorage.setItem("token",JSON.stringify(res.payload[0].token))
+              if (
+                sessionStorage.getItem("Permission") == "73" &&
+                res.payload[0].idRestaurant === 0
+              ) {
+                window.location.href = "main.html";
+              } else {
+                window.location.href = `detail.html?idRestaurant=${res.payload[0].idRestaurant}`;
+              }
+            }
+           
+
+            // return true
+          },
+        });
+      });
+    </script>
+
+    <script
+      src="js/rocket-loader.min.js "
+      data-cf-settings="69f84c5007cbf78f96d8cb7e-|49 "
+      defer=" "
+    ></script>
+    <script
+      src="js/rocket-loader.min.js "
+      data-cf-settings="69f84c5007cbf78f96d8cb7e-|49 "
+      defer=" "
+    ></script>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper">
+      <ul
+        class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+        id="accordionSidebar"
+      >
+        <a
+          class="sidebar-brand d-flex align-items-center"
+          id="companyLogo"
+          href="main.html"
+          style="background-color: white"
+        >
+          <div class="sidebar-brand-icon">
+            <img src="img/logoWithName.svg" />
+          </div>
+        </a>
+        <li class="nav-item active">
+          <a class="nav-link" href="main.html">
+            <i class="mdi mdi-home-variant-outline"></i>
+            <span>Home</span></a
+          >
+        </li>
+        <li class="nav-item" id="listDealerMenu">
+          <a class="nav-link" href="listDealer.html">
+            <i class="mdi mdi-human-child"></i>
+            <span>Dealer List</span></a
+          >
+        </li>
+        <li class="nav-item" id="dealerMenu">
+          <a class="nav-link" target="_blank" href="dealer.html">
+            <i class="mdi mdi-human"></i>
+            <span>Register Dealer</span></a
+          >
+        </li>
+
+        <li class="nav-item" id="registerRestaurantMenu">
+          <a class="nav-link" target="_blank" href="restaurant.html">
+            <i class="mdi mdi-human"></i>
+            <span>Restaurant Reg</span></a
+          >
+        </li>
+        <li class="nav-item" id="createAdminMenu">
+          <a class="nav-link" href="createAdmin.html">
+            <i class="mdi mdi-human"></i>
+            <span>Create Admin</span></a
+          >
+        </li>
+
+        <div class="d-none d-md-block">
+          <div class="user d-flex align-items-center p-3">
+            <div class="pr-3">
+              <i class="mdi mdi-account-circle-outline text-white h3 mb-0"></i>
+            </div>
+            <div>
+              <p class="mb-0 text-white" id="UserName"></p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="sidebar-divider d-none d-md-block" />
+
+        <div class="text-center d-none d-md-inline">
+          <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <nav
+            class="
+              navbar navbar-expand navbar-light
+              bg-white
+              topbar
+              mb-4
+              static-top
+              shadow-sm
+              vin-nav-top
+            "
+          >
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </nav>
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+
+            <div class="mt-n5 bg-white p-3 rounded shadow position-relative">
+              <div class="vin-single-top-info">
+                <div class="d-flex">
+                  <ul class="nav nav-tabs border-0" role="tablist">
+                    <li class="nav-item mr-2" role="presentation">
+                      <a class="nav-link active border-0 btn btn-light"
+                        >Dealer List</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <br />
+              <div class="container my-auto">
+                <div class="row" id="dealerList"></div>
+              </div>
+            </div>
+
+            <footer class="sticky-footer bg-white">
+              <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                  <span id="copyRight"></span>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+
+    <script>
+      $(document).ready(function () {
+        let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+        $("#UserName").text(userInfo.name);
+
+        getAllDealer();
+      });
+      async function activateDealer(idDealer, isActive) {
+        let result = await Axios(
+          BaseURLSuperUser,
+          `/dealer/${idDealer}`,
+          "PUT",
+          {
+            isActive,
+          }
+        );
+        let res = result.data;
+        if (res.status != 200) {
+          // $('#ErrorMessage').text(res.errorMessage)
+          return false;
+        } else  if(res.status == 200) window.location.reload();
+        // $('#ErrorMessage').text("")
+        // $('.toast').toast('')
+        return true;
+      }
+      async function getAllDealer() {
+        let result = await Axios(BaseURLSuperUser, "/dealer/list", "GET");
+        let res = result.data;
+        if (res.status != 200) {
+          return false;
+        } else if(res.status == 200) {
+          $("#dealerList").empty();
+          res.payload.forEach((element) => {
+            $("#dealerList").append(dealerListModel(element));
+          });
+        }
+
+        return true;
+      }
+    </script>
+  </body>
+</html>

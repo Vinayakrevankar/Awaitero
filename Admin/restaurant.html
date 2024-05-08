@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <div id="wrapper" style="flex-direction: column; min-height: 100vh;">
+      <div id="content-wrapper" class="d-flex flex-column">
+        <nav
+          class="navbar navbar-expand topbar static-top shadow-sm vin-nav-top"
+        >
+          <ul class="navbar-nav" style="color: #c60021">
+            <a
+              class="sidebar-brand d-flex align-items-center"
+              id="companyLogo"
+              href="javascript:void(0)"
+              style="background-color: white"
+            >
+              <div class="sidebar-brand-icon">
+                <img src="img/logoWithName.svg" />
+              </div>
+            </a>
+          </ul>
+        </nav>
+        <div id="content">
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+            <div class="banner-image p-0 mt-n4 mx-n4 position-relative">
+              <div class="position-absolute heart-icon">
+                <!-- <a href="#" class="bg-white text-decoration-none rounded p-2 text-dark font-weight-bold"><i class="far fa-heart"></i></a> -->
+              </div>
+            </div>
+            <div class="bg-white p-0 mb-0 rounded shadow position-relative">
+              <div class="vin-single-top-info">
+                <div class="ml-3"></div>
+              </div>
+              <div class="d-flex justify-content-center">
+                <form id="RestaurantRegistration" class="col-md-6">
+                  <div
+                    class="
+                      mt-n1
+                      bg-white
+                      p-3
+                      mb-1
+                      rounded
+                      shadow
+                      position-relative
+                    "
+                  >
+                    <h3 class="mt-3 mb-3" style="text-align: center">
+                      Welcome to Awaitero - Restaurant Registration
+                    </h3>
+                    <hr />
+                    <div class="form-row mt-4">
+                      <div class="form-group col-md-6">
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Enter Restaurant Name<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          name="name"
+                          id="name"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+
+                        <label
+                          for="name"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          GST No.
+                        </p>
+                        <input
+                          type="text"
+                          id="gst"
+                          autocomplete="off"
+                          name="gst"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          
+                        />
+                        <span
+                          class="mb-0 small font-weight-bold text-dark"
+                          style="color: red"
+                          class="error"
+                          id="errorpassword"
+                          class="error"
+                        ></span>
+                        <label
+                          for="gst"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+
+                    <div class="form-row">
+                      <div class="form-group col-md-6">
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Restaurant Number<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="number"
+                          name="restaurantNumber"
+                          id="restaurantNumber"
+                          autocomplete="off"
+                          maxlength="10"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+                        <label
+                          for="restaurantNumber"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Description<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          name="description"
+                          id="description"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+                        <label
+                          for="description"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Restaurant Address<span style="color: red">*</span>
+                        </p>
+                        <textarea
+                          rows="1"
+                          id="address"
+                          name="address"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                          "
+                          required
+                        ></textarea>
+                        <label
+                          for="address"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Select State<span style="color: red">*</span>
+                        </p>
+                        <select
+                          id="state"
+                          name="state"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          aria-label=""
+                          required
+                        >
+                          <option disabled="disabled" selected="">
+                            Select State
+                          </option>
+                          <option value="1">Andhra Pradesh</option>
+                          <option value="2">Arunachal Pradesh</option>
+                          <option value="3">Assam</option>
+                          <option value="4">Bihar</option>
+                          <option value="5">Chhattisgarh</option>
+                          <option value="6">Goa</option>
+                          <option value="7">Gujarat</option>
+                          <option value="8">Haryana</option>
+                          <option value="9">Himachal Pradesh</option>
+                          <option value="10">Jammu and Kashmir</option>
+                          <option value="11">Jharkhand</option>
+                          <option value="12">Karnataka</option>
+                          <option value="13">Kerala</option>
+                          <option value="14">Madhya Pradesh</option>
+                          <option value="15">Maharashtra</option>
+                          <option value="16">Manipur</option>
+                          <option value="17">Meghalaya</option>
+                          <option value="18">Mizoram</option>
+                          <option value="19">Nagaland</option>
+                          <option value="20">Odisha</option>
+                          <option value="21">Punjab</option>
+                          <option value="22">Rajasthan</option>
+                          <option value="23">Sikkim</option>
+                          <option value="24">Tamil Nadu</option>
+                          <option value="25">Telangana</option>
+                          <option value="26">Tripura</option>
+                          <option value="27">Uttarakhand</option>
+                          <option value="28">Uttar Pradesh</option>
+                          <option value="29">West Bengal</option>
+                          <option value="30">
+                            Andaman and Nicobar Islands
+                          </option>
+                          <option value="31">Chandigarh</option>
+                          <option value="32">Dadra and Nagar Haveli</option>
+                          <option value="33">Daman and Diu</option>
+                          <option value="34">Delhi</option>
+                          <option value="35">Lakshadweep</option>
+                          <option value="36">Puducherry</option>
+                        </select>
+                        <label
+                          for="state"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Enter City<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          id="city"
+                          name="city"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+                        <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                        <label
+                          for="city"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Contact Person Name<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="text"
+                          id="contactPersonName"
+                          name="contactPersonName"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+                        <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                        <label
+                          for="contactPersonName"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Email<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="email"
+                          id="alternateNumber"
+                          autocomplete="off"
+                          name="email"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          required
+                        />
+                        <!-- <span  class="mb-0 small font-weight-bold text-dark" style="color:red" class="error" id="errorpassword" class="error"></span> -->
+                        <label
+                          for="email"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                        ></label>
+                      </div>
+                      <div
+                        class="form-group col-md-6"
+                        style="margin-bottom: 0px"
+                      >
+                        <p class="mb-0 small font-weight-bold text-dark">
+                          Contact Person Number<span style="color: red">*</span>
+                        </p>
+                        <input
+                          type="number"
+                          id="mobile"
+                          name="mobile"
+                          autocomplete="off"
+                          class="
+                            form-control form-control-sm
+                            p-0
+                            border-input border-0
+                            rounded-0
+                          "
+                          maxlength="10"
+                          required
+                        />
+                        <label
+                          for="mobile"
+                          class="mb-0 small font-weight-bold error"
+                          style="color: red"
+                          
+                        ></label>
+                        <input
+                          type="submit"
+                          class="btn btn-primary mt-2"
+                          style="text-align: center; float: right"
+                          value="Register"
+                        />
+                      </div>
+                    </div>
+                    <div style="padding-left: 0">
+                      <div></div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </form>
+            
+          </div>
+         
+        </div>
+        
+      </div>
+
+    
+    </div>
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span id="copyRight"></span>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+
+    <script>
+
+      $(document).ready(function () {
+        // (async()=>{
+        //     let result = await Axios(BaseURLSuperUser,"/dealer/list","GET");
+        //     let  res = result.data;
+        //     if (res.status!=200)
+        //     {
+        //         alert('Something Went Wrong')
+        //             return false;
+
+        //     }else{
+        //         $('#idDealer').empty()
+        //         $('#idDealer').append(`<option value="null">--</option>`)
+
+        //         res.payload.forEach(val=>{
+        //             if(val.isActive)
+        //                 $('#idDealer').append(`<option value="${val.idDealer}">${val.firstName} ${val.lastName}</option>`);
+
+        //         })
+        //     }
+
+        // })()
+        $("#RestaurantRegistration").validate({
+          // initialize the plugin
+
+          rules: {
+            email: {
+              required: true,
+              email: true,
+            },
+            password: {
+              required: true,
+              minlength: 5,
+            },
+          },
+          messages: {
+            password: "Enter Password",
+            email: "Please specify a valid email address",
+          },
+
+          submitHandler: async function (form) {
+            // for demo
+            // alert('valid form submitted'); // for demo
+            // return false; // for demo
+            let data = convertPayload("RestaurantRegistration");
+            let result = await Axios(
+              BaseURLSuperUser,
+              "/restaurant",
+              "POST",
+              data
+            );
+            let res = result.data;
+            if (res.status != 200) {
+              $("#ErrorMessage").text(res.errorMessage);
+              return false;
+            }else if(res.status == 200){
+              alert('Thank you Registered Successfully')
+            }
+            // $('#ErrorMessage').text("")
+            // sessionStorage.setItem('isLogin','1');
+            // sessionStorage.setItem("UserPayload",JSON.stringify(res.payload));
+            // window.location.href = 'main.html';
+            // return true
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

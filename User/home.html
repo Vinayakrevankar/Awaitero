@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="img/logo.svg">
+    <title>Awaitero</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick.min.css" />
+    <link rel="stylesheet" type="text/css" href="vendor/slick/slick-theme.min.css" />
+
+    <link href="vendor/icons/feather.css" rel="stylesheet" type="text/css">
+
+    <link href="css/style.css" rel="stylesheet">
+
+    <link href="vendor/sidebar/demo.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js" integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"> -->
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/fontawesome.css" integrity="sha384-eHoocPgXsiuZh+Yy6+7DsKAerLXyJmu2Hadh4QYyt+8v86geixVYwFqUvMU8X90l" crossorigin="anonymous" />
+    <script src="app.js"></script>
+    <script src="https://code.iconify.design/2/2.1.0/iconify.min.js"></script>
+    <script src="vendor/jquery/jquery.min.js" type="fd7846ec355fec94f6dc8e40-text/javascript"></script>
+
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+        
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+        
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+        
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+        
+        .slider.round {
+            border-radius: 34px;
+        }
+        
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+    <style>
+        #buttonUp {
+            display: inline-block;
+            background-color: #FF9800;
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            border-radius: 4px;
+            position: fixed;
+            bottom: 70px;
+            right: 70px;
+            transition: background-color .3s, opacity .5s, visibility .5s;
+            opacity: 0;
+            visibility: hidden;
+            z-index: 1000;
+        }
+        
+        #buttonUp::after {
+            content: "\f077";
+            font-family: FontAwesome;
+            font-weight: normal;
+            font-style: normal;
+            font-size: 2em;
+            line-height: 35px;
+            color: #fff;
+        }
+        
+        #buttonUp:hover {
+            cursor: pointer;
+            background-color: #333;
+        }
+        
+        #buttonUp:active {
+            background-color: #555;
+        }
+        
+        #buttonUp.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        @media (min-width: 500px) {
+            #button {
+                margin: 30px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <a id="buttonUp"></a> -->
+    <div class="vin-restaurant">
+        <div class="vin-restaurant-detail">
+
+            <div class="bg-primary">
+                <div class="text-white">
+                    <div class="title d-flex align-items-center" style="background-color: #fff;">
+                        <!-- <a class="toggle hc-nav-trigger hc-nav-1" href="#" role="button" aria-controls="hc-nav-1">
+    <span></span>
+    </a> -->
+                        <img src="img/logoWithName.svg" style="width: 240;height:50px;">
+
+                        </h4>
+                    </div>
+                </div>
+                <div class="slider-image" tabindex="-1" style="width: 100%; display: inline-block;"><img alt="Imagr" src="img/Poster-3.jpg" class="img-fluid"></div>
+            </div>
+            <div style="display: flex;
+    flex-direction: column;
+    height:130px;
+    width: 100%;">
+
+
+                <div class="px-3 pb-0 pt-2">
+
+                    <!-- <div class="pt-1">
+<h2 class="font-weight-bold">Uday Bhavan</h2>
+<p class="font-weight-light text-dark m-0">Tilkwadi</p>
+</div> -->
+                    <!--Carousel Wrapper-->
+                    <div id="carousel-example-2" class="carousel slide carousel-fade mb-5" data-ride="carousel">
+                        <!--Indicators-->
+                        <ol class="carousel-indicators">
+                        </ol>
+                        <!--/.Indicators-->
+                        <!--Slides-->
+
+                        <div class="pt-0">
+                            <h5 class="font-weight-bold mt-1" id="restaurantName"></h5>
+                            <p class="font-weight-light text-dark m-0" id="restaurantAddress"></p>
+                        </div>
+                        <div class="row">
+
+                            <!-- <div class="col-6 mt-1">
+                  
+                <p class="font-weight-bold m-0">Open time</p>
+                <p class="text-muted m-0">8:00 AM</p>
+                </div> -->
+                            <!-- <div class="col-6">
+                    <p class="font-weight-bold m-0">Close time</p>
+                    <p class="text-muted m-0">11:00 PM</p>
+                    </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-primary p-2" style="flex-grow: 1;
+overflow: auto;"></div>
+        </div>
+
+
+
+
+    </div>
+
+    <div class="px-3 pt-3">
+        <!-- <a class="text-black font-weight-bold ml-auto" data-toggle="modal" data-target="#exampleModal" href="#">Filter</a> -->
+
+        <div>
+            <!-- <span class="pt-1"></span>
+    <label class="switch">
+        
+        <input type="checkbox">
+        <span class="slider round"></span>
+      </label>
+
+    <span class="pt-1">VEG</span> -->
+            <!-- <span class="nowrap">- asked by Peter 2 days ago</span>
+          </p> -->
+            <div>
+                <table style="text-align: center;border-spacing: 0 2em;" id="scrollHere">
+                    <tr>
+
+                        <td><span class="font-weight-bold">VEG ONLY</span></td>
+                        <td style="align-items: center;">
+                            <!-- Default switch -->
+                            <div class="custom-control custom-switch ml-1">
+                                <input type="checkbox" class="custom-control-input" id="vegSelected">
+                                <label class="custom-control-label" for="vegSelected"></label>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </table>
+                <tr>
+                    <div class="input-group mt-2 mb-2">
+                        <input type="text" class="form-control" pattern="^[a-zA-Z0-9@]+$" id="searchItem" placeholder="Search...">
+                        <button type="button" class="btn bg-transparent" style="margin-left: -40px; z-index: 100;color: black;">
+                      <span style="color:black" onclick="resetField()">X</span>
+                    </button>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="form-group row">
+                        <label for="listCatgeory" class="col-sm-2 font-weight-bold">Category</label>
+                        <div class="col-sm-10">
+
+                            <select class="form-control form-control-sm" id="listCatgeory" onChange="check(this);">
+                
+                </select>
+
+
+                        </div>
+                    </div>
+                </tr>
+            </div>
+        </div>
+
+        <div class="d-flex item-aligns-center mt-2">
+            <p style="text-align:left;"></p>
+            <p class="font-weight-bold">Menu</p>
+
+
+
+        </div>
+
+        <div id="AppendItems" class="mb-5"></div>
+
+    </div>
+
+    <div class="vin-menu-fotter fixed-bottom bg-white px-3 py-2 text-center" style="margin: -40px 0 0 0 !important;">
+        <div class="row">
+            <div class="col selected">
+                <a href="home.html" id="homeMenu" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-home text-dark"></i></p>
+                    Menu
+                </a>
+            </div>
+            <div class="col">
+                <a class="text-danger small font-weight-bold text-decoration-none" onclick="moveToTop()">
+                    <p class="h4 m-0"><i class="feather-align-center"></i>
+
+                    </p>
+                    Category
+                </a>
+            </div>
+            <div class="col">
+                <span class="badge badge-light m-0" style="float:right;background-color:red;color:white" id="cartCount"></span>
+
+                <a href="" id="cartView" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-shopping-cart"></i>
+
+                    </p>
+                    Cart
+                </a>
+            </div>
+
+            <!-- 
+ <div class="col bg-white rounded-circle mt-n4 px-3 py-2">
+<span class="badge badge-light m-0" style="margin-right:-35px;font-size: 20px;" id="cartCount"></span>
+
+<div class="bg-danger rounded-circle mt-n0 shadow">
+<a href="" id="cartView" class="text-white small font-weight-bold text-decoration-none">
+<i class="feather-shopping-cart"></i>
+</a>
+</div>
+</div> -->
+
+            <div class="col">
+                <a href="orderedItem.html" id="orderedItem" class="text-danger small font-weight-bold text-decoration-none">
+                    <p class="h4 m-0"><i class="feather-arrow-down-circle"></i></p>
+                    Ordered
+                </a>
+            </div>
+        </div>
+
+
+    </div>
+    </div>
+
+    <div class="modal fade show" id="exampleModal" style="height: 100%;" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+  </button>
+                </div>
+                <div class="modal-body p-0">
+                    <div class="vin-filter">
+                        <div class="filter" style="margin-top:113px;">
+
+
+                            <video width="100%" controls>
+  <source src="img/mov_bbb.mp4" type="video/mp4">
+  <source src="img/mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML video.
+</video>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js" type="text/javascript"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="vendor/slick/slick.min.js"></script>
+
+    <script type="text/javascript" src="vendor/sidebar/hc-offcanvas-nav.js"></script>
+
+    <script src="js/res.js" type="text/javascript"></script>
+
+    <script>
+        function ShowAd() {
+
+        }
+        $("#searchItem").keyup(function() {
+            searchItems()
+        });
+
+        function check(elem) {
+            let id = $('#listCatgeory').val();
+            $('html, body').animate({
+                scrollTop: $(id).offset().top
+            }, 2000);
+        }
+
+        function moveToTop() {
+            $('html, body').animate({
+                scrollTop: $('#scrollHere').offset().top
+            }, 0);
+        }
+
+        function searchItems() {
+
+            var str = $("#searchItem").val();
+            let payload = JSON.parse(sessionStorage.getItem('ItemCategory'))
+            let items = JSON.parse(sessionStorage.getItem('cartValue')) || []
+
+            if (str.length > 1) {
+                $('#AppendItems').empty();
+
+                payload.forEach((element, idx) => {
+                    if (element.items.length > 0)
+                        $('#AppendItems').append(CategoryAndItemModel(element, items, str))
+                })
+            } else if (str.length == 0) {
+                $('#AppendItems').empty();
+                payload.forEach((element, idx) => {
+                    $('#AppendItems').append(CategoryAndItemModel(element, items))
+                })
+            }
+            // });
+        }
+
+        function addItemToCart(idItem, idx, price) {
+            let items = JSON.parse(sessionStorage.getItem('cartValue')) || []
+            let ListOfItems = JSON.parse(sessionStorage.getItem('Items'))
+            let filteredItem = ListOfItems.filter(va => va.idItem == idItem)
+            let amount = 0;
+            items.forEach((v) => {
+                if (v.idItem == idItem)
+                    amount += +v.price
+            }, 0)
+            items = [...filteredItem, ...items]
+            sessionStorage.setItem('cartValue', JSON.stringify(items))
+            let cartValue = JSON.parse(sessionStorage.getItem('cartValue'))
+
+            //    $(`#btnAdd${idx}`).empty()
+            //    $(`#btnAdd${idx}`).append(`<p class="text-gray mb-0 float-right ml-2 mt-1 text-muted small" id="btnAmount${idx}">&#8377;${amount}</p>
+            //     <span class="count-number float-right"><button type="button" class="btn-sm left dec btn btn-outline-secondary"> <i class="feather-minus" onclick="DeleteItem(${idItem},${idx})"></i> 
+            //     </button>
+            //     <input class="count-number-input" id="itemCount${idx}" type="text" readonly="" value="${filteredItem.length}">
+            //     <button type="button" class="btn-sm right inc btn btn-outline-secondary"> <i class="feather-plus" onclick="AddItem(${idItem},${idx})"></i> </button></span>`)
+            refreshList(items)
+        }
+
+        function AddItem(idItem, idx) {
+            let items = JSON.parse(sessionStorage.getItem('cartValue')) || []
+            let ListOfItems = JSON.parse(sessionStorage.getItem('Items'))
+            let newItem = ListOfItems.filter(va => va.idItem == idItem)
+            items = [...items, ...newItem]
+            let amount = items.reduce((previousValue, currentValue) => previousValue + currentValue.price, 0)
+            sessionStorage.setItem('cartValue', JSON.stringify(items))
+
+            refreshList(items)
+        }
+
+        function resetField() {
+            $('#searchItem').val('')
+            searchItems()
+        }
+
+        function deleteItemFromCart(idItem) {
+            let cartItems = JSON.parse(sessionStorage.getItem('cartValue')) || []
+
+            var index = cartItems.findIndex(function(o) {
+                return o.idItem == idItem;
+            })
+            if (index !== -1) cartItems.splice(index, 1);
+            sessionStorage.setItem('cartValue', JSON.stringify(cartItems))
+            refreshList(cartItems);
+        }
+
+        function refreshList(cartItems) {
+            let payload = JSON.parse(sessionStorage.getItem('ItemCategory'))
+            $('#AppendItems').empty()
+
+            payload.forEach((element, idx) => {
+                // if(idx==0)
+                //     $('#appendCustCategory').append(CategoryModel({idCategory:'All',name: "All"}))
+                if (sessionStorage.getItem('vegSelected') && element.type == 1) {
+                    $('#AppendItems').append(CategoryAndItemModel(element, cartItems, null))
+                } else
+                    $('#AppendItems').append(CategoryAndItemModel(element, cartItems, null))
+
+
+            });
+            $('#cartCount').text(cartItems.length >= 1 ? cartItems.length : '')
+        }
+        $(document).ready(function() {
+            let cartItems = JSON.parse(sessionStorage.getItem('cartValue')) || []
+            $('#cartCount').text(cartItems.length >= 1 ? cartItems.length : '')
+
+            $("#vegSelected").change(function() {
+                sessionStorage.setItem('vegSelected', $("#vegSelected").prop('checked'))
+                var payloadCopy
+                let payload = JSON.parse(sessionStorage.getItem('ItemCategory'))
+                let items = JSON.parse(sessionStorage.getItem('cartValue')) || []
+                var str = $("#searchItem").val();
+                $('#AppendItems').empty()
+                if ($("#vegSelected").prop('checked')) {
+                    var payloadCopy = payload.filter(v => v.type == $("#vegSelected").prop('checked'));
+
+                    payloadCopy.forEach((element, idx) => {
+                        $('#AppendItems').append(CategoryAndItemModel(element, items, str))
+                    });
+                } else {
+                    $('#AppendItems').empty()
+
+                    payload.forEach((element, idx) => {
+                        $('#AppendItems').append(CategoryAndItemModel(element, items, str))
+                    });
+                }
+            });
+            (async() => {
+
+                let idRestaurant = getUrlParameter('idRestaurant')
+                let idReference = getUrlParameter('idReference');
+
+                //   let idReference = getUrlParameter('idReference') &idReference=${idReference}
+                $('#orderedItem').attr('href', `orderedItem.html?idReference=${idReference}&idRestaurant=${idRestaurant}`)
+                sessionStorage.setItem("CustIdRestaurant", idRestaurant)
+                let result = await Axios(BaseURLSuperUser, `/getRestaurants/${idRestaurant}`, "GET");
+                let res = result.data;
+                if (res.status != 200) {
+                    return false;
+                } else if(res.status == 200) {
+                    $('#restaurantName').text(res.payload.restaurant[0].name)
+                    $('#restaurantAddress').text(res.payload.restaurant[0].address)
+                    $('#appendCustCategory').empty()
+                    let cartItems = JSON.parse(sessionStorage.getItem('cartValue')) || [];
+
+                    //   itemCount = cartItems.filter(val=> val.idItem == va.idItem);
+                    sessionStorage.setItem('Items', JSON.stringify(res.payload.items))
+                    sessionStorage.setItem('RestaurantDetails', JSON.stringify(res.payload.restaurant[0]))
+
+                    sessionStorage.setItem('ItemCategory', JSON.stringify(res.payload.category))
+                    $('#listCatgeory').empty()
+                    $('#listCatgeory').append(`<option selected>All</option>`)
+                    res.payload.category.forEach((element, idx) => {
+                        // if(idx==0)
+                        //     $('#appendCustCategory').append(CategoryModel({idCategory:'All',name: "All"}))
+                        if (element.items.length > 0)
+                            $('#listCatgeory').append(`<option value="#idCAT${element.idCategory}">${element.name}</option>`)
+                        $('#AppendItems').append(CategoryAndItemModel(element, cartItems))
+                        $('#addCategoryToMenu').append(` <li>
+                <a href="javascript:void();">${element.name}</a>
+            </li>`)
+
+
+
+                    });
+
+                }
+
+                $('#cartView').attr('href', `checkout.html?idReference=${idReference}&idRestaurant=${idRestaurant}`)
+                $('#homeMenu').attr('href', `home.html?idReference=${idReference}&idRestaurant=${idRestaurant}`)
+
+
+                sessionStorage.setItem('idReference', JSON.stringify(idReference))
+                searchItems()
+
+            })()
+
+        });
+    </script>
+
+</body>
+
+</html>

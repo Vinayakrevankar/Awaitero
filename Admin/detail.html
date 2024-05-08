@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" alt="icon" />
+    <title>Awaitero</title>
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="css/res.css" rel="stylesheet" />
+    <link href="font/stylesheet.css" rel="stylesheet" />
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/custom.css" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body id="page-top">
+    <div id="loader" class="center"></div>
+    <div id="wrapper" style="display:none;flex-direction: column; min-height: 100vh;">
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <nav class="navbar navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5" style=" background-color: #343a40!important">
+            <a class="navbar-brand" href="javascript:void(0)">
+              <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top"  alt="logo">
+              Awaitero |
+            </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+             
+          <li class="nav-item active text-white mr-1">
+              <a class="nav-link" id="HomeMenu" href="">
+                  <i class="mdi mdi-home-variant-outline"></i>
+                  <span>Home</span></a>
+          </li>
+
+          <li class="nav-item  text-white mr-1">
+              <a class="nav-link" id="restaurantTable">
+                  <i class="mdi mdi-silverware"></i>
+                  <span>Table</span></a>
+          </li>
+
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="restaurantMenu">
+                  <i class="mdi mdi-window-maximize"></i>
+                  <span>Menu</span></a>
+          </li>
+
+
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="restaurantQRCode">
+                  <i class="mdi mdi-qrcode"></i>
+                  <span>QR Code</span></a>
+          </li>
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="reports">
+                  <i class="mdi  mdi-file-document"></i>
+                  <span>Reports</span></a>
+          </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0" >
+              <i class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"></i>
+              <span class="mb-0 text-white mr-4"  id="UserName"></span>
+              <span class="mb-0 text-white"  onclick="Logout()">LOGOUT</span>
+            </div>
+          </div>
+        </nav>
+
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+            <div class="banner-image p-0 mt-n4 mx-n4 position-relative">
+              <div class="position-absolute heart-icon">
+              </div>
+            </div>
+            <div
+              class="mt-n5 bg-white p-3 mb-4 rounded shadow position-relative"
+            >
+              <div class="row">
+                <div class="col-sm-2" style="align-items: center">
+                  <img src="" id="restaurantLogoURL" class="card-img-top" alt="Resturant Logo" />
+                  <form id="uploadLogo">
+                    <label for="restaurantLogo" class="btn btn-warning btn-sm"
+                      >Upload</label
+                    >
+                    <input
+                      id="restaurantLogo"
+                      type="file"
+                      name="restaurantLogo"
+                      style="
+                        position: absolute;
+                        top: 80%;
+                        left: 50%;
+                        opacity: 0;
+                        position: absolute;
+                        transform: translate(-50%, -50%);
+                      "
+                      accept="image/*"
+                    />
+                    <input
+                      id="idRestaurant"
+                      name="idRestaurant"
+                      type="text"
+                      hidden
+                    />
+                    <input
+                      type="submit"
+                      id="submitLogo"
+                      class="btn btn-primary btn-block mb-3"
+                      value=""
+                      hidden
+                    />
+                  </form>
+                </div>
+                <div class="col-md-6 col-xs-6 text-left">
+                  <p
+                    class="mb-0 text-muted d-flex align-items-center"
+                    style="margin-top: 25px"
+                  ></p>
+                  <h3 class="mb-0 font-weight-bold" id="restaurantName"></h3>
+                  <span
+                    class="large ml-auto"
+                    style="font-weight: bold"
+                    id="address"
+                  >
+                  </span
+                  ><br />
+                  <span
+                    class="large ml-auto"
+                    style="color: green; font-weight: bold"
+                    id="contract"
+                  >
+                  </span
+                  ><br />
+                  <span
+                    class="large ml-auto"
+                    style="color: green; font-weight: bold"
+                    id="isActiveStatus"
+                  >
+                  </span
+                  ><br />
+                  <span
+                    class="large"
+                    style="font-weight: bold; color: black"
+                    id="gst"
+                  >
+                  </span>
+                </div>
+              </div>
+              <div class="vin-single-top-info">
+                <div class="ml-3">
+                  <!-- <h3 class="mb-0 font-weight-bold mb-0 d-flex align-items-center">UDAY BHAVAN<small><i class="mdi mdi-silverware-fork-knife ml-2 mr-1"></i> American, Fast Food</small></h3> -->
+                  <div class="restaurant-detail mt-2 mb-3"></div>
+                  <div class="text-muted p-0 mt-2 mb-2">
+                    <h6 id="description"></h6>
+                  </div>
+                  <table class="table table-borderless table-dark">
+                    <tbody id="tableBody"></tbody>
+                  </table>
+                  <div class="mb-3">
+                    <input
+                      type="button"
+                      class="btn btn-primary mb-3"
+                      id="coupon"
+                      name="coupon"
+                      onclick="getCouponList()"
+                      value="View Coupon"
+                    />
+                    <input
+                      type="button"
+                      class="btn btn-primary mb-3"
+                      id="Inactive"
+                      id="updateStatus"
+                      onclick="disableRestaurant()"
+                      value="CLICK TO INACTIVE"
+                    />
+                    <input
+                      type="button"
+                      class="btn btn-primary mb-3"
+                      id="editRestaurant"
+                      data-toggle="modal"
+                      data-target="#updateRestaurantDetails"
+                      value="Edit"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+    <div id="AppendModleUpateItemList"></div>
+    <div
+      class="modal fade"
+      id="updateRestaurantDetails"
+      tabindex="-1"
+      aria-labelledby="updateRestaurantDetails"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateRestaurantDetailsModalLabel">
+              Update Restaurant
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="updateRestaurant">
+            <div class="modal-body">
+              <div class="d-flex align-items-center mb-4">
+                <div class="w-100">
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Restaurant Name
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="name"
+                    id="name"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Restaurant Name"
+                  />
+                  <label
+                    for="name"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">Address</p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="address"
+                    id="address"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Address"
+                  />
+                  <label
+                    for="address"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Restaurant Number
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="restaurantNumber"
+                    id="restaurantNumber"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Restaurant Number"
+                  />
+                  <label
+                    for="restaurantNumber"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    GST Number
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="gst"
+                    id="gst"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter GST Number"
+                  />
+                  <label
+                    for="gst"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Description
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                    id="description"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Description"
+                  />
+                  <label
+                    for="description"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Contact Person Name
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="contactPersonName"
+                    id="contactPersonName"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Contact Person Name"
+                  />
+                  <label
+                    for="contactPersonName"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">Mobile</p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="mobile"
+                    id="mobile"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Mobile Number"
+                  />
+                  <label
+                    for="mobile"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">Email</p>
+                  <input
+                    type="email"
+                    autocomplete="off"
+                    name="email"
+                    id="email"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Email"
+                  />
+                  <label
+                    for="email"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Dealer Name
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    id="dealer"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    disabled
+                  />
+                  <label
+                    for="dealer"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <!-- <p class="mb-0 small font-weight-bold text-dark">Business Type</p>
+                              <input type="text" autocomplete="off" name="dealer" id="dealer" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Restaurant Name">
+                               <label for="dealer" class="mb-0 small font-weight-bold error" style="color:red"></label>
+                              -->
+                  <!-- 
+                              <p class="mb-0 small font-weight-bold text-dark">Restaurant Logo</p>
+                              <input type="text" autocomplete="off" name="restaurantLogo" id="restaurantLogo" class="form-control form-control-sm p-0 border-input border-0 rounded-0" placeholder="Enter Restaurant Name">
+                              <label for="restaurantLogo" class="mb-0 small font-weight-bold error" style="color:red"></label>
+                              -->
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Contract From
+                  </p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="contractFrom"
+                    id="contractFrom"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    data-provide="datepicker"
+                  />
+                  <label
+                    for="contractFrom"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Contract To
+                  </p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="contractTo"
+                    id="contractTo"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    data-provide="datepicker"
+                  />
+                  <label
+                    for="contractTo"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark" id="latitudeLabel">
+
+                    Latitude
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="latitude"
+                    id="latitude"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                  />
+                  <p class="mb-0 small font-weight-bold text-dark mt-1" id="longitudeLabel">
+                    Longitude
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="longitude"
+                    id="longitude"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                  />
+                  <p class="mb-0 small font-weight-bold text-dark mt-1" id="radiusLabel" >
+                    Radius (Meters)
+                  </p>
+                  <input
+                    type="number"
+                    autocomplete="off"
+                    name="radius"
+                    id="radius"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <div
+                  class="alert alert-success fade show"
+                  id="ModelSuccessDiv"
+                  role="alert"
+                >
+                  <strong id="ModelSuccessMessage"></strong>
+                </div>
+                <div
+                  class="alert alert-warning fade show"
+                  id="ModelErrorDiv"
+                  role="alert"
+                >
+                  <strong id="ModelErrorMessage"> </strong>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-start">
+              <input
+                type="submit"
+                class="btn btn-primary btn-block mb-3"
+                value="Save"
+              />
+              <!-- <input class="btn btn-primary btn-block mb-3" value="Update"> -->
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="myitemsModalCoupon"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content vin-item-detail-pop">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">Coupon List</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body px-3 py-0">
+            <input
+              type="button"
+              class="btn btn-primary mb-3"
+              id="addcoupon"
+              name="coupon"
+              data-toggle="modal"
+              data-target="#myitemsModalCouponAdd"
+              value="Add Coupon"
+            />
+            <div class="d-flex align-items-center mb-4">
+              <div class="w-100">
+                <div class="card" id="couponList"></div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer justify-content-start">
+            <input type="text" style="visibility: hidden" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="myitemsModalCouponAdd"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content vin-item-detail-pop">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">Add Coupon</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="createCoupon">
+            <div class="modal-body px-3 py-0">
+              <div class="mb-3">
+                <div
+                  class="alert alert-success fade"
+                  id="ModelCouponAlert"
+                  role="alert"
+                ></div>
+              </div>
+              <div class="d-flex align-items-center mb-4">
+                <div class="w-100">
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Coupon Code
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="couponCode"
+                    id="couponCode"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Coupon Code"
+                  />
+                  <label
+                    for="couponCode"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p
+                    class="mb-0 small font-weight-bold text-dark"
+                    style="margin-top: 10px"
+                  >
+                    Enter Terms And Conditions
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="termsAndCondition"
+                    id="termsAndCondition"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Terms And Conditions"
+                  />
+                  <label
+                    for="termsAndCondition"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Description
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                    id="description"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Description"
+                  />
+                  <label
+                    for="description"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Valid From
+                  </p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="validFrom"
+                    id="validFrom"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Valid From"
+                  />
+                  <label
+                    for="validFrom"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">Valid To</p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="validTo"
+                    id="validTo"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Valid To"
+                  />
+                  <label
+                    for="validTo"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Select Status
+                  </p>
+                  <select
+                    id="isActive"
+                    name="isActive"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label="Default select example"
+                  >
+                    <option disabled="disabled" selected>Select Status</option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
+                  </select>
+                  <label
+                    for="isActive"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-start">
+                <input
+                  type="submit"
+                  class="btn btn-primary btn-block mb-3"
+                  value="Add Coupon"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="myitemsModalUpdateCoupon"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content vin-item-detail-pop">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">Update Coupon</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body px-3 py-0">
+            <div class="mb-3">
+              <div
+                class="alert alert-success fade"
+                id="ModelUpdateCouponAlert"
+                role="alert"
+              ></div>
+            </div>
+            <form id="updateCoupon">
+              <div class="d-flex align-items-center mb-4">
+                <div class="w-100">
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="idCoupon"
+                    id="idCoupon"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder=""
+                    hidden
+                  />
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Coupon Code
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="couponCode"
+                    id="couponCode"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Coupon Code"
+                  />
+                  <label
+                    for="couponCode"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p
+                    class="mb-0 small font-weight-bold text-dark"
+                    style="margin-top: 10px"
+                  >
+                    Enter Terms And Conditions
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="termsAndCondition"
+                    id="termsAndCondition"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Terms And Conditions"
+                  />
+                  <label
+                    for="termsAndCondition"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Description
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                    id="description"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Description"
+                  />
+                  <label
+                    for="description"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Valid From
+                  </p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="validFrom"
+                    id="validFrom"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Valid From"
+                  />
+                  <label
+                    for="validFrom"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">Valid To</p>
+                  <input
+                    type="datetime"
+                    autocomplete="off"
+                    name="validTo"
+                    id="validTo"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Valid To"
+                  />
+                  <label
+                    for="validTo"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Select Status
+                  </p>
+                  <select
+                    id="isActive"
+                    name="isActive"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label="Default select example"
+                  >
+                    <option disabled="disabled" selected>Select Status</option>
+                    <option value="1">Active</option>
+                    <option value="0">InActive</option>
+                  </select>
+                  <label
+                    for="isActive"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                </div>
+              </div>
+              <div class="modal-footer justify-content-start">
+                <input
+                  type="submit"
+                  class="btn btn-primary btn-block mb-3"
+                  value="Update Coupon"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="sticky-footer bg-white">
+      <div class="container text-center">
+        <span id="copyRight"></span>
+      </div>
+    </footer>
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+  </body>
+  <script>
+    var fileList;
+
+    $("#logoUploadBtn").hide();
+    let tableData = (key, value) => `<tr>
+      <th scope="row">${key}</th>
+      <td>${value}</td>
+      </tr>
+      <tr>`;
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function getFormData($form) {
+      var unindexed_array = $form.serializeArray();
+      var indexed_array = {};
+
+      $.map(unindexed_array, function (n, i) {
+        indexed_array[n["name"]] = n["value"];
+      });
+
+      return indexed_array;
+    }
+
+    function uploadLogo() {
+      $("#uploadLogo").validate({
+        // initialize the plugin
+
+        rules: {
+          restaurantLogo: {
+            required: true,
+            extension: "png|jpeg|jpg",
+          },
+        },
+        messages: {
+          restaurantLogo: "",
+        },
+
+        submitHandler: async function (form) {
+          let data = convertPayload("uploadLogo"); //formdata||convertPayload("dealerRegistration");
+
+          var formData = new FormData();
+
+          formData.append("idRestaurant", params.idRestaurant);
+          formData.append("restaurantLogo", fileList[0]);
+
+          let result = await Axios(
+            BaseURLSuperUser,
+            "/restaurant/image",
+            "PUT",
+            formData
+          );
+          let res = result.data;
+          if (res.status != 200) {
+            alert(res.errorMessage);
+            // $('#ErrorMessage').text(res.errorMessage)
+            return false;
+          } else location.reload();
+
+          return false;
+        },
+      });
+    }
+
+    async function couponDelete(idCoupon) {
+      var confirmDelete = confirm("Are you sure you want to delete it ?");
+
+      if (confirmDelete == true) {
+        let result = await Axios(BaseURLSuperUser, `/deleteCoupon`, "DELETE", {
+          idCoupon,
+        });
+        let res = result.data;
+        if (res.status != 200) {
+          alert("Something Went Wrong");
+        } else {
+          alert("Coupon deleted Successfully");
+          getCouponList();
+        }
+      }
+    }
+
+    async function updateRestaurant() {
+      $("#updateRestaurant").validate({
+        // initialize the plugin
+        rules: {
+          name: {
+            required: true,
+            minlength: 3,
+          },
+          address: {
+            required: true,
+            minlength: 3,
+          },
+          restaurantNumber: {
+            required: true,
+            minlength: 3,
+          },
+          description: {
+            required: true,
+            minlength: 3,
+          },
+          contactPersonName: {
+            required: true,
+            minlength: 3,
+          },
+          gst: {
+            required: false,
+          },
+          mobile: {
+            required: true,
+            minlength: 10,
+          },
+          contractFrom: {
+            required: false,
+          },
+          contractTo: {
+            required: false,
+          },
+          latitude: {
+            required: false,
+          },
+          longitude: {
+            required: false,
+          },
+          radius: {
+            required: false,
+          },
+        },
+
+        messages: {
+          name: "Enter Restaurant Name",
+          address: "Enter Address",
+          restaurantNumber: "Enter Restaurant Number",
+          description: "Enter Description",
+          contactPersonName: "Enter Contact Person Name",
+          mobile: "Enter Mobile Number",
+          contractFrom: "Enter Contract Frpm",
+          contractTo: "Enter Contract To",
+        },
+
+        submitHandler: async function (form) {
+          // for demo
+          // let data = convertPayload("updateRestaurant");
+          // tempCF = data.contractFrom.split("/");
+          // data.contractFrom = tempCF[2] + "/" + tempCF[0] + "/" + tempCF[1];
+          // tempCT = data.contractTo.split("/");
+          // data.contractTo = tempCT[2] + "/" + tempCT[0] + "/" + tempCT[1];
+
+          let data = convertPayload("updateRestaurant");
+          tempCF = $('#contractFrom').val().split("/");
+          data.contractFrom = tempCF[2] + "/" + tempCF[0] + "/" + tempCF[1];
+          tempCT = $('#contractTo').val().split("/");
+          data.contractTo = tempCT[2] + "/" + tempCT[0] + "/" + tempCT[1];
+          let result = await Axios(
+            BaseURLSuperUser,
+            `/getRestaurants/${params.idRestaurant}/details`,
+            "PUT",
+            data
+          );
+          let res = result.data;
+          if (res.status != 200) {
+            alert("Something Went Wrong");
+          } else {
+            alert("Updated Successfully");
+            getRestaurantDetails();
+          }
+        },
+      });
+    }
+
+    async function getCouponList() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getAllCouponByRestaurant?idRestaurant=${params.idRestaurant}`,
+        "GET"
+      );
+      let res = result.data;
+      if (res.status != 200) {
+        return;
+      } else if(res.status == 200) {
+        $("#couponList").empty();
+        res.payload.forEach((element) => {
+          let ele = couponCodeCardView(element);
+          $("#couponList").append(ele);
+        });
+        $("#myitemsModalCoupon").modal("show");
+
+        sessionStorage.setItem("CouponList", JSON.stringify(res.payload));
+      }
+    }
+
+    async function disableRestaurant() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getRestaurants/${params.idRestaurant}`,
+        "PUT"
+      );
+      let res = result.data;
+      if (res.status != 200) {
+        $("#ErrorMessage").text(res.errorMessage);
+        return false;
+      } else if(res.status == 200) {
+        $("#ErrorMessage").text("");
+        location.reload();
+      }
+    }
+    async function getRestaurantDetails() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getRestaurants/${params.idRestaurant}`,
+        "GET"
+      );
+      let res = result.data;
+      if (res.status != 200) {
+        $("#ErrorMessage").text(res.errorMessage);
+        return false;
+      } else if(res.status == 200) {
+        // $('#Restaurants').text(`Restaurants (${res.payload.count.activeCount+res.payload.count.inactiveCount})`)
+        jQuery("#wrapper").fadeIn("slow");
+        sessionStorage.setItem("Items", JSON.stringify(res.payload.items));
+        let tableObj = res.payload.restaurant
+          .map((va) => {
+            return Object.keys(va)
+              .map((val) => {
+                if (RestaurantMapping[val])
+                  return tableData(
+                    RestaurantMapping[val],
+                    res.payload.restaurant[0][val]
+                  );
+              })
+              .filter(Boolean);
+          })
+          .filter(Boolean)
+          .join("\n");
+        $("#description").text(res.payload.restaurant[0].description);
+        if (res.payload.restaurant[0].isActive) {
+          $("#isActiveStatus").text("ACTIVE");
+          $("#isActiveStatus").css("color", "green");
+
+          $("#Inactive").val("CLICK TO INACTIVE");
+          $("#Inactive").attr("class", "btn btn-primary mb-3");
+        } else {
+          $("#isActiveStatus").text("INACTIVE");
+          $("#isActiveStatus").css("color", "red");
+          $("#Inactive").val("CLICK TO ACTIVE");
+          $("#Inactive").attr("class", "btn btn-success mb-3");
+        }
+
+        $("#updateRestaurant #name").val(res.payload.restaurant[0].name);
+        $("#updateRestaurant #address").val(res.payload.restaurant[0].address);
+        $("#updateRestaurant #description").val(
+          res.payload.restaurant[0].description
+        );
+        $("#updateRestaurant #contactPersonName").val(
+          res.payload.restaurant[0].contactPersonName
+        );
+        $("#updateRestaurant #mobile").val(res.payload.restaurant[0].mobile);
+        $("#updateRestaurant #email").val(res.payload.restaurant[0].email);
+        $("#updateRestaurant #dealer").val(
+          res.payload.restaurant[0].dealerName == null
+            ? ""
+            : res.payload.restaurant[0].dealerName
+        );
+        $("#updateRestaurant #restaurantNumber").val(
+          res.payload.restaurant[0].restaurantNumber
+        );
+        $("#updateRestaurant #gst").val(res.payload.restaurant[0].gst || "");
+
+        $("#updateRestaurant #contractFrom").val(
+          convertDate(res.payload.restaurant[0].contractFrom)
+        );
+        $("#updateRestaurant #contractTo").val(
+          convertDate(res.payload.restaurant[0].contractTo)
+        );
+
+        $("#updateRestaurant #latitude").val(res.payload.restaurant[0].latitude)
+        $("#updateRestaurant #longitude").val(res.payload.restaurant[0].longitude)
+       
+        $("#updateRestaurant #radius").val(res.payload.restaurant[0].radius)
+        
+
+        $("#restaurantName").text(res.payload.restaurant[0]["name"]);
+        $("#address").text(res.payload.restaurant[0]["address"]);
+        $("#gst").text(
+          `${
+            res.payload.restaurant[0]["gst"].length > 0
+              ? `GST No.: ${res.payload.restaurant[0]["gst"]}`
+              : ""
+          }`
+        );
+
+        $("#contract").text(
+          `Contract: ${res.payload.restaurant[0]["contractFrom"]} - ${res.payload.restaurant[0]["contractTo"]}`
+        );
+        $("#restaurantLogoURL").attr(
+          "src",
+          BaseURL + "/" + res.payload.restaurant[0]["restaurantLogo"]
+        );
+
+        $("#tableBody").empty();
+        $("#tableBody").append(tableObj);
+        sessionStorage.setItem(
+          "Category",
+          JSON.stringify(res.payload.category)
+        );
+
+        $("#logoUploadBtn").show();
+      }
+    }
+
+    function createCoupon() {
+      $("#createCoupon").validate({
+        // initialize the plugin
+        rules: schemaOfCoupon.rules,
+        messages: schemaOfCoupon.messages,
+
+        submitHandler: async function (form) {
+          let data = convertPayload("createCoupon");
+          let result = await Axios(BaseURLSuperUser, "/createCoupon", "POST", {
+            idRestaurant: params.idRestaurant,
+            ...data,
+          });
+          let res = result.data;
+
+          if (res.status == 200){
+            
+            $("#ModelCouponAlert").empty();
+            $("#ModelCouponAlert").append(
+              "<strong>Coupon Created Successfully</strong>"
+            );
+            $("#ModelCouponAlert").attr("class", "alert alert-success");
+            setTimeout(function () {
+              document.getElementById("createCoupon").reset();
+              $("#ModelCouponAlert").attr("class", "alert alert-success fade");
+            }, 3000);
+            getCouponList();
+            return true;
+          
+          }  else 
+          {
+            $("#ModelCouponAlert").empty();
+            $("#ModelCouponAlert").append(
+              `<strong>${res.errorMessage}</strong>`
+            );
+            $("#ModelCouponAlert").attr("class", "alert alert-warning");
+
+            setTimeout(function () {
+              $("#ModelCouponAlert").attr("class", "alert alert-warning fade");
+            }, 3000);
+
+            return false;
+          }
+          
+        },
+      });
+    }
+
+    function ToggleCouponUpdate(idCouponTemp) {
+      let [
+        {
+          idCoupon,
+          couponCode,
+          termsAndCondition,
+          description,
+          validFrom,
+          validTo,
+          isActive,
+        },
+      ] = JSON.parse(sessionStorage.getItem("CouponList")).filter(
+        (val) => val.idCoupon == idCouponTemp
+      );
+
+      $("#updateCoupon #idCoupon").val(idCoupon);
+      $("#updateCoupon #couponCode").val(couponCode);
+      $("#updateCoupon #termsAndCondition").val(termsAndCondition);
+      $("#updateCoupon #description").val(description);
+      $("#updateCoupon #validFrom").val(validFrom);
+      $("#updateCoupon #validTo").val(validTo);
+      $("#updateCoupon select").val(isActive).change();
+      $("#myitemsModalUpdateCoupon").modal("show");
+    }
+    async function updateCouponSubmit() {
+      $("#updateCoupon").validate({
+        // initialize the plugin
+        rules: schemaOfCoupon.rules,
+        messages: schemaOfCoupon.messages,
+
+        submitHandler: async function (form) {
+          let data = convertPayload("updateCoupon");
+          let result = await Axios(BaseURLSuperUser, "/updateCoupon", "PUT", {
+            ...data,
+          });
+          let res = result.data;
+
+          if (res.status != 200) {
+            $("#ModelUpdateCouponAlert").empty();
+            $("#ModelUpdateCouponAlert").append(
+              `<strong>${res.errorMessage}</strong>`
+            );
+            $("#ModelUpdateCouponAlert").attr("class", "alert alert-warning");
+
+            setTimeout(function () {
+              $("#ModelUpdateCouponAlert").attr(
+                "class",
+                "alert alert-warning fade"
+              );
+            }, 3000);
+
+            return false;
+          } else if(res.status == 200) {
+            $("#ModelUpdateCouponAlert").empty();
+            $("#ModelUpdateCouponAlert").append(
+              "<strong>Coupon Uppated Successfully</strong>"
+            );
+            $("#ModelUpdateCouponAlert").attr("class", "alert alert-success");
+            setTimeout(function () {
+              $("#ModelUpdateCouponAlert").attr(
+                "class",
+                "alert alert-success fade"
+              );
+              $("#myitemsModalUpdateCoupon").modal("hide");
+            }, 3000);
+            getCouponList();
+            return true;
+          }
+        },
+      });
+    }
+
+    let params;
+    $(document).ready(function () {
+      document.querySelector("#loader").style.visibility = "visible";
+
+      $("#restaurantLogo").change(function () {
+        fileList = this.files;
+        $("#submitLogo").click();
+      });
+      sessionStorage.setItem(
+        "idRestaurant",
+        getParameterByName("idRestaurant")
+      );
+      params = { idRestaurant: sessionStorage.getItem("idRestaurant") };
+
+      if (sessionStorage.getItem("Permission") == "73") {
+        $("#Inactive").show();
+        $("#coupon").show();
+
+        $("#HomeMenu").attr("href", `main.html`);
+      } else {
+        $("#Inactive").hide();
+        $("#coupon").hide();
+        $("#updateRestaurant #contractFrom").prop("disabled", true);
+        $("#updateRestaurant #contractTo").prop("disabled", true);
+        $("#updateRestaurant #latitude").prop("disabled", true);
+        $("#updateRestaurant #longitude").prop("disabled", true);
+        $("#updateRestaurant #radius").prop("disabled", true);
+
+        $("#updateRestaurant #latitudeLabel").hide();
+        $("#updateRestaurant #longitudeLabel").hide();
+        $("#updateRestaurant #radiusLabel").hide();
+
+        $("#updateRestaurant #latitude").hide();
+        $("#updateRestaurant #longitude").hide();
+        $("#updateRestaurant #radius").hide();
+        
+      }
+      $("#uploadLogo #idRestaurant").val(params.idRestaurant);
+      $("#restaurantTable").attr(
+        "href",
+        `table.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantMenu").attr(
+        "href",
+        `menu.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantQRCode").attr(
+        "href",
+        `qrcode.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#reports").attr(
+        "href",
+        `reports.html?idRestaurant=${params.idRestaurant}`
+      );
+
+      $("#validFrom").datepicker({});
+      $("#validTo").datepicker({});
+      let userInfo = JSON.parse(sessionStorage.getItem("UserPayload"));
+      $("#UserName").text(userInfo[0].name);
+
+      $("#ModelSuccessDiv").hide();
+      $("#ModelErrorDiv").hide();
+      $("#isInActive").hide();
+      // $("#isActive").hide();
+
+      (async()=>{
+        await getRestaurantDetails();
+      })()
+        createCoupon();
+        updateCouponSubmit();
+        updateRestaurant();
+        uploadLogo();
+    });
+  </script>
+</html>

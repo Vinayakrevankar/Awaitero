@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+      rel="stylesheet"
+    />
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+    <!-- <div id="loader" class="center"></div> -->
+    <div id="wrapper" style="display: none; flex-direction: column; min-height: 100vh;">
+
+      <div id="content-wrapper" class="d-flex flex-column" style="padding-top:90px">
+        <div id="content">
+          <!-- <nav
+            class="
+              navbar navbar-expand navbar-light
+              bg-white
+              topbar
+              mb-4
+              static-top
+              shadow-sm
+              vin-nav-top
+            "
+          >
+            <button
+              id="sidebarToggleTop"
+              class="btn btn-link d-md-none rounded-circle mr-3"
+            >
+              <i class="fa fa-bars"></i>
+            </button>
+          </nav> -->
+          <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5" style=" background-color: #343a40!important">
+            <a class="navbar-brand" href="javascript:void()">
+              <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top"  alt="">
+              Awaitero |
+            </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+             
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="HomeMenu" href="">
+                  <i class="mdi mdi-home-variant-outline"></i>
+                  <span>Home</span></a>
+          </li>
+
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="restaurantTable">
+                  <i class="mdi mdi-silverware"></i>
+                  <span>Table</span></a>
+          </li>
+
+          <li class="nav-item active text-white mr-1">
+              <a class="nav-link" id="restaurantMenu">
+                  <i class="mdi mdi-window-maximize"></i>
+                  <span>Menu</span></a>
+          </li>
+
+
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="restaurantQRCode">
+                  <i class="mdi mdi-qrcode"></i>
+                  <span>QR Code</span></a>
+          </li>
+          <li class="nav-item text-white mr-1">
+              <a class="nav-link" id="reports">
+                  <i class="mdi  mdi-file-document"></i>
+                  <span>Reports</span></a>
+          </li>
+            </ul>
+            <div class="form-inline my-2 my-lg-0" >
+              <i class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"></i>
+              <span class="mb-0 text-white mr-4"  id="UserName"></span>
+              <span class="mb-0 text-white"  onclick="Logout()">LOGOUT</span>
+            </div>
+          </div>
+        </nav>
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+              <hr />
+            </div>
+            <div class="banner-image p-0 mt-n4 mx-n4 position-relative">
+              <div class="position-absolute heart-icon"></div>
+            </div>
+            <div
+              class="mt-n5 bg-white p-3 mb-4 rounded shadow position-relative"
+            >
+              <form id="searchReport" autocomplete="off">
+                <p style="color: black">Generate Reports</p>
+
+                <div class="row">
+                  <div class="col-lg-3">
+                    <p class="mb-0 small font-weight-bold text-dark">From</p>
+                    <input
+                      type="datetime"
+                      autocomplete="off"
+                      name="fromDate"
+                      id="fromDate"
+                      class="
+                        form-control form-control-sm
+                        p-0
+                        border-input border-0
+                        rounded-0
+                      "
+                      placeholder="Start Date"
+                    />
+                    <label
+                      for="fromDate"
+                      class="mb-0 small font-weight-bold error"
+                      style="color: red"
+                    ></label>
+                  </div>
+                  <div class="col-lg-3">
+                    <p class="mb-0 small font-weight-bold text-dark">To</p>
+                    <input
+                      type="datetime"
+                      autocomplete="off"
+                      name="toDate"
+                      id="toDate"
+                      class="
+                        form-control form-control-sm
+                        p-0
+                        border-input border-0
+                        rounded-0
+                      "
+                      placeholder="End Date"
+                    />
+                    <label
+                      for="toDate"
+                      class="mb-0 small font-weight-bold error"
+                      style="color: red"
+                    ></label>
+                  </div>
+                </div>
+                <div class="row pl-3 pb-3 mt-1">
+                  <input
+                    type="submit"
+                    class="btn btn-primary"
+                    id="addCategory"
+                    value="Search"
+                  />
+
+                  <a
+                    class="btn btn-primary ml-1"
+                    id="downloadReport"
+                    style="color: white;"
+                    onclick="downloadReport()"
+                  >Download</a>
+                  <a
+                    class="btn btn-primary ml-1"
+                    id="downloadReportURL"
+                    style="color: white;"
+                  hidden></a>
+                </div>
+              </form>
+              <div class="card col-sm-12" style="text-align: center">
+                <div class="card-body">
+                  <h5 class="card-title">Today's Collection</h5>
+                  <p class="card-text" id="totalAmount"></p>
+                </div>
+              </div>
+
+              <div
+                class="table-wrapper-scroll-y"
+                style="height: 100%; overflow: auto"
+              >
+                <table
+                  class="table table-bordered table-striped table-sm mb-0"
+                  style="text-align: center" id="reportTable"
+                >
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Bill No.</th>
+                      <th scope="col">Customer No.</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Mobile</th>
+                      <th scope="col">Amount (Rs)</th>
+                      <th scope="col">Bill Date</th>
+                      <th scope="col"></th>
+                      <th scope="col"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="appendTableBody"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="vin-single-top-info"></div>
+        </div>
+      </div>
+    </div>
+    
+      <footer class="sticky-footer bg-white">
+        <div class="container text-center">
+          <span id="copyRight"></span>
+        </div>
+      </footer>
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+  </body>
+
+  <script>
+    function downloadReport(){
+      var link = document.getElementById('downloadReportURL');
+      link.click();
+    }
+    async function getTodaysReport() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getReport/${params.idRestaurant}`,
+        "POST",
+        {
+          fromDate: null,
+          toDate: null,
+        }
+      );
+      let res = result.data;
+      if (res.status != 200) {
+        alert("Something Went Wrong");
+      } else if(res.status == 200) {
+        jQuery("#wrapper").fadeIn("slow");
+
+        let sum = 0;
+        var csvData = new Array();
+
+        csvData.push([
+        "\"#\"",
+        "\"Bill No.\"",
+        "\"Customer No.\"",
+        "\"Name\"",
+        "\"Email\"",
+        "\"Mobile\"",
+        "\"Amount (Rs)\"",
+        "\"Bill Date\"",
+        "\"Bill Link\"",
+    ])
+        // alert('Successfully');
+        res.payload.map((Val, idx) => {
+          let localSum = 0;
+          Val.price.split(",").map((v) => {
+            sum += +v;
+            localSum += +v;
+          });
+          link = `Admin/bill.html?idBill=${Val.idCustomer}`;
+          name = Val.name;
+          billNo = Val.idCustomer;
+          $("#appendTableBody").append(` <tr>
+                        <th scope="row">${idx + 1}</th>
+                        <td>${Val.billNo}</td>
+                        <td>${Val.idCustomer}</td>
+                        <td>${Val.name}</td>
+                        <td>${Val.email}</td>
+                        <td>${Val.mobile}</td>
+                        <td>${localSum}</td>
+                        <td>${Val.billDate}</td>
+                        <td><a target="_blank" href="${domain}/Admin/bill.html?idBill=${
+            Val.idCustomer
+          }">Link</a></td>
+                        <td>
+                          <input type="text" autocomplete="off"  placeholder="Enter Email" id="emailForBill${
+                            idx + 1
+                          }" name="emailForBill${idx + 1}" required/>
+                          <button type="button" onclick="sendMail('${link}','${name}','${billNo}','${
+            Val.email
+          }')">Send</button>
+                           </td>
+
+                      </tr>`);
+                      
+        csvData.push([
+        `\"${idx + 1}\"`,
+        `\"${Val.billNo}\"`,
+        `\"${Val.idCustomer}\"`,
+        `\"${Val.name}\"`,
+        `\"${Val.email}\"`,
+        `\"${sessionStorage.getItem("Permission") == "74" ? Val.mobile.split("").map((val,id)=> id>1 && id<7 ? '*': val).join("") : ''}\"`,
+        `\"${localSum}\"`,
+        `\"${Val.billDate}\"`,
+        `\"${domain}/Admin/bill.html?idBill=${Val.idCustomer}\"`,
+        ])
+
+        });
+        $("#totalAmount").text("Total Amount: Rs " + sum);
+
+        Html2CSV(csvData)
+        // getCouponList();
+      }
+    }
+    async function sendMail(link, name, billNo, email) {
+      let data = {
+        link: `${domain}/${link}`,
+        name,
+        billNo,
+        email,
+      };
+      let result = await Axios(BaseURLSuperUser, `/sendBill`, "POST", data);
+
+      let res = result.data;
+      if (res.status != 200) {
+        alert(res.errorMessage);
+      } else if(res.status == 200) {
+        alert("Sent Successfully");
+      }
+    }
+
+
+    function Html2CSV(csvData, filename="Report") {
+        // var array = [];
+        // var headers = [];
+        // var arrayItem = [];
+        // var csvData = new Array();
+        // $('#' + tableId + ' th').each(function (index, item) {
+        //     headers[index] = '"' + $(item).html() + '"';
+        // });
+        // csvData.push(headers);
+        // $('#' + tableId + ' tr').has('td').each(function () {
+
+        //     $('td', $(this)).each(function (index, item) {
+        //         arrayItem[index] = '"' + $(item).html() + '"';
+        //     });
+        //     array.push(arrayItem);
+        //     csvData.push(arrayItem);
+        // });
+
+
+
+
+        var fileName = filename + '.csv';
+        var buffer = csvData.join("\n");
+        var blob = new Blob([buffer], {
+            "type": "text/csv;charset=utf8;"
+        });
+        var link = document.getElementById('downloadReportURL');
+
+        if (link.download !== undefined) { // feature detection
+            // Browsers that support HTML5 download attribute
+            link.setAttribute("href", window.URL.createObjectURL(blob));
+            link.setAttribute("download", fileName);
+        }
+        else if (navigator.msSaveBlob) { // IE 10+
+            link.setAttribute("href", "#");
+            link.addEventListener("click", function (event) {
+                navigator.msSaveBlob(blob, fileName);
+            }, false);
+        }
+        // else {
+        //     // it needs to implement server side export
+        //     link.setAttribute("href", "http://www.example.com/export");
+        // }
+
+    }
+
+    let params;
+    $(document).ready(function () {
+      // document.querySelector("#loader").style.visibility = "visible";
+
+      $("#fromDate").datepicker();
+      $("#toDate").datepicker();
+
+      //       $("#fromDate").datepicker({
+      //      format: 'dd-mm-yyyy',
+      //      autoclose: true,
+      //  }).on('changeDate', function (selected) {
+      //      var minDate = new Date(selected.date.valueOf());
+      //      $('#toDate').datepicker('setStartDate', minDate);
+      //  });
+
+      //  $("#toDate").datepicker({
+      //      format: 'dd-mm-yyyy',
+      //      autoclose: true,
+      //  }).on('changeDate', function (selected) {
+      //          var minDate = new Date(selected.date.valueOf());
+      //          $('#fromDate').datepicker('setEndDate', minDate);
+      //  });
+      sessionStorage.setItem(
+        "idRestaurant",
+        getParameterByName("idRestaurant")
+      );
+      params = {
+        idRestaurant: sessionStorage.getItem("idRestaurant"),
+      };
+
+      if (sessionStorage.getItem("Permission") == "73") {
+        $("#Inactive").show();
+        $("#coupon").show();
+
+        $("#HomeMenu").attr("href", `main.html`);
+      } else {
+        $("#Inactive").hide();
+        $("#coupon").hide();
+
+        $("#HomeMenu").attr(
+          "href",
+          `detail.html?idRestaurant=${params.idRestaurant}`
+        );
+      }
+      $("#restaurantTable").attr(
+        "href",
+        `table.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantMenu").attr(
+        "href",
+        `menu.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantQRCode").attr(
+        "href",
+        `qrcode.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#reports").attr(
+        "href",
+        `reports.html?idRestaurant=${params.idRestaurant}`
+      );
+
+      $("#validFrom").datepicker({});
+      $("#validTo").datepicker({});
+      let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+      $("#UserName").text(userInfo.name);
+
+      $("#ModelSuccessDiv").hide();
+      $("#ModelErrorDiv").hide();
+      $("#isInActive").hide();
+      $("#isActive").hide();
+
+      getTodaysReport();
+      search();
+    });
+
+    function search() {
+      $("#searchReport").validate({
+        // initialize the plugin
+
+        rules: {
+          fromDate: {
+            required: true,
+          },
+          toDate: {
+            required: true,
+          },
+        },
+        messages: {
+          fromDate: "Enter Start Date",
+          toDate: "Enter End Date",
+        },
+        submitHandler: async function (form) {
+          // for demo
+
+          var fromDate = $("#fromDate").val().split("/");
+          fromDate = [fromDate[2], fromDate[0], fromDate[1]].join("-");
+          var toDate = $("#toDate").val().split("/");
+          toDate = [toDate[2], toDate[0], toDate[1]].join("-");
+
+          let result = await Axios(
+            BaseURLSuperUser,
+            `/getReport/${params.idRestaurant}`,
+            "POST",
+            {
+              fromDate,
+              toDate,
+            }
+          );
+
+          let res = result.data;
+          if (res.status != 200) {
+            alert(res.errorMessage);
+          } else if(res.status == 200) {
+            var csvData = new Array();
+        csvData.push([
+        "\"#\"",
+        "\"Bill No.\"",
+        "\"Customer No.\"",
+        "\"Name\"",
+        "\"Email\"",
+        "\"Mobile\"",
+        "\"Amount (Rs)\"",
+        "\"Bill Date\"",
+        "\"Bill Link\"",
+    ])
+            $("#totalAmount").text("");
+            $("#appendTableBody").empty();
+            let sum = 0;
+            // alert('Successfully');
+            res.payload.map((Val, idx) => {
+              let localSum = 0;
+              Val.price.split(",").map((v) => {
+                sum += +v;
+                localSum += +v;
+              });
+              link = `bill.html?idBill=${Val.idCustomer}`;
+              name = Val.name;
+              billNo = Val.idCustomer;
+              $("#appendTableBody").append(` <tr>
+                        <th scope="row">${idx + 1}</th>
+                        <td>${Val.billNo}</td>
+                        <td>${Val.idCustomer}</td>
+                        <td>${Val.name}</td>
+                        <td>${Val.email}</td>
+                        <td>${sessionStorage.getItem("Permission") == "74" ? Val.mobile.split("").map((val,id)=> id>1 && id<7 ? '*': val).join("") : ''}</td>
+                        <td>${localSum}</td>
+                        <td>${Val.billDate}</td>
+                        <td><a target="_blank" href="bill.html?idBill=${
+                          Val.idCustomer
+                        }">Link</a></td>
+                        <td>
+                          <input type="email" autocomplete="off"  placeholder="Enter Email" id="emailForBill${
+                            idx + 1
+                          }" name="emailForBill${idx + 1}" required/>
+                          <button type="button" onclick="sendMail('${link}','${name}','${billNo}','${
+                Val.email
+              }')">Send</button>
+                           </td>
+                      </tr>`);
+                      csvData.push([
+        `\"${idx + 1}\"`,
+        `\"${Val.billNo}\"`,
+        `\"${Val.idCustomer}\"`,
+        `\"${Val.name}\"`,
+        `\"${Val.email}\"`,
+        `\"${Val.mobile}\"`,
+        `\"${localSum}\"`,
+        `\"${Val.billDate}\"`,
+        `\"${domain}/Admin/bill.html?idBill=${Val.idCustomer}\"`,
+        ])
+            });
+            $("#totalAmount").text("Total Amount: Rs " + sum);
+            Html2CSV(csvData)
+          }
+
+          return true;
+        },
+      });
+    }
+  </script>
+</html>

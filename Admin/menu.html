@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="img/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+  </head>
+
+  <body id="page-top">
+ 
+    <div id="loader" class="center"></div>
+    <div id="wrapper" style="display:none; flex-direction: column; min-height: 100vh;">
+     
+     
+      <div id="content-wrapper" class="d-flex flex-column" style="padding-top:110px">
+        <nav class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5" style=" background-color: #343a40!important">
+          <a class="navbar-brand" href="javascript:void(0)">
+            <img src="img/logo.svg" width="30" height="30" class="d-inline-block align-top"  alt="">
+            Awaitero |
+          </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+           
+        <li class="nav-item text-white mr-1">
+            <a class="nav-link" id="HomeMenu" href="">
+                <i class="mdi mdi-home-variant-outline"></i>
+                <span>Home</span></a>
+        </li>
+    
+        <li class="nav-item text-white mr-1">
+            <a class="nav-link" id="restaurantTable">
+                <i class="mdi mdi-silverware"></i>
+                <span>Table</span></a>
+        </li>
+    
+        <li class="nav-item active text-white mr-1">
+            <a class="nav-link" id="restaurantMenu">
+                <i class="mdi mdi-window-maximize"></i>
+                <span>Menu</span></a>
+        </li>
+    
+    
+        <li class="nav-item text-white mr-1">
+            <a class="nav-link" id="restaurantQRCode">
+                <i class="mdi mdi-qrcode"></i>
+                <span>QR Code</span></a>
+        </li>
+        <li class="nav-item text-white mr-1">
+            <a class="nav-link" id="reports">
+                <i class="mdi  mdi-file-document"></i>
+                <span>Reports</span></a>
+        </li>
+          </ul>
+          <div class="form-inline my-2 my-lg-0" >
+            <i class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"></i>
+            <span class="mb-0 text-white mr-4"  id="UserName"></span>
+            <span class="mb-0 text-white"  onclick="Logout()">LOGOUT</span>
+          </div>
+        </div>
+      </nav>
+
+        <div id="content">      
+          <div class="container-fluid">
+            <div>
+              <h5 style="text-align: center; color: red" id="ErrorMessage"></h5>
+            </div>
+            <div
+              class="mt-n5 bg-white p-3 mb-0 rounded shadow position-relative"
+            >
+              <div class="vin-single-top-info">
+                <div class="ml-3 mb-1 mt-1">
+                  <div class="restaurant-detail "></div>
+                    <input
+                      type="button"
+                      class="btn btn-primary"
+                      id="AddItem"
+                      data-toggle="modal"
+                      data-target="#CreateCategoryModal"
+                      value="Add/Delete Category"
+                    />
+                    <input
+                      type="button"
+                      class="btn btn-primary"
+                      id="createItemBtn"
+                      data-toggle="modal"
+                      data-target="#myitemsModalCreateItem"
+                      value="Add Item"
+                    />
+                </div>
+              </div>
+            </div>
+
+            <ul
+              class="nav nav-tabs border-0 mb-4"
+              id="myTabCategory"
+              role="tablist"
+            ></ul>
+            <div class="tab-content" id="myTabContent">
+              <div
+                class="tab-pane fade show active"
+                id="popular"
+                role="tabpanel"
+                aria-labelledby="popular-tab"
+              >
+                <div class="row m-auto" id="itemList"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+          <i class="fas fa-angle-up"></i>
+        </a>
+
+        <div id="AppendModleUpateItemList"></div>
+      </div>
+      </div>
+    </div>
+    <footer class="sticky-footer bg-white">
+      <div class="container text-center">
+        <span id="copyRight"></span>
+      </div>
+    </footer>
+    <div
+      class="modal fade"
+      id="CreateCategoryModal"
+      tabindex="-1"
+      aria-labelledby="CreateCategoryModal"
+      aria-hidden="true"
+    >
+      <form id="createCategory">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="CreateCategoryModalLabel">
+                Create Catergory
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div class="mb-3">
+                <div
+                  class="alert alert-success fade show"
+                  id="ModelSuccessDiv"
+                  role="alert"
+                >
+                  <strong id="ModelSuccessMessage"></strong>
+                </div>
+                <div
+                  class="alert alert-warning fade show"
+                  id="ModelErrorDiv"
+                  role="alert"
+                >
+                  <strong id="ModelErrorMessage"> </strong>
+                </div>
+                <div class="d-flex align-items-center mb-4">
+                  <div class="w-100">
+                    <p class="mb-0 small font-weight-bold text-dark">
+                      Category Name
+                    </p>
+                    <input
+                      type="text"
+                      autocomplete="off"
+                      name="name"
+                      id="name"
+                      class="
+                        form-control form-control-sm
+                        p-0
+                        border-input border-0
+                        rounded-0
+                      "
+                      placeholder="Enter Category Name"
+                    />
+                   
+                    <label
+                      for="name"
+                      class="mb-0 small font-weight-bold error"
+                      style="color: red"
+                    ></label>
+
+                    <select
+                      id="type"
+                      name="type"
+                      class="
+                        form-control form-control-sm
+                        p-0
+                        border-input border-0
+                        rounded-0
+                      "
+                      aria-label=""
+                      required
+                    >
+                      <option disabled="disabled" selected="">
+                        Select VEG/NON VEG
+                      </option>
+                      <option value="1">VEG</option>
+                      <option value="0">NON VEG</option>
+                    </select>
+                    <label
+                      for="type"
+                      class="mb-0 small font-weight-bold error"
+                      style="color: red"
+                    ></label>
+
+                    <input
+                      type="submit"
+                      class="btn btn-primary btn-block mb-3"
+                      value="Create Category"
+                    />
+                  </div>
+                </div>
+
+                <div id="listCategoryForDelete"></div>
+              </div>
+            </div>
+            <div class="modal-footer justify-content-start mt-1">
+              <input
+                style="visibility: hidden"
+                class="btn-block mb-3"
+                value="Create Category"
+              />
+            </div>
+          </div>
+
+         
+        </div>
+      </form>
+    </div>
+
+    <div
+      class="modal fade"
+      id="myitemsModalCreateItem"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content vin-item-detail-pop">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="createItem">
+            <div class="modal-body px-3 py-0">
+              <div class="mb-3">
+                <div class="mb-3">
+                  <div
+                    class="alert alert-success fade"
+                    id="ModelAddItemAlert"
+                    role="alert"
+                  ></div>
+                </div>
+              </div>
+
+              <div class="d-flex align-items-center mb-4">
+                <div class="w-100">
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Item Name
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="name"
+                    id="name"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Item Name"
+                  />
+                  <label
+                    for="name"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Select Category
+                  </p>
+                  <select
+                    id="idCategory"
+                    name="idCategory"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    aria-label="Default select example"
+                  >
+                    <option disabled="disabled" selected>
+                      Select Category
+                    </option>
+                  </select>
+
+                  <p
+                    class="mb-0 small font-weight-bold text-dark"
+                    style="margin-top: 10px"
+                  >
+                    Enter Description
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                    id="description"
+                    value=""
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Description"
+                  />
+                  <label
+                    for="description"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Photo URL
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="photoURL"
+                    id="photoURL"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Photo URL"
+                  />
+
+                  <label
+                    for="photoURL"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Price
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="price"
+                    id="price"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Price"
+                  />
+                  <label
+                    for="price"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                </div>
+              </div>
+            </div>
+
+            <div class="modal-footer justify-content-start">
+              <input
+                type="submit"
+                class="btn btn-primary btn-block mb-3"
+                value="Add Item"
+              />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="myitemsModalUpdateItem"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="staticBackdropLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content vin-item-detail-pop">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="exampleModalLabel">Edit Item</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+         
+            <div class="mb-3 px-3">
+                <img
+                  src=""
+                  id="photoURLSrc"
+                  class="img-fluid col-md-6 p-0 rounded"
+                />
+               
+              </div>
+              <div class="px-3">
+               <input
+                  type="button"
+                  id="deleteItem"
+                  style="position: relative;"
+                  class="btn btn-primary btn-sm mb-3 px-3"
+                  value="Delete Item"
+                />
+            </div>
+          <div
+                class="alert alert-success fade"
+                id="ModelItemUpdateAlert"
+                role="alert"
+              ></div>
+          <div class="modal-body px-3 py-0">
+           
+           
+            <h4 class="mb-2" id="updatename"></h4>
+            <p id="updatedescription"></p>
+
+          <form id="updateItem">
+           
+            <div class="d-flex align-items-center mb-4">
+              
+                <div class="w-100">
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="idItem"
+                    id="idItem"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    hidden
+                  />
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Item Name
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="name"
+                    id="name"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Item Name"
+                  />
+                  <label
+                    for="name"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Select Category
+                  </p>
+                  <select
+                    id="idCategory"
+                    name="idCategory"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    id="categoryDropdown"
+                    aria-label="Default select example"
+                  ></select>
+
+                  <p
+                    class="mb-0 small font-weight-bold text-dark"
+                    style="margin-top: 10px"
+                  >
+                    Enter Description
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="description"
+                    id="description"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Description"
+                  />
+                  <label
+                    for="description"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Photo URL
+                  </p>
+                  <input
+                    type="text"
+                    autocomplete="off"
+                    name="photoURL"
+                    id="photoURL"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Photo URL"
+                  />
+
+                  <label
+                    for="photoURL"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+
+                  <p class="mb-0 small font-weight-bold text-dark">
+                    Enter Price
+                  </p>
+                  <input
+                    type="number"
+                    autocomplete="off"
+                    name="price"
+                    min="0"
+                    id="price"
+                    class="
+                      form-control form-control-sm
+                      p-0
+                      border-input border-0
+                      rounded-0
+                    "
+                    placeholder="Enter Price"
+                  />
+                  
+                  <label
+                    for="price"
+                    class="mb-0 small font-weight-bold error"
+                    style="color: red"
+                  ></label>
+                  <p style="margin-top: 2px">
+                    <input
+                      type="checkbox"
+                      id="isUnavailable"
+                      name="isUnavailable"
+                    />
+                    &nbsp;&nbsp;isUnavailable
+                  </p>
+                </div>
+       
+                
+            </div>
+            <div class="modal-footer justify-content-start">
+                <input
+                  type="submit"
+                  class="btn btn-primary btn-block mb-3"
+                  value="Update"
+                />
+            </div>
+        </form>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/jquery/jquery.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+  </body>
+  <script>
+    function getParameterByName(name, url = window.location.href) {
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    async function updateItemList(payload) {
+      let category = JSON.parse(sessionStorage.getItem("Category")); //await getCategory();
+      $("#idCategory").append(getCategoryOption(category)),
+        $("#listCategoryForDelete").empty();
+      category.forEach((val) => {
+        $("#listCategoryForDelete").append(categoryModel(val));
+      });
+      //Adding Item
+      $("#itemList").empty();
+      payload.map((val, idx) => {
+        let [{ idCategory, name }] = category.filter(
+          (va) => va.idCategory == val.idCategory
+        );
+
+        $("#itemList").append(itemList(val, name.toUpperCase()));
+        let getSelectOption = getCategoryOption(category, idCategory);
+        $; //('#AppendModleUpateItemList').append(ItemModel(idx,val,getSelectOption))
+        // updateItem(idx)
+        $("#createItem #idCategory").empty();
+        $("#createItem #idCategory").append(getCategoryOption(category));
+      });
+    }
+
+    async function getRestaurantDetails() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getRestaurants/${params.idRestaurant}`,
+        "GET"
+      );
+      let res = result.data;
+      if (res.status != 200) {
+        $("#ErrorMessage").text(res.errorMessage);
+        return false;
+      } else if(res.status == 200) {
+        jQuery("#wrapper").fadeIn("slow");
+        
+        sessionStorage.setItem("Items", JSON.stringify(res.payload.items));
+        sessionStorage.setItem(
+          "Category",
+          JSON.stringify(res.payload.category)
+        );
+
+        res.payload.category.unshift({
+          idCategory: 99999999999999,
+          name: "All",
+        });
+        let tabCatgetoryRes = res.payload.category
+          .map((Val, idx) => tabCategory(Val.idCategory, Val.name, Val.type))
+          .join("\n");
+        $("#myTabCategory").empty();
+        $("#myTabCategory").append(tabCatgetoryRes);
+
+        updateItemList(res.payload.items);
+      }
+    }
+
+    function createCategory() {
+      $("#createCategory").validate({
+        // initialize the plugin
+
+        rules: {
+          name: {
+            required: true,
+            minlength: 3,
+          },
+          type: {
+            required: true,
+          },
+        },
+        messages: {
+          category: "Enter Category Name",
+          type: "Select Type VEG/NON VEG",
+        },
+
+        submitHandler: async function (form) {
+          let data = convertPayload("createCategory");
+          let result = await Axios(
+            BaseURLSuperUser,
+            "/createCategory",
+            "POST",
+            {
+              idRestaurant: params.idRestaurant,
+              ...data,
+            }
+          );
+          let res = result.data;
+          if (res.status != 200) {
+            $("#ModelErrorMessage").text(res.errorMessage);
+            $("#ModelErrorDiv").show();
+            $("#ModelSuccessDiv").hide();
+
+            setTimeout(function () {
+              $("#ModelErrorDiv").hide();
+            }, 2000);
+
+            return false;
+          } else if(res.status == 200){
+            $("#ModelSuccessMessage").text("Category Created Successfully");
+            $("#ModelSuccessDiv").show();
+            $("#ModelErrorDiv").hide();
+            setTimeout(function () {
+              document.getElementById("createCategory").reset();
+              $("#ModelSuccessDiv").hide();
+            }, 2000);
+            getRestaurantDetails();
+            return true;
+          }
+        },
+      });
+    }
+
+    async function updateItem() {
+      $(`#updateItem`).validate({
+        // initialize the plugin
+        rules: schemaOfItem.rules,
+        messages: schemaOfItem.messages,
+
+        submitHandler: async function (form) {
+          let data = convertPayload(`updateItem`);
+          if (data.isUnavailable && data.isUnavailable == "on")
+            data.isUnavailable = 1;
+          else data.isUnavailable = 0;
+
+          let result = await Axios(BaseURLSuperUser, "/updateItem", "PUT", {
+            idRestaurant: params.idRestaurant,
+            ...data,
+          });
+          let res = result.data;
+
+          if (res.status != 200) {
+              $('#ModelItemUpdateAlert').css('display','none')
+            $(`#ModelItemUpdateAlert`).empty();
+            $(`#ModelItemUpdateAlert`).append(
+              `<strong>${res.errorMessage}</strong>`
+            );
+            $(`#ModelItemUpdateAlert`).attr("class", "alert alert-warning");
+
+            setTimeout(function () {
+              $(`#ModelItemUpdateAlert`).attr(
+                "class",
+                "alert alert-warning fade"
+              );
+            }, 3000);
+
+            return false;
+          } else if(res.status == 200) {
+            $('#ModelItemUpdateAlert').css('display','block')
+            $(`#ModelItemUpdateAlert`).empty();
+            $(`#ModelItemUpdateAlert`).append(
+              "<strong>Item Updated Successfully</strong>"
+            );
+            $(`#ModelItemUpdateAlert`).attr("class", "alert alert-success");
+            setTimeout(function () {
+              $(`#ModelItemUpdateAlert`).attr(
+                "class",
+                "alert alert-success fade"
+              );
+              $(`#myitemsModalUpdateItem`).modal("hide");
+            }, 3000);
+            getRestaurantDetails();
+            return true;
+          }
+        },
+      });
+    }
+
+    async function deleteItem(idItem) {
+      var confirmDelete = confirm("Are you sure you want to delete it ?");
+      var idRestaurant = sessionStorage.getItem("idRestaurant");
+      if (confirmDelete == true) {
+        let result = await Axios(BaseURLSuperUser, `/deleteItem`, "DELETE", {
+          idItem,
+          idRestaurant,
+        });
+        let res = result.data;
+        if (res.status != 200) {
+          alert("Something Went Wrong");
+        } else if(res.status == 200) {
+          alert("Item deleted Successfully");
+          $("#myitemsModalUpdateItem").modal("hide");
+          getRestaurantDetails();
+        }
+      }
+    }
+    function createItem() {
+      $("#createItem").validate({
+        // initialize the plugin
+
+        rules: schemaOfItem.rules,
+        messages: schemaOfItem.messages,
+
+        submitHandler: async function (form) {
+          let data = convertPayload("createItem");
+          let result = await Axios(BaseURLSuperUser, "/createItem", "POST", {
+            idRestaurant: params.idRestaurant,
+            ...data,
+          });
+          let res = result.data;
+
+          if (res.status != 200) {
+            $("#ModelAddItemAlert").empty();
+            $("#ModelAddItemAlert").append(
+              `<strong>${res.errorMessage}</strong>`
+            );
+            $("#ModelAddItemAlert").attr("class", "alert alert-warning");
+
+            setTimeout(function () {
+              $("#ModelAddItemAlert").attr("class", "alert alert-warning fade");
+            }, 3000);
+
+            return false;
+          } else if(res.status == 200) {
+            $("#ModelAddItemAlert").empty();
+            $("#ModelAddItemAlert").append(
+              "<strong>Item Added Successfully</strong>"
+            );
+            $("#ModelAddItemAlert").attr("class", "alert alert-success");
+            setTimeout(function () {
+              document.getElementById("createItem").reset();
+              $("#ModelAddItemAlert").attr("class", "alert alert-success fade");
+              $(`#myitemsModalCreateItem`).modal("hide");
+            }, 3000);
+            $("form#createItem").trigger("reset");
+            getRestaurantDetails();
+            return true;
+          }
+          return false;
+        },
+      });
+    }
+    async function deleteCategory(idCategory, catgeory) {
+      if (catgeory != "All") {
+        var confirmDelete = confirm(
+          `Are you sure you want to delete it Category-${catgeory} ?`
+        );
+        if (confirmDelete == true) {
+          let result = await Axios(
+            BaseURLSuperUser,
+            `/deleteCategory`,
+            "DELETE",
+            {
+              idCategory,
+              idRestaurant: params.idRestaurant,
+            }
+          );
+          let res = result.data;
+          if (res.status != 200) {
+            alert("Something Went Wrong");
+          } else if(res.status == 200) {
+            alert("Category deleted Successfully");
+            getRestaurantDetails();
+          }
+        } else return false;
+      }
+      return false;
+    }
+
+    function ToggleItemUpdate(idItemTemp) {
+      let [
+        {
+          idItem,
+          name,
+          price,
+          idCategory,
+          photoURL,
+          description,
+          isUnavailable,
+        },
+      ] = JSON.parse(sessionStorage.getItem("Items")).filter(
+        (val) => val.idItem == idItemTemp
+      );
+      category = JSON.parse(sessionStorage.getItem("Category"));
+      $("#updateItem #idItem").val(idItem);
+      $("#updateItem #name").val(name);
+      $("#updateItem #price").val(price);
+      $("#updateItem #description").val(description);
+      $("#deleteItem").attr("onclick", `deleteItem(${idItem})`);
+
+      $("#updateItem #photoURL").val(photoURL);
+      $("#photoURLSrc").attr("src", (photoURL || '' ).length ==0 ? photoURL : '');
+      $("#updatename").text(name);
+      $("#updatedescription").text(description);
+      $("#updateItem #idCategory").empty();
+      $("#updateItem #idCategory").append(
+        getCategoryOption(category, idCategory)
+      );
+      // $("#updateItem select").val(isActive).change();
+      // updatename,updatedescription
+      $("#updateItem #isUnavailable").prop(
+        "checked",
+        isUnavailable == 0 ? false : true
+      );
+      $("#myitemsModalUpdateItem").modal("show");
+    }
+
+    let tabCategory = (idCategory, name, type) => {
+      let tt = `'${name.trim()}'`;
+      let vegnonveg = `<img src="img/${
+        type == 1 ? "ic_veg.svg" : "ic_non.svg"
+      }">`;
+      return `<li class="nav-item mr-2 mt-2" onclick="filterItemOnScreen(${idCategory})">
+        <a class="nav-link active border-0 btn btn-light"
+        href="javascript:void(0);"id="tabColorChange${idCategory}" role="tab" aria-controls="popular" aria-selected="true">${name} ${
+        tt == "'All'" ? "" : vegnonveg
+      } </a>
+        </li>`;
+    };
+
+    async function filterItemOnScreen(idCategory) {
+      $("#myTabCategory a").each(function () {
+        if (this.id == `tabColorChange${idCategory}`) {
+          $("#" + this.id).removeClass("btn-light btn-success");
+          $("#" + this.id).addClass("btn-success");
+        } else {
+          $("#" + this.id).removeClass("btn-light btn-success");
+          $("#" + this.id).addClass("btn-light");
+        }
+      });
+      let SUBURL = "";
+      if (idCategory === 99999999999999)
+        SUBURL = `/getItem/${sessionStorage.getItem("idRestaurant")}/All`;
+      else SUBURL = `/getItemByCategory/${idCategory}`;
+
+      let result = await Axios(BaseURLSuperUser, SUBURL, "GET", null);
+      let res = result.data;
+
+      if (res.status != 200) {
+        alert("Could not get Items");
+      } else if(res.status == 200) {
+        if (res.payload.length == 0) alert("No Items Found");
+        else updateItemList(res.payload);
+      }
+    }
+    async function getCategory() {
+      let result = await Axios(
+        BaseURLSuperUser,
+        `/getCategory/${sessionStorage.getItem("idRestaurant")}`,
+        "GET",
+        null
+      );
+      let res = result.data;
+
+      if (res.status != 200) {
+        alert("Could not get Category");
+      } else if(res.status == 200) {
+        sessionStorage.setItem("Category", JSON.stringify(res.payload));
+        return res.payload;
+      }
+    }
+    let params;
+    $(document).ready(function () {
+      
+      document.querySelector("#loader").style.visibility = "visible";
+
+        $('#ModelItemUpdateAlert').css('display','none')
+      sessionStorage.setItem(
+        "idRestaurant",
+        getParameterByName("idRestaurant")
+      );
+      params = {
+        idRestaurant: sessionStorage.getItem("idRestaurant"),
+      };
+      $("#restaurantTable").attr(
+        "href",
+        `table.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantMenu").attr(
+        "href",
+        `menu.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#restaurantQRCode").attr(
+        "href",
+        `qrcode.html?idRestaurant=${params.idRestaurant}`
+      );
+      $("#reports").attr(
+        "href",
+        `reports.html?idRestaurant=${params.idRestaurant}`
+      );
+
+      if (sessionStorage.getItem("Permission") == "73") {
+            $("#HomeMenu").attr(
+              "href",
+              `main.html?idRestaurant=${params.idRestaurant}`
+            );
+          } else {
+            $("#HomeMenu").attr(
+              "href",
+              `detail.html?idRestaurant=${params.idRestaurant}`
+            );
+          }
+      let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+      $("#UserName").text(userInfo.name);
+
+      $("#ModelSuccessDiv").hide();
+      $("#ModelErrorDiv").hide();
+
+      getRestaurantDetails();
+      createCategory();
+      createItem();
+
+      updateItem();
+    });
+  </script>
+</html>

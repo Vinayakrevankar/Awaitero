@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <title>Awaitero</title>
+
+    <link
+      href="vendor/fontawesome-free/css/all.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link href="css/res.css" rel="stylesheet" />
+
+    <link href="font/stylesheet.css" rel="stylesheet" />
+
+    <link
+      href="vendor/mdi-icons/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
+
+    <link href="css/custom.css" rel="stylesheet" />
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/additional-methods.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+      integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"
+      integrity="sha512-u9akINsQsAkG9xjc1cnGF4zw5TFDwkxuc9vUp5dltDWYCSmyd0meygbvgXrlc/z7/o4a19Fb5V0OUE58J7dcyw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script src="app.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+      integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/gh/englishextra/qrjs2@latest/js/qrjs2.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/printThis/1.15.0/printThis.min.js"
+      integrity="sha512-d5Jr3NflEZmFDdFHZtxeJtBzk0eB+kkRXWFQqEc1EKmolXjHm2IKCA7kTvXBNjIYzjXfD5XzIjaaErpkZHCkBg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <style>
+      table {
+        border-collapse: collapse;
+      }
+
+      @media print {
+        html,
+        body {
+          height: 99%;
+        }
+      }
+
+      .body {
+        font-family: "Times New Roman", Times, serif;
+      }
+    </style>
+  </head>
+
+  <body id="page-top">
+    <div id="loader" class="center"></div>
+    <div id="wrapper" style="display:none">
+
+      <div id="content-wrapper" class="d-flex flex-column" style="padding-top:120px">
+        <div id="content">
+         
+          <nav
+            class="navbar fixed-top navbar-dark bg-dark navbar-expand-lg shadow-sm mb-5"
+            style="background-color: #343a40 !important"
+          >
+            <a class="navbar-brand" href="javascript:void()">
+              <img
+                src="img/logo.svg"
+                width="30"
+                height="30"
+                class="d-inline-block align-top"
+                alt=""
+              />
+              Awaitero |
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item text-white mr-1">
+                  <a class="nav-link" id="HomeMenu" href="">
+                    <i class="mdi mdi-home-variant-outline"></i>
+                    <span>Home</span></a
+                  >
+                </li>
+
+                <li class="nav-item text-white mr-1">
+                  <a class="nav-link" id="restaurantTable">
+                    <i class="mdi mdi-silverware"></i>
+                    <span>Table</span></a
+                  >
+                </li>
+
+                <li class="nav-item text-white mr-1">
+                  <a class="nav-link" id="restaurantMenu">
+                    <i class="mdi mdi-window-maximize"></i>
+                    <span>Menu</span></a
+                  >
+                </li>
+
+                <li class="nav-item active text-white mr-1">
+                  <a class="nav-link" id="restaurantQRCode">
+                    <i class="mdi mdi-qrcode"></i>
+                    <span>QR Code</span></a
+                  >
+                </li>
+                <li class="nav-item text-white mr-1">
+                  <a class="nav-link" id="reports">
+                    <i class="mdi mdi-file-document"></i>
+                    <span>Reports</span></a
+                  >
+                </li>
+              </ul>
+              <div class="form-inline my-2 my-lg-0">
+                <i
+                  class="mdi mdi-account-circle-outline text-white h3 mb-0 mr-1"
+                ></i>
+                <span class="mb-0 text-white mr-4" id="UserName"></span>
+                <span class="mb-0 text-white" onclick="Logout()">LOGOUT</span>
+              </div>
+            </div>
+          </nav>
+          <div class="container-fluid">
+            <div class="mt-n5 bg-white p-4 rounded shadow position-relative">
+              <div class="vin-single-top-info">
+                <div class="d-flex">
+                  <ul class="nav nav-tabs border-0" role="tablist">
+                    <li class="nav-item mr-2" role="presentation">
+                      <a
+                        class="nav-link active border-0 btn btn-light"
+                        id="restaurantName"
+                      ></a>
+                    </li>
+                    <li class="nav-item mr-2" role="presentation">
+                      <a
+                        class="nav-link border-0 btn btn-dark"
+                        onclick="window.print()"
+                        style="color: white"
+                        id=""
+                        >Print</a
+                      >
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <br />
+              <div class="mr-5 ml-5" id="containerContent">
+                <div
+                  class="row m-auto"
+                  id="container"
+                  style="display: flex; align-items: center"
+                ></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="sticky-footer bg-white">
+      <div class="container text-center">
+        <span id="copyRight"></span>
+      </div>
+    </footer>
+    <script data-cfasync="false" src="js/email-decode.min.js"></script>
+    <script
+      src="vendor/bootstrap/js/bootstrap.bundle.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="vendor/jquery-easing/jquery.easing.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+
+    <script
+      src="js/res.min.js"
+      type="733a478407262b07af967949-text/javascript"
+    ></script>
+    <script
+      src="js/rocket-loader.min.js"
+      data-cf-settings="733a478407262b07af967949-|49"
+      defer=""
+    ></script>
+
+    <script>
+      let params = {
+        idRestaurant: sessionStorage.getItem("idRestaurant"),
+      };
+
+      async function getAllTable(idRestaurant) {
+        let result = await Axios(
+          BaseURLSuperUser,
+          `/getAllTable/${params.idRestaurant}`,
+          "GET",
+          null
+        );
+        let res = result.data;
+
+        if (res.status != 200) {
+        } else if(res.status == 200) {
+          $("#addTableName").empty();
+          let len = Math.max(...res.payload.map((val) => val.name.length));
+          res.payload.length == 0 ? $("#noTable").show() : $("#noTable").hide();
+          res.payload.forEach((element, idx) => {
+            element.name = element.name.toUpperCase();
+            let id = `qrcode${idx}`;
+
+            text = `${domain}/User/check.html?idReference=${element.idReference}&idRestaurant=${idRestaurant}`;
+            console.log("text",text)
+            qr = QRCode.generateSVG(text, {
+              ecclevel: "M",
+              format: "html",
+              fillcolor: "#FFF",
+              textcolor: "#000",
+              margin: 4,
+              modulesize: 4,
+            });
+            var XMLS = new XMLSerializer();
+            qr = XMLS.serializeToString(qr);
+            qr =
+              "data:image/svg+xml;base64," +
+              window.btoa(unescape(encodeURIComponent(qr)));
+            $("#container")
+              .append(`<div class="card" style="width: 18rem;margin:10px;background: rgba(252,136,37,255)">
+         <div class="p-5 pb-2"  style="text-align: center;margin-bottom:0;width:576 px;height:960 px" > 
+          <img src="img/symbolLogo.svg" style="width:50%;height:20%"/>
+          
+          <h4> <b>AwaiTero<b></h4>
+  <p  style="display: inline-block;font-weight:bold;color:white;margin-bottom:0">Scan QR code to view menu </p>
+         
+  <img class="card-img-top mt-2" src="${qr}">
+  
+  <div class="mt-4"></div>
+  <h5><b>${element.name}</b></h5>
+  <div class="p-0" style="color:black;text-align: center;font-size:12px"><p><i></i> <br>
+   <i><b></b></i></p></div>
+  
+  </div>
+
+  <div style="margin-top:30px;margin-bottom:30px"></div>`);
+
+          });
+        }
+        let delayres = await delay(10000);
+        return delayres;
+      }
+
+      function delay(delayInms) {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve(1);
+          }, delayInms);
+        });
+      }
+
+      $(document).ready(function () {
+        document.querySelector("#loader").style.visibility = "visible";
+
+        (async () => {
+          let result = await Axios(BaseURLSuperUser, "/getRestaurants", "GET");
+          let res = result.data;
+          if (res.status != 200) {
+            $("#ErrorMessage").text(res.errorMessage);
+            return false;
+          } else if(res.status == 200) {
+            getAllTable(params.idRestaurant);
+            jQuery("#wrapper").fadeIn("slow");
+
+            sessionStorage.setItem(
+              "RestaurantsList",
+              JSON.stringify(res.payload.restaurants)
+            );
+          }
+
+          let [userInfo] = JSON.parse(sessionStorage.getItem("UserPayload"));
+          $("#UserName").text(userInfo.name);
+          $("#copyRight").empty();
+          $("#copyRight").append(copyRight);
+
+          let idRestaurant = JSON.parse(sessionStorage.getItem("idRestaurant"));
+
+          let [RestaurantsList] = res.payload.restaurants.filter(
+            (val) => val.idRestaurant == idRestaurant
+          );
+
+          $("#restaurantName").text(RestaurantsList.name);
+          if (sessionStorage.getItem("Permission") == "73") {
+            $("#HomeMenu").attr(
+              "href",
+              `main.html?idRestaurant=${idRestaurant}`
+            );
+          } else {
+            $("#HomeMenu").attr(
+              "href",
+              `detail.html?idRestaurant=${idRestaurant}`
+            );
+          }
+        })();
+        $("#restaurantMenu").attr(
+          "href",
+          `menu.html?idRestaurant=${params.idRestaurant}`
+        );
+        $("#restaurantQRCode").attr(
+          "href",
+          `qrcode.html?idRestaurant=${params.idRestaurant}`
+        );
+        $("#restaurantTable").attr(
+          "href",
+          `table.html?idRestaurant=${params.idRestaurant}`
+        );
+        $("#reports").attr(
+          "href",
+          `reports.html?idRestaurant=${params.idRestaurant}`
+        );
+      });
+      // (async function (document) {
+      //   if (res) {
+      //     // $("#content").printThis();
+      //   }
+      // })(document);
+    </script>
+  </body>
+</html>
