@@ -24,8 +24,11 @@ Introducing Awaitero's cutting-edge digital menu, ordering, and billing software
 
 
 ### Screenshots
+
 <hr>
+
 #### Landing Page
+
 <hr>
 
 <img src="https://github.com/Vinayakrevankar/Awaitero/blob/cfa25e7733f8f426f51bea291d80d71cbf0f291c/img/login-image1.png">
